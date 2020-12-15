@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/home.dart';
+import 'screens/sign_in.dart';
+import 'screens/sign_up.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,16 +23,12 @@ class MyApp extends StatelessWidget {
         backgroundColor: const Color(0xFFEEEEEE),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      routes: {
+        HomePage.routeName: (context) => HomePage(),
+        SignIn.routeName: (context) => SignIn(),
+        SignUp.routeName: (context) => SignUp(),
+      },
+      home: SignIn(),
     );
   }
 }
