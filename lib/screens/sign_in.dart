@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/services/firease_auth_services.dart';
+import 'package:gfg_jssateb/services/auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -111,7 +111,7 @@ class _SignInState extends State<SignIn> {
                         setState(() {
                           _isLoading = true;
                         });
-                        await FirebaseAuthService.loginUser(
+                        await AuthService.loginUser(
                           email: emailController.text?.trim(),
                           password: passwordController.text,
                         );
