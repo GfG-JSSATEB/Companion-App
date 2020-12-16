@@ -19,6 +19,8 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final AuthService _auth = AuthService();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -111,7 +113,7 @@ class _SignInState extends State<SignIn> {
                         setState(() {
                           _isLoading = true;
                         });
-                        await AuthService.loginUser(
+                        await _auth.signInWithEmail(
                           email: emailController.text?.trim(),
                           password: passwordController.text,
                         );
