@@ -6,6 +6,8 @@ class AuthService {
   final FirebaseAuth _auth;
   AuthService(this._auth);
 
+  Stream<User> get authStateChanges => _auth.authStateChanges();
+
   Future signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
