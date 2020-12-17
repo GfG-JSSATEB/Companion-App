@@ -89,7 +89,7 @@ class _SignInState extends State<SignIn> {
                   height: MediaQuery.of(context).size.height * 0.32,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/sign_in.jpg'),
+                        image: AssetImage('assets/images/logo.jpeg'),
                         fit: BoxFit.fitHeight),
                   ),
                 ),
