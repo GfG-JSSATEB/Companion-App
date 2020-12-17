@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
 import '../components/body_container.dart';
+import '../services/auth.dart';
 import '../widgets/custom_textfield.dart';
+import 'home.dart';
 import 'sign_up.dart';
 
 class SignIn extends StatefulWidget {
@@ -17,8 +18,6 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-//   final AuthService _auth = AuthService();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -37,6 +36,7 @@ class _SignInState extends State<SignIn> {
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
+      Navigator.pushReplacementNamed(context, HomePage.routeName);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
