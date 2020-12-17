@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 import '../components/body_container.dart';
 import '../widgets/custom_textfield.dart';
@@ -88,12 +90,19 @@ class _SignUpState extends State<SignUp> {
                 minWidth: MediaQuery.of(context).size.width,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     validityEmail = isValidEmail(emailController.text);
                     validityPassword = isValidPassword(passwordController.text);
                   });
-                  if (validityEmail && validityPassword) {}
+                  if (validityEmail && validityPassword) {
+                    String result =
+                        await context.read<AuthService>().signUpWithEmail(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                              name: nameController.text.trim(),
+                            );
+                  }
                 },
                 color: Theme.of(context).accentColor,
                 child: const Text(

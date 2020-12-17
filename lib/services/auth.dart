@@ -41,7 +41,7 @@ class AuthService {
   Future<String> signUpWithEmail({
     @required String email,
     @required String password,
-    //   @required name
+    @required String name,
   }) async {
     try {
       await _auth.createUserWithEmailAndPassword(
@@ -53,7 +53,7 @@ class AuthService {
     }
   }
 
-  Future<void> logoutUser() async {
+  Future<void> signOut() async {
     return await _auth.signOut();
   }
 }

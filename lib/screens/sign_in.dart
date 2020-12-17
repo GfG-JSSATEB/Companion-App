@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 import '../components/body_container.dart';
 import '../widgets/custom_textfield.dart';
@@ -86,7 +88,13 @@ class _SignInState extends State<SignIn> {
                       validityPassword =
                           isValidPassword(passwordController.text);
                     });
-                    if (validityEmail && validityPassword) {}
+                    if (validityEmail && validityPassword) {
+                      String result =
+                          await context.read<AuthService>().signInWithEmail(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              );
+                    }
                   },
                   color: Theme.of(context).accentColor,
                   child: const Text(
