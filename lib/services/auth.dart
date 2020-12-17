@@ -10,7 +10,13 @@ class AuthService {
 
   Future signInWithGoogle() async {
     try {
-      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+      );
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
