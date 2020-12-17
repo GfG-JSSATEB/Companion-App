@@ -28,7 +28,14 @@ class MyApp extends StatelessWidget {
         SignIn.routeName: (context) => SignIn(),
         SignUp.routeName: (context) => SignUp(),
       },
-      home: SignIn(),
+      home: AuthenticationWrapper(),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
