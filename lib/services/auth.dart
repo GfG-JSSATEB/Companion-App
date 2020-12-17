@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth;
+  AuthService(this._auth);
 
   Future signInWithGoogle() async {
     try {
@@ -21,16 +22,32 @@ class AuthService {
     } catch (e) {}
   }
 
-  Future signInWithEmail(
+  Future<String> signInWithEmail(
       {@required String email, @required String password}) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } catch (e) {
+      return 'Signed In';
+    } on FirebaseAuthException catch (e) {
       debugPrint(e.toString());
-      return null;
+      return e.message;
+    }
+  }
+
+  Future<String> signUpWithEmail({
+    @required String email,
+    @required String password,
+    //   @required name
+  }) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return 'Signed up';
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+      return e.message;
     }
   }
 

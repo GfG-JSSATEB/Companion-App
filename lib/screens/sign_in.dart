@@ -1,12 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/services/auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../components/body_container.dart';
 import '../widgets/custom_textfield.dart';
-import 'home.dart';
 import 'sign_up.dart';
 
 class SignIn extends StatefulWidget {
@@ -19,7 +15,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final AuthService _auth = AuthService();
+//   final AuthService _auth = AuthService();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -31,24 +27,6 @@ class _SignInState extends State<SignIn> {
   String passwordErrorMessage = "";
 
   bool _isLoading = false;
-
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-
-  Future<void> _login() async {
-    try {
-      await _googleSignIn.signIn().then((value) {
-        setState(() {
-          _isLoading = true;
-        });
-        Navigator.pushReplacementNamed(context, HomePage.routeName);
-        setState(() {
-          _isLoading = false;
-        });
-      });
-    } catch (err) {
-      debugPrint('$err');
-    }
-  }
 
   @override
   void dispose() {
@@ -108,36 +86,7 @@ class _SignInState extends State<SignIn> {
                       validityPassword =
                           isValidPassword(passwordController.text);
                     });
-                    if (validityEmail && validityPassword) {
-                      try {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        await _auth.signInWithEmail(
-                          email: emailController.text?.trim(),
-                          password: passwordController.text,
-                        );
-
-                        Navigator.pushReplacementNamed(
-                          context,
-                          HomePage.routeName,
-                        );
-                      } on FirebaseAuthException catch (e) {
-                        _scaffoldKey.currentState
-                            .showSnackBar(SnackBar(content: Text(e.message)));
-                      } catch (e) {
-                        _scaffoldKey.currentState.showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                                "An error occurred. Please try again later"),
-                          ),
-                        );
-                      } finally {
-                        setState(() {
-                          _isLoading = false;
-                        });
-                      }
-                    }
+                    if (validityEmail && validityPassword) {}
                   },
                   color: Theme.of(context).accentColor,
                   child: const Text(
@@ -168,7 +117,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   const SizedBox(height: 10.0),
                   FlatButton(
-                    onPressed: () => _login(),
+                    onPressed: () {},
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 40, vertical: 15),

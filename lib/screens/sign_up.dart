@@ -4,7 +4,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../components/body_container.dart';
 import '../widgets/custom_textfield.dart';
-import 'home.dart';
 
 class SignUp extends StatefulWidget {
   static const routeName = '/signUp';
@@ -27,45 +26,6 @@ class _SignUpState extends State<SignUp> {
   bool validityPassword = true;
 
   bool _isLoading = false;
-
-  void registerToFb() {
-    setState(() {
-      _isLoading = true;
-    });
-    firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((result) {
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
-
-      setState(() {
-        _isLoading = false;
-      });
-    }).catchError(
-      (err) {
-        setState(() {
-          _isLoading = false;
-        });
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Error"),
-              content: Text('$err.message'),
-              actions: [
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Ok"),
-                )
-              ],
-            );
-          },
-        );
-      },
-    );
-  }
 
   @override
   void dispose() {
@@ -129,14 +89,11 @@ class _SignUpState extends State<SignUp> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () {
-                  setState(
-                    () {
-                      validityEmail = isValidEmail(emailController.text);
-                      validityPassword =
-                          isValidPassword(passwordController.text);
-                    },
-                  );
-                  registerToFb();
+                  setState(() {
+                    validityEmail = isValidEmail(emailController.text);
+                    validityPassword = isValidPassword(passwordController.text);
+                  });
+                  if (validityEmail && validityPassword) {}
                 },
                 color: Theme.of(context).accentColor,
                 child: const Text(
