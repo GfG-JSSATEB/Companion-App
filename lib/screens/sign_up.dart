@@ -38,6 +38,36 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
+  Future<void> signUp(BuildContext context) async {
+    try {
+      await context.read<AuthService>().signUpWithEmail(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+            name: nameController.text.trim(),
+          );
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          setState(() {
+            validityEmail = false;
+            emailIdErrorMessage = e.message;
+          });
+          break;
+        case 'weak-password':
+          setState(() {
+            validityPassword = false;
+            passwordErrorMessage = e.message;
+          });
+          break;
+        default:
+          setState(() {
+            validityEmail = false;
+            emailIdErrorMessage = e.message;
+          });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
@@ -94,15 +124,14 @@ class _SignUpState extends State<SignUp> {
                   setState(() {
                     validityEmail = isValidEmail(emailController.text);
                     validityPassword = isValidPassword(passwordController.text);
+                    _isLoading = true;
                   });
                   if (validityEmail && validityPassword) {
-                    String result =
-                        await context.read<AuthService>().signUpWithEmail(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                              name: nameController.text.trim(),
-                            );
+                    await signUp(context);
                   }
+                  setState(() {
+                    _isLoading = false;
+                  });
                 },
                 color: Theme.of(context).accentColor,
                 child: const Text(

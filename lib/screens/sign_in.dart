@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gfg_jssateb/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -29,6 +30,35 @@ class _SignInState extends State<SignIn> {
   String passwordErrorMessage = "";
 
   bool _isLoading = false;
+
+  Future<void> signIn(BuildContext context) async {
+    try {
+      await context.read<AuthService>().signInWithEmail(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          );
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          setState(() {
+            validityEmail = false;
+            emailIdErrorMessage = e.message;
+          });
+          break;
+        case 'wrong-password':
+          setState(() {
+            validityPassword = false;
+            passwordErrorMessage = e.message;
+          });
+          break;
+        default:
+          setState(() {
+            validityEmail = false;
+            emailIdErrorMessage = e.message;
+          });
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -87,14 +117,14 @@ class _SignInState extends State<SignIn> {
                       validityEmail = isValidEmail(emailController.text);
                       validityPassword =
                           isValidPassword(passwordController.text);
+                      _isLoading = true;
                     });
                     if (validityEmail && validityPassword) {
-                      String result =
-                          await context.read<AuthService>().signInWithEmail(
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                              );
+                      await signIn(context);
                     }
+                    setState(() {
+                      _isLoading = false;
+                    });
                   },
                   color: Theme.of(context).accentColor,
                   child: const Text(
