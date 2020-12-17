@@ -51,6 +51,12 @@ class _SignInState extends State<SignIn> {
             passwordErrorMessage = e.message;
           });
           break;
+        case 'user-disabled':
+          setState(() {
+            validityEmail = false;
+            emailIdErrorMessage = e.message;
+          });
+          break;
         default:
           setState(() {
             validityEmail = false;
