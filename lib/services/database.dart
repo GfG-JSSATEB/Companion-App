@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/student.dart';
+
 class DatabaseService {
   DatabaseService._();
 
@@ -25,5 +27,11 @@ class DatabaseService {
       'year': year,
       'isAdmin': false,
     });
+  }
+
+  static Future<Student> getStudent(String id) async {
+    final DocumentSnapshot snapshot =
+        await _firestore.collection('students').doc(id).get();
+    return Student.fromDocumentSnapshot(snapshot);
   }
 }

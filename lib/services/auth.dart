@@ -9,8 +9,6 @@ class AuthService {
 
   Stream<User> get authStateChanges => _auth.authStateChanges();
 
-  get id => null;
-
   Future<void> signInWithEmail(
       {@required String email, @required String password}) async {
     await _auth.signInWithEmailAndPassword(
