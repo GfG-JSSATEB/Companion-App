@@ -257,7 +257,7 @@ class _SignUpState extends State<SignUp> {
         onPressed: () async {
           setState(() {
             validityEmail = isValidEmail(emailController.text.trim());
-            validityPassword = isValidPassword(passwordController.text.trim());
+            validityPassword = isValidPassword(passwordController.text);
             validityName = isValidName(nameController.text.trim());
             validityUSN = isValidUSN(usnController.text.trim());
             _isLoading = true;

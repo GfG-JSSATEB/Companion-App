@@ -157,7 +157,7 @@ class _SignInState extends State<SignIn> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () async {
           setState(() {
-            validityEmail = isValidEmail(emailController.text);
+            validityEmail = isValidEmail(emailController.text.trim());
             validityPassword = isValidPassword(passwordController.text);
             _isLoading = true;
           });
