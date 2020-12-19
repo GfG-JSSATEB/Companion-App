@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/screens/sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +8,7 @@ import '../services/auth.dart';
 import '../widgets/custom_dropdown.dart';
 import '../widgets/custom_textfield.dart';
 import 'home.dart';
+import 'sign_in.dart';
 
 class SignUp extends StatefulWidget {
   static const routeName = '/signUp';
@@ -25,7 +25,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController usnController = TextEditingController();
 
-  String branch = 'Branch';
+  String branch = 'Select branch';
   List<String> branches = [
     'CSE',
     'ISE',
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
     'OTHER',
   ];
 
-  String year = 'Select Passing out year';
+  String year = 'Select year of graduation';
   List<String> years = [];
 
   String college = 'Select College';
@@ -133,7 +133,7 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         const Text(
-          "Already have a account yet?",
+          "Already have an account yet?",
           textScaleFactor: 1.3,
         ),
         const SizedBox(width: 10.0),
@@ -260,8 +260,8 @@ class _SignUpState extends State<SignUp> {
               validityPassword &&
               validityName &&
               validityUSN &&
-              branch != 'Branch' &&
-              year != 'Select Passing out year' &&
+              branch != 'Select branch' &&
+              year != 'Select year of graduation' &&
               college != 'Select College') {
             await signUp(context);
           }

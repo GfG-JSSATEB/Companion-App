@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
     return Column(
       children: [
         const Text(
-          "Don't have a account yet?",
+          "Don't have an account yet?",
           textScaleFactor: 1.3,
         ),
         const SizedBox(width: 5.0),
