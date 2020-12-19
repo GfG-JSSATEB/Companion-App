@@ -25,7 +25,9 @@ class _SignUpState extends State<SignUp> {
 
   String emailIdErrorMessage = "";
   String passwordErrorMessage = "";
+  String nameErrorMessage = "";
 
+  bool validityName = true;
   bool validityEmail = true;
   bool validityPassword = true;
 
@@ -94,8 +96,8 @@ class _SignUpState extends State<SignUp> {
             CustomTextField(
               controller: nameController,
               title: 'Name',
-              validity: true,
-              errorMessage: '',
+              validity: validityName,
+              errorMessage: nameErrorMessage,
               obscureText: false,
               iconData: Icons.person,
             ),
@@ -127,9 +129,15 @@ class _SignUpState extends State<SignUp> {
                   setState(() {
                     validityEmail = isValidEmail(emailController.text);
                     validityPassword = isValidPassword(passwordController.text);
+                    if (nameController.text.trim().length < 3) {
+                      validityName = false;
+                      nameErrorMessage = 'Name too short';
+                    } else {
+                      validityName = true;
+                    }
                     _isLoading = true;
                   });
-                  if (validityEmail && validityPassword) {
+                  if (validityEmail && validityPassword && validityName) {
                     await signUp(context);
                   }
                   setState(() {
