@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/screens/sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
@@ -81,10 +82,10 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 margin: const EdgeInsets.only(top: 50.0),
-                height: MediaQuery.of(context).size.height * 0.32,
+                height: MediaQuery.of(context).size.height * 0.2,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/logo.jpeg'),
+                      image: AssetImage('assets/images/logo.jpg'),
                       fit: BoxFit.fitHeight),
                 ),
               ),
@@ -138,7 +139,26 @@ class _SignUpState extends State<SignUp> {
                 color: Theme.of(context).accentColor,
                 child: const Text(
                   "SIGN UP",
-                  style: TextStyle(fontSize: 17.0, color: Colors.white),
+                  textScaleFactor: 1.4,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            const Text(
+              "Already have a account yet?",
+              textScaleFactor: 1.3,
+            ),
+            const SizedBox(width: 10.0),
+            GestureDetector(
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, SignIn.routeName),
+              child: Text(
+                'Sign In',
+                textScaleFactor: 1.2,
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),

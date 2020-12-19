@@ -86,10 +86,10 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   margin: const EdgeInsets.only(top: 50.0),
-                  height: MediaQuery.of(context).size.height * 0.32,
+                  height: MediaQuery.of(context).size.height * 0.2,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/logo.jpeg'),
+                        image: AssetImage('assets/images/logo.jpg'),
                         fit: BoxFit.fitHeight),
                   ),
                 ),
@@ -146,12 +146,15 @@ class _SignInState extends State<SignIn> {
                 children: [
                   const Text(
                     "Don't have a account yet?",
+                    textScaleFactor: 1.3,
                   ),
                   const SizedBox(width: 5.0),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, SignUp.routeName),
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, SignUp.routeName),
                     child: Text(
                       'Register Now',
+                      textScaleFactor: 1.2,
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
