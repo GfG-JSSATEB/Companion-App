@@ -233,9 +233,11 @@ class _SignUpState extends State<SignUp> {
         margin: const EdgeInsets.only(top: 50.0),
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: const BoxDecoration(
+          shape: BoxShape.circle,
           image: DecorationImage(
-              image: AssetImage('assets/images/logo.jpg'),
-              fit: BoxFit.fitHeight),
+            image: AssetImage('assets/images/logo.jpg'),
+            fit: BoxFit.fitHeight,
+          ),
         ),
       ),
     );
