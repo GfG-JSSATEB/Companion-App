@@ -60,6 +60,10 @@ class _SignUpState extends State<SignUp> {
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
             name: nameController.text.trim(),
+            usn: usnController.text.trim(),
+            college: college,
+            branch: branch,
+            year: year,
           );
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     } on FirebaseAuthException catch (e) {
