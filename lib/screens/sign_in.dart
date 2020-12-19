@@ -80,92 +80,114 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         key: _scaffoldKey,
         body: BodyContainer(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  margin: const EdgeInsets.only(top: 50.0),
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/logo.jpg'),
-                        fit: BoxFit.fitHeight),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              CustomTextField(
-                controller: emailController,
-                title: 'Email',
-                validity: validityEmail,
-                errorMessage: emailIdErrorMessage,
-                obscureText: false,
-                iconData: Icons.mail,
-              ),
-              CustomTextField(
-                controller: passwordController,
-                title: 'Password',
-                validity: validityPassword,
-                errorMessage: passwordErrorMessage,
-                obscureText: true,
-                iconData: Icons.lock,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: MaterialButton(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  minWidth: MediaQuery.of(context).size.width,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () async {
-                    setState(() {
-                      validityEmail = isValidEmail(emailController.text);
-                      validityPassword =
-                          isValidPassword(passwordController.text);
-                      _isLoading = true;
-                    });
-                    if (validityEmail && validityPassword) {
-                      await signIn(context);
-                    }
-                    setState(() {
-                      _isLoading = false;
-                    });
-                  },
-                  color: Theme.of(context).accentColor,
-                  child: const Text(
-                    "SIGN IN",
-                    textScaleFactor: 1.4,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have a account yet?",
-                    textScaleFactor: 1.3,
-                  ),
-                  const SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: () => Navigator.pushReplacementNamed(
-                        context, SignUp.routeName),
-                    child: Text(
-                      'Register Now',
-                      textScaleFactor: 1.2,
-                      style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                logo(context),
+                const SizedBox(height: 10.0),
+                inputForm(),
+                signInButton(context),
+                const SizedBox(height: 10.0),
+                signUpRoute(context),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Column signUpRoute(BuildContext context) {
+    return Column(
+      children: [
+        const Text(
+          "Don't have a account yet?",
+          textScaleFactor: 1.3,
+        ),
+        const SizedBox(width: 5.0),
+        GestureDetector(
+          onTap: () =>
+              Navigator.pushReplacementNamed(context, SignUp.routeName),
+          child: Text(
+            'Register Now',
+            textScaleFactor: 1.2,
+            style: TextStyle(
+              color: Theme.of(context).accentColor,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column inputForm() {
+    return Column(
+      children: [
+        CustomTextField(
+          controller: emailController,
+          title: 'Email',
+          validity: validityEmail,
+          errorMessage: emailIdErrorMessage,
+          obscureText: false,
+          iconData: Icons.mail,
+        ),
+        const SizedBox(height: 20),
+        CustomTextField(
+          controller: passwordController,
+          title: 'Password',
+          validity: validityPassword,
+          errorMessage: passwordErrorMessage,
+          obscureText: true,
+          iconData: Icons.lock,
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Padding signInButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: MaterialButton(
+        height: MediaQuery.of(context).size.height * 0.08,
+        minWidth: MediaQuery.of(context).size.width,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        onPressed: () async {
+          setState(() {
+            validityEmail = isValidEmail(emailController.text);
+            validityPassword = isValidPassword(passwordController.text);
+            _isLoading = true;
+          });
+          if (validityEmail && validityPassword) {
+            await signIn(context);
+          }
+          setState(() {
+            _isLoading = false;
+          });
+        },
+        color: Theme.of(context).accentColor,
+        child: const Text(
+          "SIGN IN",
+          textScaleFactor: 1.4,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Padding logo(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        margin: const EdgeInsets.only(top: 50.0),
+        height: MediaQuery.of(context).size.height * 0.2,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/logo.jpg'),
+              fit: BoxFit.fitHeight),
         ),
       ),
     );
