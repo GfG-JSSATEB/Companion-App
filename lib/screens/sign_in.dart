@@ -178,18 +178,15 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Padding logo(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        margin: const EdgeInsets.only(top: 50.0),
-        height: MediaQuery.of(context).size.height * 0.2,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/images/logo.jpg'),
-            fit: BoxFit.fitHeight,
-          ),
+  Widget logo(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 50.0, bottom: 30.0),
+      height: MediaQuery.of(context).size.height * 0.2,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage('assets/images/logo.jpg'),
+          fit: BoxFit.fitHeight,
         ),
       ),
     );
