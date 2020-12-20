@@ -200,12 +200,13 @@ class _SignUpState extends State<SignUp> {
           validity: validityUSN,
           errorMessage: usnErrorMessage,
           obscureText: false,
-          iconData: Icons.linear_scale,
+          iconData: Icons.recent_actors_rounded,
         ),
         const SizedBox(height: 20),
         CustomDropdown(
           hint: college,
           list: const ['JSSATEB', 'OTHER'],
+          iconData: Icons.business,
           onChanged: (String val) {
             setState(() {
               college = val;
@@ -230,6 +231,7 @@ class _SignUpState extends State<SignUp> {
         CustomDropdown(
           hint: branch,
           list: branches,
+          iconData: Icons.local_library,
           onChanged: (String val) {
             setState(() {
               branch = val;
@@ -240,6 +242,7 @@ class _SignUpState extends State<SignUp> {
         CustomDropdown(
           hint: year,
           list: years,
+          iconData: Icons.school,
           onChanged: (String val) {
             setState(() {
               year = val;
