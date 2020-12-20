@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/components/app_bar.dart';
 import 'package:gfg_jssateb/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBarDesign(
+          title: 'Home',
+        ),
+      ),
       body: SafeArea(
         child: FutureBuilder(
           future: studentFuture,
