@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gfg_jssateb/color_constants.dart';
+import 'package:gfg_jssateb/screens/events.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/home.dart';
@@ -25,6 +26,12 @@ class CustomDrawer extends StatelessWidget {
               iconData: Icons.home,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, HomePage.routeName),
+            ),
+            DrawerTile(
+              title: 'Events',
+              iconData: Icons.event,
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, EventsPage.routeName),
             ),
             DrawerTile(
               title: 'Sign Out',
