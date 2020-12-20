@@ -24,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController usnController = TextEditingController();
+  TextEditingController otherCollegeController = TextEditingController();
 
   String branch = 'Select branch';
   List<String> branches = [
@@ -46,16 +47,21 @@ class _SignUpState extends State<SignUp> {
   String passwordErrorMessage = "";
   String nameErrorMessage = "";
   String usnErrorMessage = "";
+  String otherCollegeErorMessage = "";
 
   bool validityName = true;
   bool validityEmail = true;
   bool validityPassword = true;
   bool validityUSN = true;
+  bool validityOtherCollege = true;
 
   bool _isLoading = false;
 
   Future<void> signUp(BuildContext context) async {
     try {
+      if (college == 'OTHER') {
+        college = otherCollegeController.text.trim();
+      }
       await context.read<AuthService>().signUpWithEmail(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
@@ -206,6 +212,20 @@ class _SignUpState extends State<SignUp> {
             });
           },
         ),
+        if (college == 'OTHER')
+          Column(
+            children: [
+              const SizedBox(height: 20),
+              CustomTextField(
+                controller: otherCollegeController,
+                title: 'College Name',
+                validity: validityOtherCollege,
+                errorMessage: otherCollegeErorMessage,
+                obscureText: false,
+                iconData: Icons.business,
+              ),
+            ],
+          ),
         const SizedBox(height: 20),
         CustomDropdown(
           hint: branch,
@@ -257,6 +277,9 @@ class _SignUpState extends State<SignUp> {
             validityPassword = isValidPassword(passwordController.text);
             validityName = isValidName(nameController.text.trim());
             validityUSN = isValidUSN(usnController.text.trim());
+            if (college == 'OTHER') {
+              validityOtherCollege = true;
+            }
             _isLoading = true;
           });
           if (validityEmail &&
@@ -266,7 +289,11 @@ class _SignUpState extends State<SignUp> {
               branch != 'Select branch' &&
               year != 'Select year of graduation' &&
               college != 'Select College') {
-            await signUp(context);
+            if (college == 'OTHER' && validityOtherCollege) {
+              await signUp(context);
+            } else if (college == 'JSSATEB') {
+              await signUp(context);
+            }
           }
           setState(() {
             _isLoading = false;
@@ -294,6 +321,15 @@ class _SignUpState extends State<SignUp> {
   bool isValidUSN(String usn) {
     if (usn.length < 10) {
       usnErrorMessage = 'USN too short';
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool isValidOtherCollege(String collegeName) {
+    if (collegeName.length < 3) {
+      otherCollegeErorMessage = 'College Name too short';
       return false;
     } else {
       return true;
