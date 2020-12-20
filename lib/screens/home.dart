@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../models/student.dart';
@@ -16,6 +17,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Future<Student> studentFuture;
+
+  Future<void> signOut() async {
+    await context.read<AuthService>().signOut();
+    Navigator.pushReplacementNamed(context, SignIn.routeName);
+  }
 
   @override
   void initState() {
@@ -38,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             } else if (snapshot.hasData) {
               final Student student = snapshot.data as Student;
               return FlatButton(
-                onPressed: () => context.read<AuthService>().signOut(),
+                onPressed: () => signOut(),
                 child: Text(student.email),
               );
             } else {
