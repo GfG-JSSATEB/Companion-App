@@ -40,8 +40,10 @@ class DatabaseService {
 
   static Future<List<Announcement>> getAnnouncements() async {
     final List<Announcement> announcements = [];
-    final QuerySnapshot snapshot =
-        await _firestore.collection("announcements").get();
+    final QuerySnapshot snapshot = await _firestore
+        .collection("announcements")
+        .orderBy('timestamp', descending: true)
+        .get();
     for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
       announcements.add(Announcement.fromDocumentSnapshot(docSnapshot));
     }
