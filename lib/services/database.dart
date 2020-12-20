@@ -26,6 +26,8 @@ class DatabaseService {
       'branch': branch,
       'year': year,
       'isAdmin': false,
+      'participated': <String>[],
+      'won': <String>[],
     });
   }
 
