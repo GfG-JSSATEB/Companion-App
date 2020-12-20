@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../color_constants.dart';
 import '../models/announcement.dart';
-import '../widgets/app_bar.dart';
+import '../widgets/custom_appbar.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   final Announcement announcement;
@@ -15,12 +15,11 @@ class AnnouncementScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
-        child: AppBarDesign(
+        child: CustomAppBar(
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               size: 30,
-              color: Theme.of(context).accentColor,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),

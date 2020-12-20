@@ -6,7 +6,8 @@ import '../models/announcement.dart';
 import '../screens/sign_in.dart';
 import '../services/auth.dart';
 import '../services/database.dart';
-import '../widgets/app_bar.dart';
+import '../widgets/custom_appbar.dart';
+import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,12 +35,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: AppBarDesign(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: CustomAppBar(
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 30,
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
           title: 'Home',
         ),
       ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: FutureBuilder(
           future: announcements,
