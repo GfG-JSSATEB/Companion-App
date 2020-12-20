@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.white,
           accentColor: const Color(0xFF2F8D46),
           backgroundColor: const Color(0xFFEEEEEE),
+          fontFamily: "Mont-med",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {
