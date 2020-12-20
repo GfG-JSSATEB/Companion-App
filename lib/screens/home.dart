@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../components/announcement_card.dart';
 import '../models/announcement.dart';
-import '../screens/sign_in.dart';
-import '../services/auth.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
@@ -20,11 +17,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<List<Announcement>> announcements;
 
-  Future<void> signOut() async {
-    await context.read<AuthService>().signOut();
-    Navigator.pushReplacementNamed(context, SignIn.routeName);
-  }
-
   @override
   void initState() {
     announcements = DatabaseService.getAnnouncements();
@@ -35,18 +27,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(60),
         child: CustomAppBar(
-          leading: Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(
-                Icons.menu,
-                size: 30,
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
           title: 'Home',
         ),
       ),
@@ -64,7 +47,8 @@ class _HomePageState extends State<HomePage> {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return AnnouncementCard(
-                      announcement: snapshot.data[index] as Announcement);
+                    announcement: snapshot.data[index] as Announcement,
+                  );
                 },
                 itemCount: snapshot.data.length as int,
               );

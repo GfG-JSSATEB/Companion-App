@@ -11,7 +11,16 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Theme.of(context).backgroundColor,
-      leading: leading,
+      leading: leading ??
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 30,
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
       iconTheme: IconThemeData(color: Theme.of(context).accentColor, size: 30),
       title: Text(
         title,
