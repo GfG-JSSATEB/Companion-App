@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../color_constants.dart';
 import '../models/announcement.dart';
 import '../widgets/app_bar.dart';
 
@@ -66,6 +67,7 @@ class AnnouncementScreen extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.4,
+                  style: const TextStyle(color: kTextColor),
                 ),
               ],
             ),

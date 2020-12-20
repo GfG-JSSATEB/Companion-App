@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../color_constants.dart';
 import '../models/announcement.dart';
 import '../screens/announcement.dart';
 
@@ -47,6 +48,7 @@ class AnnouncementCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 5,
               textScaleFactor: 1.3,
+              style: const TextStyle(color: kTextColor),
             ),
             const SizedBox(height: 15),
             Row(
@@ -58,6 +60,7 @@ class AnnouncementCard extends StatelessWidget {
                 Text(
                   " ${announcement.relativeTime}",
                   textScaleFactor: 1.2,
+                  style: const TextStyle(color: kTextColor),
                 )
               ],
             ),

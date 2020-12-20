@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'color_constants.dart';
 import 'screens/home.dart';
 import 'screens/sign_in.dart';
 import 'screens/sign_up.dart';
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
         title: 'GfG JSSATEB',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.white,
-          accentColor: const Color(0xFF2F8D46),
-          backgroundColor: const Color(0xFFEEEEEE),
+          primaryColor: kPrimaryColor,
+          accentColor: kAccentColor,
+          backgroundColor: kBackgroundColor,
           fontFamily: "Mont-med",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
