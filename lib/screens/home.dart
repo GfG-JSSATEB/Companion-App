@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/student.dart';
+import '../components/announcement_card.dart';
+import '../models/announcement.dart';
 import '../screens/sign_in.dart';
 import '../services/auth.dart';
 import '../services/database.dart';
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<Student> studentFuture;
+  Future<List<Announcement>> announcements;
 
   Future<void> signOut() async {
     await context.read<AuthService>().signOut();
@@ -26,8 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    studentFuture =
-        DatabaseService.getStudent(FirebaseAuth.instance.currentUser.uid);
+    announcements = DatabaseService.getAnnouncements();
     super.initState();
   }
 
@@ -43,17 +42,20 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future: studentFuture,
+          future: announcements,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
               return ErrorMessage(
                 message: snapshot.error,
               );
             } else if (snapshot.hasData) {
-              final Student student = snapshot.data as Student;
-              return FlatButton(
-                onPressed: () => signOut(),
-                child: Text('SignOut: ${student.email}'),
+              return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return AnnouncementCard(
+                      announcement: snapshot.data[index] as Announcement);
+                },
+                itemCount: snapshot.data.length as int,
               );
             } else {
               return const Center(
