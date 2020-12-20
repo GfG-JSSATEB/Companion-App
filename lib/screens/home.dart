@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/components/app_bar.dart';
-import 'package:gfg_jssateb/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../models/student.dart';
+import '../screens/sign_in.dart';
 import '../services/auth.dart';
 import '../services/database.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/error_message.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               final Student student = snapshot.data as Student;
               return FlatButton(
                 onPressed: () => signOut(),
-                child: Text(student.email),
+                child: Text('SignOut: ${student.email}'),
               );
             } else {
               return const Center(
