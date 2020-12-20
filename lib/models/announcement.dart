@@ -22,7 +22,9 @@ class Announcement {
       id: snapshot.id,
       title: data['title'] as String,
       description: data['description'] as String,
-      relativeTime: timeago.format(data['timestamp'] as DateTime),
+      relativeTime: timeago.format(
+        DateTime.parse(data['timestamp'].toDate().toString()),
+      ),
     );
   }
 }
