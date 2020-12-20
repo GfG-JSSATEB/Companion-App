@@ -54,7 +54,7 @@ class DatabaseService {
   }
 
   static Future<void> addAnnouncement(
-      {String title, String description}) async {
+      {@required String title, @required String description}) async {
     final String id = uuid.v4();
     await _firestore.collection('announcements').doc(id).set({
       'id': id,
