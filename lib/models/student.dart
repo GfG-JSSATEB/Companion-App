@@ -10,8 +10,8 @@ class Student {
   final String branch;
   final String year;
   final bool isAdmin;
-  final List<String> participated;
-  final List<String> won;
+  final List participated;
+  final List won;
 
   Student({
     @required this.participated,
@@ -38,8 +38,8 @@ class Student {
       branch: data['branch'] as String,
       year: data['year'] as String,
       isAdmin: data['isAdmin'] as bool,
-      participated: data['participated'] as List<String>,
-      won: data['won'] as List<String>,
+      participated: data['participated'] as List,
+      won: data['won'] as List,
     );
   }
 }

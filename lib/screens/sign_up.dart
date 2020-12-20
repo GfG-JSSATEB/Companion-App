@@ -281,7 +281,8 @@ class _SignUpState extends State<SignUp> {
             validityName = isValidName(nameController.text.trim());
             validityUSN = isValidUSN(usnController.text.trim());
             if (college == 'OTHER') {
-              validityOtherCollege = true;
+              validityOtherCollege =
+                  isValidOtherCollege(otherCollegeController.text.trim());
             }
             _isLoading = true;
           });
