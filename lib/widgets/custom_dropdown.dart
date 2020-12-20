@@ -34,9 +34,7 @@ class CustomDropdown extends StatelessWidget {
             hint: Text(
               hint,
               textScaleFactor: 1.1,
-              style: TextStyle(
-                color: Theme.of(context).backgroundColor,
-              ),
+              style: const TextStyle(color: Colors.white),
             ),
             items: list.map((String value) {
               return DropdownMenuItem<String>(

@@ -29,18 +29,14 @@ class CustomTextField extends StatelessWidget {
       },
       cursorColor: Theme.of(context).accentColor,
       obscureText: obscureText,
-      style: TextStyle(
-        color: Theme.of(context).primaryColor,
-      ),
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         filled: true,
         fillColor: Theme.of(context).accentColor.withOpacity(0.2),
         hintText: title,
-        hintStyle:
-            TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6)),
+        hintStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
         labelText: title,
-        labelStyle:
-            TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.6)),
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
         prefixIcon: Icon(iconData, color: Theme.of(context).accentColor),
         enabledBorder: OutlineInputBorder(
           borderSide:
