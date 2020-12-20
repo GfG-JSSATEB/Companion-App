@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gfg_jssateb/models/event.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/uuid_util.dart';
 
@@ -62,5 +63,17 @@ class DatabaseService {
       'description': description,
       'timestamp': Timestamp.now(),
     });
+  }
+
+  static Future<List<Event>> getEvents() async {
+    final List<Event> events = [];
+    final QuerySnapshot snapshot = await _firestore
+        .collection("events")
+        .where('isFinished', isEqualTo: false)
+        .get();
+    for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
+      events.add(Event.fromDocumentSnapshot(docSnapshot));
+    }
+    return events;
   }
 }

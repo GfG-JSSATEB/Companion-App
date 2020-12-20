@@ -20,7 +20,7 @@ class Announcement {
 
   factory Announcement.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     final Map<String, dynamic> data = snapshot.data();
-    final DateFormat dateFormat = DateFormat('EEEE, d MMM');
+    final DateFormat dateFormat = DateFormat('EE, d MMM');
 
     final DateTime date = DateTime.parse(data['timestamp'].toDate().toString());
 
