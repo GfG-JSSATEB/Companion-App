@@ -8,6 +8,8 @@ class Event {
   final String description;
   final DateTime date;
   final DateTime register;
+  final List participants;
+  final List participantsEmail;
 
   Event({
     @required this.id,
@@ -16,6 +18,8 @@ class Event {
     @required this.description,
     @required this.date,
     @required this.register,
+    @required this.participants,
+    @required this.participantsEmail,
   });
 
   factory Event.fromDocumentSnapshot(DocumentSnapshot snapshot) {
@@ -28,6 +32,8 @@ class Event {
       date: DateTime.parse(data['date'].toDate().toString()),
       register: DateTime.parse(data['register'].toDate().toString()),
       title: data['title'] as String,
+      participants: data['participants'] as List,
+      participantsEmail: data['participantsEmail'] as List,
     );
   }
 }

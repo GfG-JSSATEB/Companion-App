@@ -19,7 +19,7 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   void initState() {
-    events = DatabaseService.getEvents();
+    events = DatabaseService.getAllEvents();
     super.initState();
   }
 
