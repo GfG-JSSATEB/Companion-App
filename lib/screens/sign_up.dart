@@ -128,6 +128,7 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               logo(context),
+              greetings(),
               const SizedBox(height: 20),
               inputForms(),
               const SizedBox(height: 10),
@@ -140,11 +141,22 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  Text greetings() {
+    return const Text(
+      'Welcome',
+      textScaleFactor: 2.5,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+    );
+  }
+
   Column signInRoute(BuildContext context) {
     return Column(
       children: [
         const Text(
-          "Already have an account yet?",
+          "Already have an account?",
           textScaleFactor: 1.3,
           style: TextStyle(color: kTextColor),
         ),

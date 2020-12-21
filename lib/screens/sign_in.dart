@@ -86,7 +86,8 @@ class _SignInState extends State<SignIn> {
             child: Column(
               children: [
                 logo(context),
-                const SizedBox(height: 10.0),
+                greetings(),
+                const SizedBox(height: 20.0),
                 inputForm(),
                 signInButton(context),
                 const SizedBox(height: 10.0),
@@ -95,6 +96,17 @@ class _SignInState extends State<SignIn> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Text greetings() {
+    return const Text(
+      'GfG JSSATEB',
+      textScaleFactor: 2.5,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     );
   }
