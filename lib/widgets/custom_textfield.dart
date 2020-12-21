@@ -40,24 +40,23 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: Icon(iconData, color: Theme.of(context).accentColor),
         enabledBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(color: Theme.of(context).accentColor.withOpacity(0.2)),
+              BorderSide(color: Theme.of(context).accentColor.withOpacity(0.4)),
           borderRadius: BorderRadius.circular(20.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Theme.of(context).accentColor.withOpacity(0.2)),
+          borderSide: BorderSide(color: Theme.of(context).accentColor),
           borderRadius: BorderRadius.circular(20.0),
         ),
         errorText: validity ? null : errorMessage,
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Colors.deepOrange,
+            color: Colors.red,
           ),
           borderRadius: BorderRadius.circular(20.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Colors.deepOrange,
+            color: Colors.red,
           ),
           borderRadius: BorderRadius.circular(20.0),
         ),
