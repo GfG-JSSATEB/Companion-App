@@ -54,21 +54,16 @@ class EventCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildRichText(
-                  context: context,
-                  title: 'Event Date',
-                  value: dateFormat.format(event.date),
-                ),
-                const SizedBox(height: 5),
-                buildRichText(
-                  context: context,
-                  title: 'Last Date to Register',
-                  value: dateFormat.format(event.register),
-                ),
-              ],
+            buildRichText(
+              context: context,
+              title: 'Event Date:',
+              value: dateFormat.format(event.date),
+            ),
+            const SizedBox(height: 5),
+            buildRichText(
+              context: context,
+              title: 'Register By:',
+              value: dateFormat.format(event.register),
             )
           ],
         ),

@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
       iconTheme: IconThemeData(color: Theme.of(context).accentColor, size: 30),
       title: Text(
         title,
-        textScaleFactor: 1.7,
+        textScaleFactor: 1.6,
         style: TextStyle(
           color: Theme.of(context).accentColor,
           fontWeight: FontWeight.bold,

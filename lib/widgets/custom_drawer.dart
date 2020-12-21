@@ -23,13 +23,13 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             DrawerTile(
               title: 'Home',
-              iconData: Icons.home,
+              iconData: Icons.home_outlined,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, HomePage.routeName),
             ),
             DrawerTile(
               title: 'Events',
-              iconData: Icons.event,
+              iconData: Icons.event_note,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, EventsPage.routeName),
             ),
@@ -62,6 +62,7 @@ class CustomDrawer extends StatelessWidget {
         textAlign: TextAlign.center,
         textScaleFactor: 2.5,
         style: TextStyle(
+          fontWeight: FontWeight.bold,
           color: Theme.of(context).accentColor,
         ),
       ),
