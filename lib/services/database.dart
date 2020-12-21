@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gfg_jssateb/models/event.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/uuid_util.dart';
 
 import '../models/announcement.dart';
+import '../models/event.dart';
 import '../models/student.dart';
 
 class DatabaseService {
@@ -65,7 +65,7 @@ class DatabaseService {
     });
   }
 
-  static Future<List<Event>> getEvents() async {
+  static Future<List<Event>> getAllEvents() async {
     final List<Event> events = [];
     final QuerySnapshot snapshot = await _firestore
         .collection("events")
@@ -75,5 +75,21 @@ class DatabaseService {
       events.add(Event.fromDocumentSnapshot(docSnapshot));
     }
     return events;
+  }
+
+  static Future<Event> getEvent({@required String id}) async {
+    final DocumentSnapshot doc =
+        await _firestore.collection('events').doc(id).get();
+    return Event.fromDocumentSnapshot(doc);
+  }
+
+  static Future<void> registerToEvent(
+      {@required String uid,
+      @required String email,
+      @required String eventId}) async {
+    await _firestore.collection("events").doc(eventId).update({
+      'participants': FieldValue.arrayUnion([uid]),
+      'participantsEmail': FieldValue.arrayUnion([email]),
+    });
   }
 }
