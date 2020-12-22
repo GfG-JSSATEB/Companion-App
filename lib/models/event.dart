@@ -10,6 +10,7 @@ class Event {
   final DateTime register;
   final List participants;
   final List participantsEmail;
+  final bool isFinished;
 
   Event({
     @required this.id,
@@ -20,6 +21,7 @@ class Event {
     @required this.register,
     @required this.participants,
     @required this.participantsEmail,
+    @required this.isFinished,
   });
 
   factory Event.fromDocumentSnapshot(DocumentSnapshot snapshot) {
@@ -34,6 +36,7 @@ class Event {
       title: data['title'] as String,
       participants: data['participants'] as List,
       participantsEmail: data['participantsEmail'] as List,
+      isFinished: data['isFinished'] as bool,
     );
   }
 }

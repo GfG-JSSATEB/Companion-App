@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'color_constants.dart';
-import 'screens/events.dart';
 import 'screens/home.dart';
 import 'screens/sign_in.dart';
 import 'screens/sign_up.dart';
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           HomePage.routeName: (context) => HomePage(),
-          EventsPage.routeName: (context) => EventsPage(),
           SignIn.routeName: (context) => SignIn(),
           SignUp.routeName: (context) => SignUp(),
         },

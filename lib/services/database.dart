@@ -65,11 +65,11 @@ class DatabaseService {
     });
   }
 
-  static Future<List<Event>> getAllEvents() async {
+  static Future<List<Event>> getAllEvents({@required bool isFinished}) async {
     final List<Event> events = [];
     final QuerySnapshot snapshot = await _firestore
         .collection("events")
-        .where('isFinished', isEqualTo: false)
+        .where('isFinished', isEqualTo: isFinished)
         .get();
     for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
       events.add(Event.fromDocumentSnapshot(docSnapshot));

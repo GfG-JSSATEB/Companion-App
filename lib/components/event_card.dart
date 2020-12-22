@@ -15,14 +15,23 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EventDetails(
-            id: event.id,
-          ),
-        ),
-      ),
+      onTap: () => event.isFinished
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PastEventDetails(
+                  event: event,
+                ),
+              ),
+            )
+          : Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EventDetails(
+                  id: event.id,
+                ),
+              ),
+            ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Container(

@@ -9,6 +9,9 @@ import '../widgets/error_message.dart';
 
 class EventsPage extends StatefulWidget {
   static const routeName = '/events';
+  final bool isFinished;
+
+  const EventsPage({Key key, @required this.isFinished}) : super(key: key);
 
   @override
   _EventsPageState createState() => _EventsPageState();
@@ -19,7 +22,7 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   void initState() {
-    events = DatabaseService.getAllEvents();
+    events = DatabaseService.getAllEvents(isFinished: widget.isFinished);
     super.initState();
   }
 
