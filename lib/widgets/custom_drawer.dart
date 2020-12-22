@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../color_constants.dart';
+import '../screens/about_us.dart';
 import '../screens/events.dart';
 import '../screens/home.dart';
 import '../screens/sign_in.dart';
@@ -23,13 +25,13 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             DrawerTile(
               title: 'Home',
-              iconData: Icons.home_outlined,
+              iconData: FontAwesomeIcons.home,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, HomePage.routeName),
             ),
             DrawerTile(
               title: 'Events',
-              iconData: Icons.event_note,
+              iconData: FontAwesomeIcons.calendarAlt,
               onTap: () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -41,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             DrawerTile(
               title: 'Past Events',
-              iconData: Icons.event_available,
+              iconData: FontAwesomeIcons.calendarCheck,
               onTap: () => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -52,8 +54,14 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             DrawerTile(
+              title: 'About Us',
+              iconData: FontAwesomeIcons.info,
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, AboutUs.routeName),
+            ),
+            DrawerTile(
               title: 'Sign Out',
-              iconData: Icons.exit_to_app,
+              iconData: FontAwesomeIcons.signOutAlt,
               onTap: () async {
                 await context.read<AuthService>().signOut();
                 Navigator.pushReplacementNamed(context, SignIn.routeName);

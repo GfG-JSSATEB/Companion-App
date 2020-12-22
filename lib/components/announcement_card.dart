@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../color_constants.dart';
 import '../models/announcement.dart';
@@ -54,9 +55,10 @@ class AnnouncementCard extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.access_time,
+                  FontAwesomeIcons.clock,
                   color: Theme.of(context).accentColor,
                 ),
+                const SizedBox(width: 5),
                 Text(
                   " ${announcement.relativeTime}",
                   textScaleFactor: 1.2,
