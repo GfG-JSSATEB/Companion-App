@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../color_constants.dart';
+
 class ErrorMessage extends StatelessWidget {
   final dynamic message;
   const ErrorMessage({
@@ -23,6 +25,7 @@ class ErrorMessage extends StatelessWidget {
             "$message",
             textScaleFactor: 1.2,
             textAlign: TextAlign.center,
+            style: TextStyle(color: kTextColor),
           ),
         ],
       ),
