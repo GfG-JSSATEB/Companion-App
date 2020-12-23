@@ -39,19 +39,29 @@ class _HomePageState extends State<HomePage> {
           future: announcements,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
-              return ErrorMessage(
-                message: snapshot.error,
+              return Center(
+                child: ErrorMessage(
+                  message: snapshot.error,
+                ),
               );
             } else if (snapshot.hasData) {
-              return ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return AnnouncementCard(
-                    announcement: snapshot.data[index] as Announcement,
-                  );
-                },
-                itemCount: snapshot.data.length as int,
-              );
+              if (snapshot.data.length as int > 0) {
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return AnnouncementCard(
+                      announcement: snapshot.data[index] as Announcement,
+                    );
+                  },
+                  itemCount: snapshot.data.length as int,
+                );
+              } else {
+                return const Center(
+                  child: ErrorMessage(
+                    message: 'No announcements available',
+                  ),
+                );
+              }
             } else {
               return const Center(
                 child: CircularProgressIndicator(),
