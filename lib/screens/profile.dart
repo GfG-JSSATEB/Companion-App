@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gfg_jssateb/screens/sign_in.dart';
+import 'package:gfg_jssateb/services/auth.dart';
+import 'package:provider/provider.dart';
 
 import '../color_constants.dart';
 import '../models/student.dart';
@@ -165,7 +168,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         minWidth: MediaQuery.of(context).size.width * 0.6,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          await context
+                              .read<AuthService>()
+                              .resetPassword(email: student.email);
+                          await context.read<AuthService>().signOut();
+                          Navigator.pushReplacementNamed(
+                              context, SignIn.routeName);
+                        },
                         color: Theme.of(context).accentColor,
                         child: const Text(
                           "Reset Password?",
@@ -277,7 +287,7 @@ class ProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => onTap(hashCode),
+      onTap: () => onTap(),
       leading: Icon(
         icon,
         color: Theme.of(context).accentColor,
