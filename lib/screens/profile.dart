@@ -98,9 +98,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         },
                       ),
-                      ProfileTile(
-                        title: student.email,
-                        icon: FontAwesomeIcons.solidEnvelope,
+                      ListTile(
+                        leading: Icon(
+                          FontAwesomeIcons.solidEnvelope,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        title: Text(
+                          student.email,
+                          style: const TextStyle(
+                            color: kTextColor,
+                            letterSpacing: 1.3,
+                          ),
+                        ),
                       ),
                       ProfileTile(
                         title: student.college,
