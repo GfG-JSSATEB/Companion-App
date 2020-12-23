@@ -75,13 +75,13 @@ class EventCard extends StatelessWidget {
               const SizedBox(height: 15),
               buildRichText(
                 context: context,
-                title: 'Event Date:',
+                title: 'Event Date',
                 value: dateFormat.format(event.date),
               ),
               const SizedBox(height: 5),
               buildRichText(
                 context: context,
-                title: 'Register By:',
+                title: 'Register By',
                 value: dateFormat.format(event.register),
               )
             ],

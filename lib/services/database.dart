@@ -92,6 +92,19 @@ class DatabaseService {
     return Event.fromDocumentSnapshot(doc);
   }
 
+  static Future<List<Event>> getParticipatedEvents(
+      {@required String uid}) async {
+    final List<Event> events = [];
+    final QuerySnapshot snapshot = await _firestore
+        .collection("events")
+        .where('participants', arrayContains: uid)
+        .get();
+    for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
+      events.add(Event.fromDocumentSnapshot(docSnapshot));
+    }
+    return events;
+  }
+
   static Future<void> registerToEvent(
       {@required String uid,
       @required String email,

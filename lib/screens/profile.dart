@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gfg_jssateb/screens/sign_in.dart';
-import 'package:gfg_jssateb/services/auth.dart';
 import 'package:provider/provider.dart';
 
 import '../color_constants.dart';
 import '../models/student.dart';
+import '../services/auth.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_textfield.dart';
+import 'participated_events.dart';
+import 'sign_in.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/profile';
@@ -159,17 +160,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         },
                       ),
-                      ProfileTile(
-                        title: 'Contests Participated',
-                        icon: FontAwesomeIcons.certificate,
-                        trailing: FontAwesomeIcons.chevronRight,
-                        onTap: () {},
-                      ),
-                      ProfileTile(
-                        title: 'Contests Won',
-                        icon: FontAwesomeIcons.trophy,
-                        trailing: FontAwesomeIcons.chevronRight,
-                        onTap: () {},
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          ParticipatedEvents.routeName,
+                        ),
+                        child: const ProfileTile(
+                          title: 'Participated Events',
+                          icon: FontAwesomeIcons.certificate,
+                          trailing: FontAwesomeIcons.chevronRight,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       MaterialButton(
@@ -200,10 +200,11 @@ class _ProfilePageState extends State<ProfilePage> {
           );
   }
 
-  Future<void> buildShowDialog(
-      {@required BuildContext context,
-      @required String key,
-      @required String value}) async {
+  Future<void> buildShowDialog({
+    @required BuildContext context,
+    @required String key,
+    @required String value,
+  }) async {
     textController.text = value;
 
     showDialog(
@@ -282,21 +283,18 @@ class ProfileTile extends StatelessWidget {
       {Key key,
       @required this.title,
       @required this.icon,
-      this.onTap,
       this.trailing,
       this.trailingOnTap})
       : super(key: key);
 
   final String title;
   final IconData icon;
-  final Function onTap;
   final IconData trailing;
   final Function trailingOnTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => onTap(),
       leading: Icon(
         icon,
         color: Theme.of(context).accentColor,

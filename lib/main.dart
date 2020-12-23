@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'color_constants.dart';
 import 'screens/about_us.dart';
 import 'screens/home.dart';
+import 'screens/participated_events.dart';
 import 'screens/profile.dart';
 import 'screens/settings.dart';
 import 'screens/sign_in.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
           AboutUs.routeName: (context) => AboutUs(),
           Settings.routeName: (context) => Settings(),
           ProfilePage.routeName: (context) => ProfilePage(),
+          ParticipatedEvents.routeName: (context) => ParticipatedEvents(),
         },
         home: AuthenticationWrapper(),
       ),
