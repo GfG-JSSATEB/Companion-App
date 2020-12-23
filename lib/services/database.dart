@@ -42,10 +42,12 @@ class DatabaseService {
     return Student.fromDocumentSnapshot(snapshot);
   }
 
-  static Future<void> updateName(
-      {@required String id, @required String name}) async {
+  static Future<void> updateStudentField(
+      {@required String id,
+      @required String value,
+      @required String key}) async {
     await _firestore.collection('students').doc(id).update({
-      'name': name,
+      key: value,
     });
   }
 

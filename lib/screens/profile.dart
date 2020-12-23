@@ -21,8 +21,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   bool _isLoading = true;
 
-  TextEditingController nameController = TextEditingController();
-  String nameErrorMessage = "";
+  TextEditingController textController = TextEditingController();
+  String errorMessage = "";
   bool validityName = true;
 
   @override
@@ -33,14 +33,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    textController.dispose();
     super.dispose();
   }
 
   Future<void> getStudent() async {
     student = await DatabaseService.getStudent(uid);
     setState(() {
-      nameController.text = student.name;
       _isLoading = false;
     });
   }
@@ -89,7 +88,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         icon: FontAwesomeIcons.solidUser,
                         trailing: FontAwesomeIcons.pen,
                         trailingOnTap: () async {
-                          await buildShowDialog(context);
+                          await buildShowDialog(
+                            context: context,
+                            key: 'name',
+                            value: student.name,
+                          );
                         },
                       ),
                       ProfileTile(
@@ -99,14 +102,50 @@ class _ProfilePageState extends State<ProfilePage> {
                       ProfileTile(
                         title: student.college,
                         icon: FontAwesomeIcons.school,
+                        trailing: FontAwesomeIcons.pen,
+                        trailingOnTap: () async {
+                          await buildShowDialog(
+                            context: context,
+                            key: 'college',
+                            value: student.college,
+                          );
+                        },
                       ),
                       ProfileTile(
                         title: student.usn,
                         icon: FontAwesomeIcons.solidIdBadge,
+                        trailing: FontAwesomeIcons.pen,
+                        trailingOnTap: () async {
+                          await buildShowDialog(
+                            context: context,
+                            key: 'usn',
+                            value: student.usn,
+                          );
+                        },
                       ),
                       ProfileTile(
                         title: student.branch,
                         icon: FontAwesomeIcons.bookReader,
+                        trailing: FontAwesomeIcons.pen,
+                        trailingOnTap: () async {
+                          await buildShowDialog(
+                            context: context,
+                            key: 'branch',
+                            value: student.branch,
+                          );
+                        },
+                      ),
+                      ProfileTile(
+                        title: student.year,
+                        icon: FontAwesomeIcons.graduationCap,
+                        trailing: FontAwesomeIcons.pen,
+                        trailingOnTap: () async {
+                          await buildShowDialog(
+                            context: context,
+                            key: 'year',
+                            value: student.year,
+                          );
+                        },
                       ),
                       ProfileTile(
                         title: 'Contests Participated',
@@ -142,7 +181,12 @@ class _ProfilePageState extends State<ProfilePage> {
           );
   }
 
-  Future<void> buildShowDialog(BuildContext context) async {
+  Future<void> buildShowDialog(
+      {@required BuildContext context,
+      @required String key,
+      @required String value}) async {
+    textController.text = value;
+
     showDialog(
       context: context,
       builder: (context) {
@@ -154,12 +198,12 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextField(
-                  controller: nameController,
-                  title: 'Name',
+                  controller: textController,
+                  title: key,
                   validity: validityName,
-                  errorMessage: nameErrorMessage,
+                  errorMessage: errorMessage,
                   obscureText: false,
-                  iconData: FontAwesomeIcons.solidUser,
+                  iconData: FontAwesomeIcons.solidEdit,
                 ),
                 const SizedBox(height: 20),
                 MaterialButton(
@@ -169,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(20)),
                   onPressed: () async {
                     setState(() {
-                      validityName = isValidName(nameController.text.trim());
+                      validityName = isValidName(textController.text.trim());
                     });
                     if (validityName) {
                       setState(() {
@@ -177,9 +221,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       });
                       Navigator.pop(context);
 
-                      await DatabaseService.updateName(
+                      await DatabaseService.updateStudentField(
                         id: uid,
-                        name: nameController.text.trim(),
+                        key: key,
+                        value: textController.text.trim(),
                       );
 
                       await getStudent();
@@ -205,7 +250,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   bool isValidName(String name) {
     if (name.length < 3) {
-      nameErrorMessage = 'Name too short';
+      errorMessage = 'Name too short';
       return false;
     } else {
       return true;
