@@ -42,6 +42,13 @@ class DatabaseService {
     return Student.fromDocumentSnapshot(snapshot);
   }
 
+  static Future<void> updateName(
+      {@required String id, @required String name}) async {
+    await _firestore.collection('students').doc(id).update({
+      'name': name,
+    });
+  }
+
   static Future<List<Announcement>> getAnnouncements() async {
     final List<Announcement> announcements = [];
     final QuerySnapshot snapshot = await _firestore
