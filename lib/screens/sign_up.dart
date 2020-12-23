@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   String year = 'Select year of graduation';
   List<String> years = [];
 
-  String college = 'Select College';
+  String college = CollegeDetails.noDetail;
 
   String emailIdErrorMessage = "";
   String passwordErrorMessage = "";
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<void> signUp(BuildContext context) async {
     try {
-      if (college == 'OTHER') {
+      if (college == CollegeDetails.otherCollege) {
         college = otherCollegeController.text.trim();
       }
       await context.read<AuthService>().signUpWithEmail(
@@ -220,7 +220,7 @@ class _SignUpState extends State<SignUp> {
         const SizedBox(height: 20),
         CustomDropdown(
           hint: college,
-          list: const ['JSSATEB', 'OTHER'],
+          list: const [CollegeDetails.jssCollege, CollegeDetails.otherCollege],
           iconData: FontAwesomeIcons.school,
           onChanged: (String val) {
             setState(() {
@@ -228,7 +228,7 @@ class _SignUpState extends State<SignUp> {
             });
           },
         ),
-        if (college == 'OTHER')
+        if (college == CollegeDetails.otherCollege)
           Column(
             children: [
               const SizedBox(height: 20),
@@ -295,7 +295,7 @@ class _SignUpState extends State<SignUp> {
             validityPassword = isValidPassword(passwordController.text);
             validityName = isValidName(nameController.text.trim());
             validityUSN = isValidUSN(usnController.text.trim());
-            if (college == 'OTHER') {
+            if (college == CollegeDetails.otherCollege) {
               validityOtherCollege =
                   isValidOtherCollege(otherCollegeController.text.trim());
             }
@@ -307,10 +307,11 @@ class _SignUpState extends State<SignUp> {
               validityUSN &&
               branch != 'Select branch' &&
               year != 'Select year of graduation' &&
-              college != 'Select College') {
-            if (college == 'OTHER' && validityOtherCollege) {
+              college != CollegeDetails.noDetail) {
+            if (college == CollegeDetails.otherCollege &&
+                validityOtherCollege) {
               await signUp(context);
-            } else if (college == 'JSSATEB') {
+            } else if (college == CollegeDetails.otherCollege) {
               await signUp(context);
             }
           }
@@ -394,4 +395,10 @@ class _SignUpState extends State<SignUp> {
       return true;
     }
   }
+}
+
+mixin CollegeDetails {
+  static const String noDetail = 'Select College';
+  static const String jssCollege = 'JSSATEB';
+  static const String otherCollege = 'OTHER';
 }
