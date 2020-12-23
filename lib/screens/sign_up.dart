@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
@@ -187,7 +188,7 @@ class _SignUpState extends State<SignUp> {
           validity: validityName,
           errorMessage: nameErrorMessage,
           obscureText: false,
-          iconData: Icons.person,
+          iconData: FontAwesomeIcons.solidUser,
         ),
         const SizedBox(height: 20),
         CustomTextField(
@@ -196,7 +197,7 @@ class _SignUpState extends State<SignUp> {
           validity: validityEmail,
           errorMessage: emailIdErrorMessage,
           obscureText: false,
-          iconData: Icons.mail,
+          iconData: FontAwesomeIcons.solidEnvelope,
         ),
         const SizedBox(height: 20),
         CustomTextField(
@@ -205,7 +206,7 @@ class _SignUpState extends State<SignUp> {
           validity: validityPassword,
           errorMessage: passwordErrorMessage,
           obscureText: true,
-          iconData: Icons.lock,
+          iconData: FontAwesomeIcons.lock,
         ),
         const SizedBox(height: 20),
         CustomTextField(
@@ -214,13 +215,13 @@ class _SignUpState extends State<SignUp> {
           validity: validityUSN,
           errorMessage: usnErrorMessage,
           obscureText: false,
-          iconData: Icons.recent_actors_rounded,
+          iconData: FontAwesomeIcons.solidIdBadge,
         ),
         const SizedBox(height: 20),
         CustomDropdown(
           hint: college,
           list: const ['JSSATEB', 'OTHER'],
-          iconData: Icons.business,
+          iconData: FontAwesomeIcons.school,
           onChanged: (String val) {
             setState(() {
               college = val;
@@ -237,7 +238,7 @@ class _SignUpState extends State<SignUp> {
                 validity: validityOtherCollege,
                 errorMessage: otherCollegeErorMessage,
                 obscureText: false,
-                iconData: Icons.business,
+                iconData: FontAwesomeIcons.school,
               ),
             ],
           ),
@@ -245,7 +246,7 @@ class _SignUpState extends State<SignUp> {
         CustomDropdown(
           hint: branch,
           list: branches,
-          iconData: Icons.local_library,
+          iconData: FontAwesomeIcons.bookReader,
           onChanged: (String val) {
             setState(() {
               branch = val;
@@ -256,7 +257,7 @@ class _SignUpState extends State<SignUp> {
         CustomDropdown(
           hint: year,
           list: years,
-          iconData: Icons.school,
+          iconData: FontAwesomeIcons.graduationCap,
           onChanged: (String val) {
             setState(() {
               year = val;

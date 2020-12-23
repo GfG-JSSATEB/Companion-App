@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
@@ -146,7 +147,7 @@ class _SignInState extends State<SignIn> {
           validity: validityEmail,
           errorMessage: emailIdErrorMessage,
           obscureText: false,
-          iconData: Icons.mail,
+          iconData: FontAwesomeIcons.solidEnvelope,
         ),
         const SizedBox(height: 20),
         CustomTextField(
@@ -155,7 +156,7 @@ class _SignInState extends State<SignIn> {
           validity: validityPassword,
           errorMessage: passwordErrorMessage,
           obscureText: true,
-          iconData: Icons.lock,
+          iconData: FontAwesomeIcons.lock,
         ),
         const SizedBox(height: 20),
       ],

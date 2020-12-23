@@ -31,7 +31,7 @@ class CustomDropdown extends StatelessWidget {
             iconData,
             color: Theme.of(context).accentColor,
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 15),
           DropdownButton<String>(
             hint: Text(
               hint,
