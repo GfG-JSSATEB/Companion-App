@@ -100,5 +100,9 @@ class DatabaseService {
       'participants': FieldValue.arrayUnion([uid]),
       'participantsEmail': FieldValue.arrayUnion([email]),
     });
+
+    await _firestore.collection('students').doc(uid).update({
+      'participated': FieldValue.arrayUnion([eventId])
+    });
   }
 }
