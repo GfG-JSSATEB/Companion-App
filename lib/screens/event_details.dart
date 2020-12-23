@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../color_constants.dart';
@@ -55,7 +56,7 @@ class _EventDetailsState extends State<EventDetails> {
               child: CustomAppBar(
                 leading: IconButton(
                   icon: const Icon(
-                    Icons.arrow_back_ios,
+                    FontAwesomeIcons.chevronLeft,
                     size: 30,
                   ),
                   onPressed: () => Navigator.of(context).pop(),
@@ -174,7 +175,7 @@ class PastEventDetails extends StatelessWidget {
         child: CustomAppBar(
           leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back_ios,
+              FontAwesomeIcons.chevronLeft,
               size: 30,
             ),
             onPressed: () => Navigator.of(context).pop(),

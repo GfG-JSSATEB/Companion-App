@@ -6,6 +6,7 @@ import '../color_constants.dart';
 import '../screens/about_us.dart';
 import '../screens/events.dart';
 import '../screens/home.dart';
+import '../screens/settings.dart';
 import '../screens/sign_in.dart';
 import '../services/auth.dart';
 
@@ -58,6 +59,12 @@ class CustomDrawer extends StatelessWidget {
               iconData: FontAwesomeIcons.info,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, AboutUs.routeName),
+            ),
+            DrawerTile(
+              title: 'Settings',
+              iconData: FontAwesomeIcons.cog,
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, Settings.routeName),
             ),
             DrawerTile(
               title: 'Sign Out',

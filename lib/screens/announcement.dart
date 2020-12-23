@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../color_constants.dart';
 import '../models/announcement.dart';
@@ -18,7 +19,7 @@ class AnnouncementScreen extends StatelessWidget {
         child: CustomAppBar(
           leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back_ios,
+              FontAwesomeIcons.chevronLeft,
               size: 30,
             ),
             onPressed: () => Navigator.of(context).pop(),

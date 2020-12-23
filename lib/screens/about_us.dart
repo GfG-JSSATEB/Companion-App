@@ -19,7 +19,7 @@ class AboutUs extends StatelessWidget {
 
   Future<void> _launchSocial(String url) async {
     try {
-      bool launched =
+      final bool launched =
           await launch(url, forceSafariVC: false, forceWebView: false);
       if (!launched) {
         await launch("https://www.geeksforgeeks.org/",

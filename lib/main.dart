@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'color_constants.dart';
 import 'screens/about_us.dart';
 import 'screens/home.dart';
+import 'screens/profile.dart';
+import 'screens/settings.dart';
 import 'screens/sign_in.dart';
 import 'screens/sign_up.dart';
 import 'services/auth.dart';
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
           SignIn.routeName: (context) => SignIn(),
           SignUp.routeName: (context) => SignUp(),
           AboutUs.routeName: (context) => AboutUs(),
+          Settings.routeName: (context) => Settings(),
+          ProfilePage.routeName: (context) => ProfilePage(),
         },
         home: AuthenticationWrapper(),
       ),
