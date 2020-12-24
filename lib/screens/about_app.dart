@@ -7,6 +7,8 @@ import '../widgets/custom_drawer.dart';
 
 class AboutApp extends StatelessWidget {
   static const routeName = '/aboutApp';
+  final String playstoreUrl = '';
+  final String githubeUrl = '';
 
   Future<void> _launchSocial(String url) async {
     try {
@@ -75,17 +77,20 @@ class AboutApp extends StatelessWidget {
                   textScaleFactor: 1.3,
                 ),
                 const SizedBox(height: 15),
-                const AboutTile(
+                AboutTile(
                   icon: FontAwesomeIcons.shareAlt,
                   title: 'Share',
+                  onTap: () {},
                 ),
-                const AboutTile(
+                AboutTile(
                   icon: FontAwesomeIcons.googlePlay,
                   title: 'Rate Us',
+                  onTap: () {},
                 ),
-                const AboutTile(
+                AboutTile(
                   icon: FontAwesomeIcons.github,
                   title: 'Contribute',
+                  onTap: () {},
                 ),
               ],
             ),
@@ -99,10 +104,12 @@ class AboutApp extends StatelessWidget {
 class AboutTile extends StatelessWidget {
   final String title;
   final IconData icon;
+  final Function onTap;
   const AboutTile({
     Key key,
     @required this.title,
     @required this.icon,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -118,9 +125,7 @@ class AboutTile extends StatelessWidget {
           size: 30,
           color: Theme.of(context).accentColor,
         ),
-        onPressed: () {
-          // _launchSocial(url);
-        },
+        onPressed: () => onTap(),
       ),
     );
   }
