@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gfg_jssateb/screens/forgot_password.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
@@ -94,6 +95,9 @@ class _SignInState extends State<SignIn> {
                 greetings(),
                 const SizedBox(height: 20.0),
                 inputForm(),
+                const SizedBox(height: 5.0),
+                buildForgotPassword(),
+                const SizedBox(height: 12.0),
                 signInButton(context),
                 const SizedBox(height: 10.0),
                 signUpRoute(context),
@@ -102,6 +106,26 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
+    );
+  }
+
+  Row buildForgotPassword() {
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, ForgotPassword.routeName),
+          child: const Text(
+            'Forgot Password?',
+            textScaleFactor: 1.1,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+              color: Colors.white,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

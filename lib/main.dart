@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/screens/forgot_password.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/about_app.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           SignIn.routeName: (context) => SignIn(),
           SignUp.routeName: (context) => SignUp(),
           VerifyScreen.routeName: (context) => VerifyScreen(),
+          ForgotPassword.routeName: (context) => ForgotPassword(),
           AboutUs.routeName: (context) => AboutUs(),
           AboutApp.routeName: (context) => AboutApp(),
           Settings.routeName: (context) => Settings(),
