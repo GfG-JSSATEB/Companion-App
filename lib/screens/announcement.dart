@@ -66,9 +66,6 @@ class AnnouncementScreen extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.4,
-                  style: const TextStyle(
-                      // color: kTextColor.
-                      ),
                 ),
               ],
             ),

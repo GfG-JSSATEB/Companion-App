@@ -121,19 +121,15 @@ class DrawerTile extends StatelessWidget {
         ListTile(
           leading: Icon(
             iconData,
-            // color: kTextColor,
+            color: Theme.of(context).accentColor,
           ),
           title: Text(
             title,
             textScaleFactor: 1.3,
-            style: const TextStyle(
-                // color: kTextColor,
-                ),
           ),
           onTap: () => onTap(),
         ),
         const Divider(
-          // color: kTextColor,
           thickness: 2,
         ),
       ],

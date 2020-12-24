@@ -158,9 +158,6 @@ class _SignUpState extends State<SignUp> {
         const Text(
           "Already have an account?",
           textScaleFactor: 1.3,
-          style: TextStyle(
-              // color: kTextColor,
-              ),
         ),
         const SizedBox(width: 10.0),
         GestureDetector(

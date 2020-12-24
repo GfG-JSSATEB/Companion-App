@@ -100,9 +100,6 @@ class SettingsTile extends StatelessWidget {
       title: Text(
         title,
         textScaleFactor: 1.2,
-        style: const TextStyle(
-            // color: kTextColor,
-            ),
       ),
       trailing: trailing,
     );

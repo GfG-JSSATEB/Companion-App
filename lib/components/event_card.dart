@@ -67,9 +67,6 @@ class EventCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.justify,
                 textScaleFactor: 1.2,
-                style: TextStyle(
-                    // color: kTextColor.withOpacity(0.8),
-                    ),
               ),
               const SizedBox(height: 15),
               buildRichText(
@@ -100,9 +97,6 @@ class EventCard extends StatelessWidget {
       maxLines: 2,
       textScaleFactor: 1.3,
       text: TextSpan(
-        style: TextStyle(
-            // color: kTextColor.withOpacity(0.8),
-            ),
         children: [
           TextSpan(
             text: "$title: ",

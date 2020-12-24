@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'color_constants.dart';
 import 'screens/about_us.dart';
 import 'screens/home.dart';
 import 'screens/participated_events.dart';
@@ -46,7 +45,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Provider.of<DarkNotifier>(context).isDark
               ? const Color(0xFF161B22)
               : Colors.white,
-          accentColor: kAccentColor,
+          accentColor: const Color(0xFF2F8D46),
           backgroundColor: Provider.of<DarkNotifier>(context).isDark
               ? const Color(0xFF010409)
               : const Color(0xFFEEEEEE),

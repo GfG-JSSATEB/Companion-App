@@ -115,9 +115,6 @@ class _EventDetailsState extends State<EventDetails> {
                         softWrap: true,
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.2,
-                        style: const TextStyle(
-                            // color: kTextColor.
-                            ),
                       ),
                       const SizedBox(height: 20),
                       if (!event.participants.contains(uid))
@@ -226,9 +223,6 @@ class PastEventDetails extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.2,
-                  style: const TextStyle(
-                      // color: kTextColor,
-                      ),
                 ),
               ],
             ),

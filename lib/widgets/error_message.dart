@@ -23,8 +23,6 @@ class ErrorMessage extends StatelessWidget {
             "$message",
             textScaleFactor: 1.2,
             textAlign: TextAlign.center,
-            style: const TextStyle(// color: kTextColor,
-                ),
           ),
         ],
       ),

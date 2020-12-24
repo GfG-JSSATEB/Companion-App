@@ -75,9 +75,6 @@ class AboutUs extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 5,
                   textScaleFactor: 1.3,
-                  style: TextStyle(
-                      // color: kTextColor,
-                      ),
                 ),
                 const SizedBox(height: 15),
                 Row(
@@ -107,7 +104,6 @@ class AboutUs extends StatelessWidget {
     return IconButton(
       icon: Icon(
         icon,
-        // color: kTextColor,
         size: 30,
       ),
       onPressed: () {

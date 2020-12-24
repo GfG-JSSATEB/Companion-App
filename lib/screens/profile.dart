@@ -107,7 +107,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: Text(
                           student.email,
                           style: const TextStyle(
-                            // color: kTextColor,
                             letterSpacing: 1.3,
                           ),
                         ),
@@ -302,7 +301,6 @@ class ProfileTile extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          // color: kTextColor,
           letterSpacing: 1.3,
         ),
       ),

@@ -117,9 +117,6 @@ class _SignInState extends State<SignIn> {
         const Text(
           "Don't have an account yet?",
           textScaleFactor: 1.3,
-          style: TextStyle(
-              // color: kTextColor,
-              ),
         ),
         const SizedBox(width: 5.0),
         GestureDetector(
