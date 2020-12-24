@@ -111,17 +111,17 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      ProfileTile(
-                        title: student.college,
-                        icon: FontAwesomeIcons.school,
-                        trailing: FontAwesomeIcons.pen,
-                        trailingOnTap: () async {
-                          await buildShowDialog(
-                            context: context,
-                            key: 'college',
-                            value: student.college,
-                          );
-                        },
+                      ListTile(
+                        leading: Icon(
+                          FontAwesomeIcons.school,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        title: Text(
+                          student.college,
+                          style: const TextStyle(
+                            letterSpacing: 1.3,
+                          ),
+                        ),
                       ),
                       ProfileTile(
                         title: student.usn,
