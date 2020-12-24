@@ -106,8 +106,10 @@ class EventCard extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: value,
-          ),
+              text: value,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+              )),
         ],
       ),
     );

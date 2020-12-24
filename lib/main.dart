@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: Provider.of<DarkNotifier>(context).isDark
               ? const Color(0xFF010409)
               : const Color(0xFFEEEEEE),
-          fontFamily: "Mont-med",
           brightness: Provider.of<DarkNotifier>(context).isDark
               ? Brightness.dark
               : Brightness.light,
+          fontFamily: "Mont-med",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {
