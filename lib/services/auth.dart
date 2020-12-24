@@ -9,12 +9,14 @@ class AuthService {
 
   Stream<User> get authStateChanges => _auth.authStateChanges();
 
-  Future<void> signInWithEmail(
+  Future<User> signInWithEmail(
       {@required String email, @required String password}) async {
-    await _auth.signInWithEmailAndPassword(
+    final UserCredential userCredential =
+        await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
+    return userCredential.user;
   }
 
   Future<void> signUpWithEmail({

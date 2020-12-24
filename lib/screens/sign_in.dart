@@ -9,6 +9,7 @@ import '../services/auth.dart';
 import '../widgets/custom_textfield.dart';
 import 'home.dart';
 import 'sign_up.dart';
+import 'verify_screen.dart';
 
 class SignIn extends StatefulWidget {
   static const routeName = '/signIn';
@@ -33,11 +34,15 @@ class _SignInState extends State<SignIn> {
 
   Future<void> signIn(BuildContext context) async {
     try {
-      await context.read<AuthService>().signInWithEmail(
+      final User user = await context.read<AuthService>().signInWithEmail(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
+      if (user.emailVerified) {
+        Navigator.pushReplacementNamed(context, HomePage.routeName);
+      } else {
+        Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
+      }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
