@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ErrorMessage extends StatelessWidget {
   final dynamic message;
@@ -15,7 +16,7 @@ class ErrorMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(
-            Icons.error,
+            FontAwesomeIcons.exclamation,
             size: 100,
             color: Colors.red,
           ),
