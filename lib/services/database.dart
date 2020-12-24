@@ -83,6 +83,9 @@ class DatabaseService {
     for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
       events.add(Event.fromDocumentSnapshot(docSnapshot));
     }
+
+    events.sort((a, b) => b.date.compareTo(a.date));
+
     return events;
   }
 
@@ -102,6 +105,9 @@ class DatabaseService {
     for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
       events.add(Event.fromDocumentSnapshot(docSnapshot));
     }
+
+    events.sort((a, b) => b.date.compareTo(a.date));
+
     return events;
   }
 
