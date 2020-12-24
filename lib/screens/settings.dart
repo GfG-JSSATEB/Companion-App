@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gfg_jssateb/screens/about_app.dart';
 import 'package:gfg_jssateb/settings/dark_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,8 @@ class Settings extends StatelessWidget {
                     SettingsTile(
                       icon: FontAwesomeIcons.infoCircle,
                       title: 'About App',
-                      onTap: () {},
+                      onTap: () =>
+                          Navigator.pushNamed(context, AboutApp.routeName),
                     ),
                     SettingsTile(
                       icon: FontAwesomeIcons.fill,
