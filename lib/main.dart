@@ -11,6 +11,7 @@ import 'screens/profile.dart';
 import 'screens/settings.dart';
 import 'screens/sign_in.dart';
 import 'screens/sign_up.dart';
+import 'screens/verify_screen.dart';
 import 'services/auth.dart';
 import 'settings/dark_notifier.dart';
 
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (context) => HomePage(),
           SignIn.routeName: (context) => SignIn(),
           SignUp.routeName: (context) => SignUp(),
+          VerifyScreen.routeName: (context) => VerifyScreen(),
           AboutUs.routeName: (context) => AboutUs(),
           AboutApp.routeName: (context) => AboutApp(),
           Settings.routeName: (context) => Settings(),

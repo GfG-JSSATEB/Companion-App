@@ -8,8 +8,8 @@ import '../components/body_container.dart';
 import '../services/auth.dart';
 import '../widgets/custom_dropdown.dart';
 import '../widgets/custom_textfield.dart';
-import 'home.dart';
 import 'sign_in.dart';
+import 'verify_screen.dart';
 
 class SignUp extends StatefulWidget {
   static const routeName = '/signUp';
@@ -72,7 +72,7 @@ class _SignUpState extends State<SignUp> {
             branch: branch,
             year: year,
           );
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
+      Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -299,20 +299,19 @@ class _SignUpState extends State<SignUp> {
             }
             _isLoading = true;
           });
-          if (validityEmail &&
-              validityPassword &&
-              validityName &&
-              validityUSN &&
-              branch != 'Select branch' &&
-              year != 'Select year of graduation' &&
-              college != CollegeDetails.noDetail) {
-            if (college == CollegeDetails.otherCollege &&
-                validityOtherCollege) {
-              await signUp(context);
-            } else if (college == CollegeDetails.otherCollege) {
-              await signUp(context);
-            }
+          //   if (validityEmail &&
+          //       validityPassword &&
+          //       validityName &&
+          //       validityUSN &&
+          //       branch != 'Select branch' &&
+          //       year != 'Select year of graduation' &&
+          //       college != CollegeDetails.noDetail) {
+          if (college == CollegeDetails.otherCollege && validityOtherCollege) {
+            await signUp(context);
+          } else if (college == CollegeDetails.jssCollege) {
+            await signUp(context);
           }
+          //   }
           setState(() {
             _isLoading = false;
           });
