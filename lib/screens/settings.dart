@@ -7,14 +7,9 @@ import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import 'profile.dart';
 
-class Settings extends StatefulWidget {
+class Settings extends StatelessWidget {
   static const String routeName = '/settings';
 
-  @override
-  _SettingsState createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     bool isDark = Provider.of<DarkNotifier>(context, listen: false).isDark;
@@ -60,13 +55,11 @@ class _SettingsState extends State<Settings> {
                       icon: FontAwesomeIcons.fill,
                       title: 'Dark Theme',
                       trailing: Switch(
-                        value: Provider.of<DarkNotifier>(context).isDark,
+                        value: isDark,
                         onChanged: (value) {
-                          setState(() {
-                            isDark = value;
-                            Provider.of<DarkNotifier>(context, listen: false)
-                                .darkMode = value;
-                          });
+                          isDark = value;
+                          Provider.of<DarkNotifier>(context, listen: false)
+                              .darkMode = isDark;
                         },
                       ),
                       onTap: () {},
