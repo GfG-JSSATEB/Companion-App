@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gfg_jssateb/components/body_container.dart';
+import 'package:provider/provider.dart';
 
+import '../components/body_container.dart';
+import '../services/auth.dart';
 import 'home.dart';
+import 'sign_in.dart';
 
 class VerifyScreen extends StatefulWidget {
   static const routeName = '/verifyScreen';
@@ -54,6 +57,23 @@ class _VerifyScreenState extends State<VerifyScreen> {
               "A email have been send to ${user.email} please verify",
               textScaleFactor: 1.3,
               textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            MaterialButton(
+              height: MediaQuery.of(context).size.height * 0.065,
+              minWidth: MediaQuery.of(context).size.width * 0.6,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              onPressed: () async {
+                await context.read<AuthService>().signOut();
+                Navigator.pushReplacementNamed(context, SignIn.routeName);
+              },
+              color: Theme.of(context).accentColor,
+              child: const Text(
+                "SIGN OUT",
+                textScaleFactor: 1.4,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

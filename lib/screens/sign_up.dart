@@ -299,19 +299,20 @@ class _SignUpState extends State<SignUp> {
             }
             _isLoading = true;
           });
-          //   if (validityEmail &&
-          //       validityPassword &&
-          //       validityName &&
-          //       validityUSN &&
-          //       branch != 'Select branch' &&
-          //       year != 'Select year of graduation' &&
-          //       college != CollegeDetails.noDetail) {
-          if (college == CollegeDetails.otherCollege && validityOtherCollege) {
-            await signUp(context);
-          } else if (college == CollegeDetails.jssCollege) {
-            await signUp(context);
+          if (validityEmail &&
+              validityPassword &&
+              validityName &&
+              validityUSN &&
+              branch != 'Select branch' &&
+              year != 'Select year of graduation' &&
+              college != CollegeDetails.noDetail) {
+            if (college == CollegeDetails.otherCollege &&
+                validityOtherCollege) {
+              await signUp(context);
+            } else if (college == CollegeDetails.jssCollege) {
+              await signUp(context);
+            }
           }
-          //   }
           setState(() {
             _isLoading = false;
           });
