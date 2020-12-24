@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-import '../color_constants.dart';
 import '../components/body_container.dart';
 import '../services/auth.dart';
 import '../widgets/custom_dropdown.dart';
@@ -159,7 +158,9 @@ class _SignUpState extends State<SignUp> {
         const Text(
           "Already have an account?",
           textScaleFactor: 1.3,
-          style: TextStyle(color: kTextColor),
+          style: TextStyle(
+              // color: kTextColor,
+              ),
         ),
         const SizedBox(width: 10.0),
         GestureDetector(

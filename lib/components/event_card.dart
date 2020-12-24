@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../color_constants.dart';
 import '../models/event.dart';
 import '../screens/event_details.dart';
 import 'cached_image.dart';
@@ -69,8 +68,8 @@ class EventCard extends StatelessWidget {
                 textAlign: TextAlign.justify,
                 textScaleFactor: 1.2,
                 style: TextStyle(
-                  color: kTextColor.withOpacity(0.8),
-                ),
+                    // color: kTextColor.withOpacity(0.8),
+                    ),
               ),
               const SizedBox(height: 15),
               buildRichText(
@@ -102,8 +101,8 @@ class EventCard extends StatelessWidget {
       textScaleFactor: 1.3,
       text: TextSpan(
         style: TextStyle(
-          color: kTextColor.withOpacity(0.8),
-        ),
+            // color: kTextColor.withOpacity(0.8),
+            ),
         children: [
           TextSpan(
             text: "$title: ",

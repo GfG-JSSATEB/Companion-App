@@ -12,11 +12,19 @@ import 'screens/settings.dart';
 import 'screens/sign_in.dart';
 import 'screens/sign_up.dart';
 import 'services/auth.dart';
+import 'settings/dark_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => DarkNotifier(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,10 +43,17 @@ class MyApp extends StatelessWidget {
         title: 'GfG JSSATEB',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: kPrimaryColor,
+          primaryColor: Provider.of<DarkNotifier>(context).isDark
+              ? const Color(0xFF161B22)
+              : Colors.white,
           accentColor: kAccentColor,
-          backgroundColor: kBackgroundColor,
+          backgroundColor: Provider.of<DarkNotifier>(context).isDark
+              ? const Color(0xFF010409)
+              : const Color(0xFFEEEEEE),
           fontFamily: "Mont-med",
+          brightness: Provider.of<DarkNotifier>(context).isDark
+              ? Brightness.dark
+              : Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {

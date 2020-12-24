@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../color_constants.dart';
 import '../screens/about_us.dart';
 import '../screens/events.dart';
 import '../screens/home.dart';
@@ -120,17 +119,23 @@ class DrawerTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          leading: Icon(iconData, color: kTextColor),
+          leading: Icon(
+            iconData,
+            // color: kTextColor,
+          ),
           title: Text(
             title,
             textScaleFactor: 1.3,
             style: const TextStyle(
-              color: kTextColor,
-            ),
+                // color: kTextColor,
+                ),
           ),
           onTap: () => onTap(),
         ),
-        const Divider(color: kTextColor, thickness: 2),
+        const Divider(
+          // color: kTextColor,
+          thickness: 2,
+        ),
       ],
     );
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../color_constants.dart';
 import '../models/student.dart';
 import '../services/auth.dart';
 import '../services/database.dart';
@@ -76,7 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.only(
                   bottom: 20, left: 20, right: 20, top: 10),
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: Text(
                           student.email,
                           style: const TextStyle(
-                            color: kTextColor,
+                            // color: kTextColor,
                             letterSpacing: 1.3,
                           ),
                         ),
@@ -302,7 +302,7 @@ class ProfileTile extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          color: kTextColor,
+          // color: kTextColor,
           letterSpacing: 1.3,
         ),
       ),

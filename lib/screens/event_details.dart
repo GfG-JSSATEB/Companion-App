@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-import '../color_constants.dart';
 import '../models/event.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
@@ -116,7 +115,9 @@ class _EventDetailsState extends State<EventDetails> {
                         softWrap: true,
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.2,
-                        style: const TextStyle(color: kTextColor),
+                        style: const TextStyle(
+                            // color: kTextColor.
+                            ),
                       ),
                       const SizedBox(height: 20),
                       if (!event.participants.contains(uid))
@@ -225,7 +226,9 @@ class PastEventDetails extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.2,
-                  style: const TextStyle(color: kTextColor),
+                  style: const TextStyle(
+                      // color: kTextColor,
+                      ),
                 ),
               ],
             ),
