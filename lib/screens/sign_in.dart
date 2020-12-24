@@ -123,15 +123,16 @@ class _SignInState extends State<SignIn> {
           "Don't have an account yet?",
           textScaleFactor: 1.3,
         ),
-        const SizedBox(width: 5.0),
+        const SizedBox(height: 5.0),
         GestureDetector(
           onTap: () =>
               Navigator.pushReplacementNamed(context, SignUp.routeName),
           child: Text(
-            'Register Now',
-            textScaleFactor: 1.2,
+            'Register Now!',
+            textScaleFactor: 1.3,
             style: TextStyle(
               color: Theme.of(context).accentColor,
+              letterSpacing: 1.4,
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),

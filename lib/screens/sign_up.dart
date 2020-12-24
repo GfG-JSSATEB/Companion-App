@@ -133,6 +133,7 @@ class _SignUpState extends State<SignUp> {
               inputForms(),
               const SizedBox(height: 10),
               signUpButton(context),
+              const SizedBox(height: 10),
               signInRoute(context),
             ],
           ),
@@ -159,20 +160,22 @@ class _SignUpState extends State<SignUp> {
           "Already have an account?",
           textScaleFactor: 1.3,
         ),
-        const SizedBox(width: 10.0),
+        const SizedBox(height: 5.0),
         GestureDetector(
           onTap: () =>
               Navigator.pushReplacementNamed(context, SignIn.routeName),
           child: Text(
             'Sign In',
-            textScaleFactor: 1.2,
+            textScaleFactor: 1.3,
             style: TextStyle(
               color: Theme.of(context).accentColor,
+              letterSpacing: 1.4,
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),
           ),
         ),
+        const SizedBox(height: 15.0),
       ],
     );
   }
