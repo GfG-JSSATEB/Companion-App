@@ -26,7 +26,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   bool _isLoading = false;
 
-  Future<void> signIn(BuildContext context) async {
+  Future<void> resetPassword(BuildContext context) async {
     try {
       await context
           .read<AuthService>()
@@ -112,7 +112,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             _isLoading = true;
           });
           if (validityEmail) {
-            await signIn(context);
+            await resetPassword(context);
           }
           setState(() {
             _isLoading = false;

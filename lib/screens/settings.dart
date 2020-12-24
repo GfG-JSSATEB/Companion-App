@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gfg_jssateb/screens/about_app.dart';
-import 'package:gfg_jssateb/settings/dark_notifier.dart';
 import 'package:provider/provider.dart';
 
+import '../settings/dark_notifier.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
+import 'about_app.dart';
 import 'profile.dart';
 
 class Settings extends StatelessWidget {

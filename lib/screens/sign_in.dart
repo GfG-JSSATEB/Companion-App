@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gfg_jssateb/screens/forgot_password.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
 import '../components/body_container.dart';
 import '../services/auth.dart';
 import '../widgets/custom_textfield.dart';
+import 'forgot_password.dart';
 import 'home.dart';
 import 'sign_up.dart';
 import 'verify_screen.dart';
