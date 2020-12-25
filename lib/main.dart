@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gfg_jssateb/screens/forgot_password.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/about_app.dart';
 import 'screens/about_us.dart';
+import 'screens/forgot_password.dart';
 import 'screens/home.dart';
 import 'screens/participated_events.dart';
 import 'screens/profile.dart';

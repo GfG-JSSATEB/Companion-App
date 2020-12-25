@@ -135,7 +135,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage('assets/images/logo.jpg'),
+          image: AssetImage('assets/images/logo.png'),
           fit: BoxFit.fitHeight,
         ),
       ),
