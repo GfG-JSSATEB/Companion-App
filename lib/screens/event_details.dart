@@ -135,18 +135,31 @@ class _EventDetailsState extends State<EventDetails> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                await DatabaseService.registerToEvent(
-                                  uid: uid,
-                                  email: email,
-                                  eventId: event.id,
-                                );
-                                await getEvent();
-                                setState(() {
-                                  _isLoading = false;
-                                });
+                                try {
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+
+                                  await DatabaseService.registerToEvent(
+                                    uid: uid,
+                                    email: email,
+                                    eventId: event.id,
+                                  );
+
+                                  await getEvent();
+
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+
+                                  _scaffoldKey.currentState
+                                      .showSnackBar(const SnackBar(
+                                    content: Text('Registerd Successfully'),
+                                  ));
+                                } catch (e) {
+                                  _scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(content: Text('$e')));
+                                }
                               },
                               color: Theme.of(context).accentColor,
                               child: const Text(
