@@ -17,6 +17,8 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final DateFormat dateFormat = DateFormat('hh:mm a, d MMM yyyy');
   final DateFormat registerFormat = DateFormat('d MMM yyyy');
 
@@ -28,11 +30,15 @@ class _EventDetailsState extends State<EventDetails> {
   bool _isLoading = true;
 
   Future<void> getEvent() async {
-    final Event temp = await DatabaseService.getEvent(id: widget.id);
-    setState(() {
-      event = temp;
-      _isLoading = false;
-    });
+    try {
+      final Event temp = await DatabaseService.getEvent(id: widget.id);
+      setState(() {
+        event = temp;
+        _isLoading = false;
+      });
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    }
   }
 
   @override
@@ -45,10 +51,12 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     return _isLoading
         ? Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Theme.of(context).backgroundColor,
             body: const Center(child: CircularProgressIndicator()),
           )
         : Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(60),

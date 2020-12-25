@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gfg_jssateb/widgets/error_message.dart';
 
 import '../components/event_list.dart';
 import '../models/event.dart';
@@ -16,15 +17,24 @@ class EventsPage extends StatefulWidget {
 
 class _EventsPageState extends State<EventsPage> {
   Future<List<Event>> events;
+  bool error = false;
+  String message = '';
 
   @override
   void initState() {
-    events = DatabaseService.getAllEvents(isFinished: widget.isFinished);
+    try {
+      events = DatabaseService.getAllEvents(isFinished: widget.isFinished);
+    } catch (e) {
+      setState(() {
+        error = true;
+        message = e.toString();
+      });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return EventList(events: events);
+    return error ? ErrorMessage(message: message) : EventList(events: events);
   }
 }

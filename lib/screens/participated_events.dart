@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../components/event_list.dart';
 import '../models/event.dart';
 import '../services/database.dart';
+import '../widgets/error_message.dart';
 
 class ParticipatedEvents extends StatefulWidget {
   static const routeName = '/participatedEvent';
@@ -16,14 +17,24 @@ class _ParticipatedEventsState extends State<ParticipatedEvents> {
   Future<List<Event>> events;
   final String uid = FirebaseAuth.instance.currentUser.uid;
 
+  bool error = false;
+  String message = '';
+
   @override
   void initState() {
-    events = DatabaseService.getParticipatedEvents(uid: uid);
+    try {
+      events = DatabaseService.getParticipatedEvents(uid: uid);
+    } catch (e) {
+      setState(() {
+        error = true;
+        message = e.toString();
+      });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return EventList(events: events);
+    return error ? ErrorMessage(message: message) : EventList(events: events);
   }
 }

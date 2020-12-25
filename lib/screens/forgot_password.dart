@@ -31,8 +31,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       await context
           .read<AuthService>()
           .resetPassword(email: emailController.text.trim());
-      // TODO: Snack Bar
-      Navigator.pop(context);
+
+      _scaffoldKey.currentState.showSnackBar(const SnackBar(
+          content: Text('Password Reset Mail sent successfully')));
+
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pop(context);
+      });
     } on FirebaseAuthException catch (e) {
       setState(() {
         validityEmail = false;

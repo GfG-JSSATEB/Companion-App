@@ -19,6 +19,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Student student;
   final String uid = FirebaseAuth.instance.currentUser.uid;
 
@@ -41,22 +43,28 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> getStudent() async {
-    student = await DatabaseService.getStudent(uid);
-    setState(() {
-      _isLoading = false;
-    });
+    try {
+      student = await DatabaseService.getStudent(uid);
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return _isLoading
         ? Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Theme.of(context).backgroundColor,
             body: const Center(
               child: CircularProgressIndicator(),
             ),
           )
         : Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(60),
@@ -231,25 +239,30 @@ class _ProfilePageState extends State<ProfilePage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                   onPressed: () async {
-                    setState(() {
-                      validityName = isValidName(textController.text.trim());
-                    });
-                    if (validityName) {
+                    try {
                       setState(() {
-                        _isLoading = true;
+                        validityName = isValidName(textController.text.trim());
                       });
-                      Navigator.pop(context);
+                      if (validityName) {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        Navigator.pop(context);
 
-                      await DatabaseService.updateStudentField(
-                        id: uid,
-                        key: key,
-                        value: textController.text.trim(),
-                      );
+                        await DatabaseService.updateStudentField(
+                          id: uid,
+                          key: key,
+                          value: textController.text.trim(),
+                        );
 
-                      await getStudent();
-                      setState(() {
-                        _isLoading = false;
-                      });
+                        await getStudent();
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    } catch (e) {
+                      _scaffoldKey.currentState
+                          .showSnackBar(SnackBar(content: Text('$e')));
                     }
                   },
                   color: Theme.of(context).accentColor,
