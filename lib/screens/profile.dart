@@ -256,9 +256,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         );
 
                         await getStudent();
+
                         setState(() {
                           _isLoading = false;
                         });
+
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text('Updated $key successfully')));
                       }
                     } catch (e) {
                       _scaffoldKey.currentState
