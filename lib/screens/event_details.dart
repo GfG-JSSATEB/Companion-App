@@ -51,7 +51,8 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+    final bool isAdmin =
+        Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return _isLoading
         ? Scaffold(
@@ -214,7 +215,8 @@ class PastEventDetails extends StatelessWidget {
   PastEventDetails({Key key, this.event}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+    final bool isAdmin =
+        Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,

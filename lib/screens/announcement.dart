@@ -13,13 +13,23 @@ class AnnouncementScreen extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+    final bool isAdmin =
+        Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
+          actions: isAdmin
+              ? [
+                  IconButton(
+                    icon: const Icon(FontAwesomeIcons.plus),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 5),
+                ]
+              : null,
           leading: IconButton(
             icon: const Icon(
               FontAwesomeIcons.chevronLeft,

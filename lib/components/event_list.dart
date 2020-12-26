@@ -19,7 +19,8 @@ class EventList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+    final bool isAdmin =
+        Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
