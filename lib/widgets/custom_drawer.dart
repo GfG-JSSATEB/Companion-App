@@ -83,7 +83,7 @@ class CustomDrawer extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: Theme.of(context).accentColor,
       radius: 65,
-      child: ClipOval(child: Image.asset('assets/images/logo.jpg')),
+      child: ClipOval(child: Image.asset('assets/images/logo.png')),
     );
   }
 
