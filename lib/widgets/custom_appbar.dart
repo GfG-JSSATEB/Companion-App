@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -20,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
           Builder(
             builder: (context) => IconButton(
               icon: const Icon(
-                Icons.menu,
+                FontAwesomeIcons.bars,
                 size: 30,
               ),
               onPressed: () => Scaffold.of(context).openDrawer(),
