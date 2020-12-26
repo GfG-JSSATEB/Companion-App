@@ -34,12 +34,13 @@ class _EventDetailsState extends State<EventDetails> {
   Future<void> getEvent() async {
     try {
       final Event temp = await DatabaseService.getEvent(id: widget.id);
-      setState(() {
-        event = temp;
-        _isLoading = false;
-      });
+      event = temp;
     } catch (e) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -153,10 +154,6 @@ class _EventDetailsState extends State<EventDetails> {
 
                                   await getEvent();
 
-                                  setState(() {
-                                    _isLoading = false;
-                                  });
-
                                   _scaffoldKey.currentState
                                       .showSnackBar(const SnackBar(
                                     content: Text('Registerd Successfully'),
@@ -164,6 +161,10 @@ class _EventDetailsState extends State<EventDetails> {
                                 } catch (e) {
                                   _scaffoldKey.currentState.showSnackBar(
                                       SnackBar(content: Text('$e')));
+                                } finally {
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
                                 }
                               },
                               color: Theme.of(context).accentColor,
