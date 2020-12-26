@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gfg_jssateb/models/student.dart';
-import 'package:gfg_jssateb/services/database.dart';
+
+import '../services/database.dart';
+import 'student.dart';
 
 class StudentData extends ChangeNotifier {
   Student _student;
@@ -16,9 +17,20 @@ class StudentData extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateStudent(
+      {@required String key, @required String value}) async {
+    await DatabaseService.updateStudentField(
+      id: student.id,
+      key: key,
+      value: value,
+    );
+
+    await _loadStudent();
+
+    notifyListeners();
+  }
+
   bool get isAdmin => _student.isAdmin;
 
-  String get id => _student.id;
-
-  String get email => _student.id;
+  Student get student => _student;
 }
