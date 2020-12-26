@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/announcement_card.dart';
 import '../models/announcement.dart';
+import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    Provider.of<StudentData>(context, listen: false);
     announcements = DatabaseService.getAnnouncements();
     super.initState();
   }

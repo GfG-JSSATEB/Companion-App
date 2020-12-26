@@ -23,7 +23,7 @@ class Student {
     @required this.college,
     @required this.branch,
     @required this.year,
-    @required this.isAdmin,
+    this.isAdmin = false,
   });
 
   factory Student.fromDocumentSnapshot(DocumentSnapshot snapshot) {
