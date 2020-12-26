@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../models/event.dart';
+import '../models/student_data.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
@@ -16,11 +19,22 @@ class EventList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
+          actions: isAdmin
+              ? [
+                  IconButton(
+                    icon: const Icon(FontAwesomeIcons.plus),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 5),
+                ]
+              : null,
           title: 'Events',
         ),
       ),

@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../models/event.dart';
+import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 
@@ -49,6 +51,8 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+
     return _isLoading
         ? Scaffold(
             key: _scaffoldKey,
@@ -170,6 +174,29 @@ class _EventDetailsState extends State<EventDetails> {
                             ),
                           ],
                         ),
+                      if (isAdmin) ...[
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.pen,
+                                color: Theme.of(context).accentColor,
+                              ),
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.trash,
+                                color: Theme.of(context).accentColor,
+                              ),
+                              onPressed: () {},
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 10)
+                      ],
                     ],
                   ),
                 ),
@@ -187,6 +214,8 @@ class PastEventDetails extends StatelessWidget {
   PastEventDetails({Key key, this.event}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
@@ -245,6 +274,29 @@ class PastEventDetails extends StatelessWidget {
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.2,
                 ),
+                if (isAdmin) ...[
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.pen,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.trash,
+                          color: Theme.of(context).accentColor,
+                        ),
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10)
+                ],
               ],
             ),
           ),
