@@ -17,6 +17,8 @@ class AddAnnouncement extends StatefulWidget {
 }
 
 class _AddAnnouncementState extends State<AddAnnouncement> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final TextEditingController titleController = TextEditingController();
   final TextEditingController desctiptionController = TextEditingController();
 
@@ -70,6 +72,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -160,8 +163,19 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                                   description:
                                       desctiptionController.text.trim(),
                                 );
-                          Navigator.pop(context);
-                        } catch (e) {} finally {
+
+                          _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text(
+                                'Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
+                          ));
+
+                          Future.delayed(const Duration(seconds: 2), () {
+                            Navigator.pop(context);
+                          });
+                        } catch (e) {
+                          _scaffoldKey.currentState
+                              .showSnackBar(SnackBar(content: Text('$e')));
+                        } finally {
                           setState(() {
                             _isLoading = false;
                           });
