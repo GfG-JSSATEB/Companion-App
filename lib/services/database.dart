@@ -86,6 +86,10 @@ class DatabaseService {
     });
   }
 
+  static Future<void> deleteAnnouncement({@required String id}) async {
+    await _announcementRef.doc(id).delete();
+  }
+
   static Stream<List<Event>> getAllEvents({@required bool isFinished}) {
     return _eventRef
         .where('isFinished', isEqualTo: isFinished)
