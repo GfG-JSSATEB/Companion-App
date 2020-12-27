@@ -14,9 +14,10 @@ class AnnouncementScreen extends StatelessWidget {
   void showAlertDialog(BuildContext context) {
     final Widget cancelButton = FlatButton(
       onPressed: () => Navigator.pop(context),
-      child: const Text(
+      child: Text(
         "Cancel",
         textScaleFactor: 1.2,
+        style: TextStyle(color: Theme.of(context).accentColor),
       ),
     );
     final Widget okButton = FlatButton(
@@ -25,9 +26,10 @@ class AnnouncementScreen extends StatelessWidget {
         Navigator.pop(context);
         Navigator.pop(context);
       },
-      child: const Text(
+      child: Text(
         "OK",
         textScaleFactor: 1.2,
+        style: TextStyle(color: Theme.of(context).accentColor),
       ),
     );
 
