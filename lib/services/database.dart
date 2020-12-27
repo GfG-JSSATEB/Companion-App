@@ -9,9 +9,16 @@ import '../models/student.dart';
 
 class DatabaseService {
   DatabaseService._();
-  static Uuid uuid = Uuid(options: {'grng': UuidUtil.cryptoRNG});
+  static final Uuid _uuid = Uuid(options: {'grng': UuidUtil.cryptoRNG});
 
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static final CollectionReference _eventRef =
+      FirebaseFirestore.instance.collection('events');
+
+  static final CollectionReference _studentRef =
+      FirebaseFirestore.instance.collection('students');
+
+  static final CollectionReference _announcementRef =
+      FirebaseFirestore.instance.collection('announcements');
 
   static Future<void> addStudent({
     @required String email,
@@ -22,7 +29,7 @@ class DatabaseService {
     @required String year,
     @required String id,
   }) async {
-    _firestore.collection('students').doc(id).set({
+    _studentRef.doc(id).set({
       'id': id,
       'name': name,
       'email': email,
@@ -37,8 +44,7 @@ class DatabaseService {
   }
 
   static Future<Student> getStudent(String id) async {
-    final DocumentSnapshot snapshot =
-        await _firestore.collection('students').doc(id).get();
+    final DocumentSnapshot snapshot = await _studentRef.doc(id).get();
     return Student.fromDocumentSnapshot(snapshot);
   }
 
@@ -46,14 +52,13 @@ class DatabaseService {
       {@required String id,
       @required String value,
       @required String key}) async {
-    await _firestore.collection('students').doc(id).update({
+    await _studentRef.doc(id).update({
       key: value,
     });
   }
 
   static Stream<List<Announcement>> get announcements {
-    return _firestore
-        .collection("announcements")
+    return _announcementRef
         .orderBy('timestamp', descending: true)
         .snapshots()
         .map(Announcement.announcemntListFromSnapshot);
@@ -61,8 +66,8 @@ class DatabaseService {
 
   static Future<void> addAnnouncement(
       {@required String title, @required String description}) async {
-    final String id = uuid.v4();
-    await _firestore.collection('announcements').doc(id).set({
+    final String id = _uuid.v4();
+    await _announcementRef.doc(id).set({
       'id': id,
       'title': title,
       'description': description,
@@ -71,20 +76,18 @@ class DatabaseService {
   }
 
   static Stream<List<Event>> getAllEvents({@required bool isFinished}) {
-    return _firestore
-        .collection("events")
+    return _eventRef
         .where('isFinished', isEqualTo: isFinished)
         .snapshots()
         .map(Event.fromQuerySnapshot);
   }
 
   static Stream<DocumentSnapshot> getEvent({@required String id}) {
-    return _firestore.collection('events').doc(id).snapshots();
+    return _eventRef.doc(id).snapshots();
   }
 
   static Stream<List<Event>> getParticipatedEvents({@required String uid}) {
-    return _firestore
-        .collection("events")
+    return _eventRef
         .where('participants', arrayContains: uid)
         .snapshots()
         .map(Event.fromQuerySnapshot);
@@ -94,12 +97,12 @@ class DatabaseService {
       {@required String uid,
       @required String email,
       @required String eventId}) async {
-    await _firestore.collection("events").doc(eventId).update({
+    await _eventRef.doc(eventId).update({
       'participants': FieldValue.arrayUnion([uid]),
       'participantsEmail': FieldValue.arrayUnion([email]),
     });
 
-    await _firestore.collection('students').doc(uid).update({
+    await _studentRef.doc(uid).update({
       'participated': FieldValue.arrayUnion([eventId])
     });
   }
