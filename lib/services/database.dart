@@ -78,10 +78,8 @@ class DatabaseService {
         .map(Event.fromQuerySnapshot);
   }
 
-  static Future<Event> getEvent({@required String id}) async {
-    final DocumentSnapshot doc =
-        await _firestore.collection('events').doc(id).get();
-    return Event.fromDocumentSnapshot(doc);
+  static Stream<DocumentSnapshot> getEvent({@required String id}) {
+    return _firestore.collection('events').doc(id).snapshots();
   }
 
   static Stream<List<Event>> getParticipatedEvents({@required String uid}) {

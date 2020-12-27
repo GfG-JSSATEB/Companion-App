@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../models/event.dart';
 import '../screens/event_details.dart';
+import '../screens/past_events_detals.dart';
 import 'cached_image.dart';
 
 class EventCard extends StatelessWidget {

@@ -41,7 +41,7 @@ class Event {
   }
 
   static List<Event> fromQuerySnapshot(QuerySnapshot snapshot) {
-    List<Event> events = snapshot.docs.map((doc) {
+    final List<Event> events = snapshot.docs.map((doc) {
       return Event(
         id: doc['id'] as String,
         url: doc['url'] as String,
