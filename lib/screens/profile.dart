@@ -8,7 +8,7 @@ import '../models/student_data.dart';
 import '../services/auth.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_textfield.dart';
-import 'participated_events.dart';
+import 'events.dart';
 import 'sign_in.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -145,9 +145,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(
+                    onTap: () => Navigator.pushReplacement(
                       context,
-                      ParticipatedEvents.routeName,
+                      MaterialPageRoute(
+                        builder: (context) => const EventsPage(
+                          isParticipated: true,
+                        ),
+                      ),
                     ),
                     child: const ProfileTile(
                       title: 'Participated Events',

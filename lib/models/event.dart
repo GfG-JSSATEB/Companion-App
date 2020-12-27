@@ -39,4 +39,24 @@ class Event {
       isFinished: data['isFinished'] as bool,
     );
   }
+
+  static List<Event> fromQuerySnapshot(QuerySnapshot snapshot) {
+    List<Event> events = snapshot.docs.map((doc) {
+      return Event(
+        id: doc['id'] as String,
+        url: doc['url'] as String,
+        description: doc['description'] as String,
+        date: DateTime.parse(doc['date'].toDate().toString()),
+        register: DateTime.parse(doc['register'].toDate().toString()),
+        title: doc['title'] as String,
+        participants: doc['participants'] as List,
+        participantsEmail: doc['participantsEmail'] as List,
+        isFinished: doc['isFinished'] as bool,
+      );
+    }).toList();
+
+    events.sort((a, b) => b.date.compareTo(a.date));
+
+    return events;
+  }
 }

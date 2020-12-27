@@ -37,6 +37,7 @@ class CustomDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => const EventsPage(
                     isFinished: false,
+                    isParticipated: false,
                   ),
                 ),
               ),
@@ -49,6 +50,7 @@ class CustomDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => const EventsPage(
                     isFinished: true,
+                    isParticipated: false,
                   ),
                 ),
               ),

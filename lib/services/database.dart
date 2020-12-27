@@ -70,19 +70,12 @@ class DatabaseService {
     });
   }
 
-  static Future<List<Event>> getAllEvents({@required bool isFinished}) async {
-    final List<Event> events = [];
-    final QuerySnapshot snapshot = await _firestore
+  static Stream<List<Event>> getAllEvents({@required bool isFinished}) {
+    return _firestore
         .collection("events")
         .where('isFinished', isEqualTo: isFinished)
-        .get();
-    for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
-      events.add(Event.fromDocumentSnapshot(docSnapshot));
-    }
-
-    events.sort((a, b) => b.date.compareTo(a.date));
-
-    return events;
+        .snapshots()
+        .map(Event.fromQuerySnapshot);
   }
 
   static Future<Event> getEvent({@required String id}) async {
@@ -91,20 +84,12 @@ class DatabaseService {
     return Event.fromDocumentSnapshot(doc);
   }
 
-  static Future<List<Event>> getParticipatedEvents(
-      {@required String uid}) async {
-    final List<Event> events = [];
-    final QuerySnapshot snapshot = await _firestore
+  static Stream<List<Event>> getParticipatedEvents({@required String uid}) {
+    return _firestore
         .collection("events")
         .where('participants', arrayContains: uid)
-        .get();
-    for (final QueryDocumentSnapshot docSnapshot in snapshot.docs) {
-      events.add(Event.fromDocumentSnapshot(docSnapshot));
-    }
-
-    events.sort((a, b) => b.date.compareTo(a.date));
-
-    return events;
+        .snapshots()
+        .map(Event.fromQuerySnapshot);
   }
 
   static Future<void> registerToEvent(
