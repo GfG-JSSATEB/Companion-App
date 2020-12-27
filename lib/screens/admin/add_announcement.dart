@@ -151,7 +151,12 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         });
                         try {
                           isUpdate
-                              ? null
+                              ? await DatabaseService.updateAnnouncement(
+                                  title: titleController.text.trim(),
+                                  description:
+                                      desctiptionController.text.trim(),
+                                  id: widget.announcement.id,
+                                )
                               : await DatabaseService.addAnnouncement(
                                   title: titleController.text.trim(),
                                   description:

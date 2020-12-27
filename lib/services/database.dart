@@ -75,6 +75,17 @@ class DatabaseService {
     });
   }
 
+  static Future<void> updateAnnouncement({
+    @required String title,
+    @required String description,
+    @required String id,
+  }) async {
+    await _announcementRef.doc(id).update({
+      'title': title,
+      'description': description,
+    });
+  }
+
   static Stream<List<Event>> getAllEvents({@required bool isFinished}) {
     return _eventRef
         .where('isFinished', isEqualTo: isFinished)

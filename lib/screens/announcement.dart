@@ -97,7 +97,13 @@ class AnnouncementScreen extends StatelessWidget {
                           FontAwesomeIcons.pen,
                           color: Theme.of(context).accentColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                AddAnnouncement(announcement: announcement),
+                          ),
+                        ),
                       ),
                       IconButton(
                         icon: Icon(
