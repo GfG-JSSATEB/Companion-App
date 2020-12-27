@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../models/announcement.dart';
 import '../models/student_data.dart';
 import '../widgets/custom_appbar.dart';
+import 'admin/add_announcement.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   final Announcement announcement;
@@ -25,7 +26,12 @@ class AnnouncementScreen extends StatelessWidget {
               ? [
                   IconButton(
                     icon: const Icon(FontAwesomeIcons.plus),
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddAnnouncement(),
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 5),
                 ]

@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final String errorMessage;
   final bool obscureText;
   final IconData iconData;
+  final TextInputType textInputType;
+  final int maxLines;
 
   const CustomTextField({
     Key key,
@@ -16,13 +18,16 @@ class CustomTextField extends StatelessWidget {
     @required this.errorMessage,
     @required this.obscureText,
     this.iconData,
+    this.textInputType,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: textInputType,
+      maxLines: maxLines,
       textInputAction: TextInputAction.next,
       onSubmitted: (v) {
         FocusScope.of(context).requestFocus();
