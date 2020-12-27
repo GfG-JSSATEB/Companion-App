@@ -101,6 +101,10 @@ class DatabaseService {
     return _eventRef.doc(id).snapshots();
   }
 
+  static Future<void> deleteEvent({@required String id}) async {
+    return _eventRef.doc(id).delete();
+  }
+
   static Stream<List<Event>> getParticipatedEvents({@required String uid}) {
     return _eventRef
         .where('participants', arrayContains: uid)
