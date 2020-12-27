@@ -5,59 +5,12 @@ import 'package:provider/provider.dart';
 import '../models/announcement.dart';
 import '../models/student_data.dart';
 import '../services/database.dart';
+import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
 import 'admin/add_announcement.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   final Announcement announcement;
-
-  void showAlertDialog(BuildContext context) {
-    final Widget cancelButton = FlatButton(
-      onPressed: () => Navigator.pop(context),
-      child: Text(
-        "Cancel",
-        textScaleFactor: 1.2,
-        style: TextStyle(color: Theme.of(context).accentColor),
-      ),
-    );
-    final Widget okButton = FlatButton(
-      onPressed: () async {
-        await DatabaseService.deleteAnnouncement(id: announcement.id);
-        Navigator.pop(context);
-        Navigator.pop(context);
-      },
-      child: Text(
-        "OK",
-        textScaleFactor: 1.2,
-        style: TextStyle(color: Theme.of(context).accentColor),
-      ),
-    );
-
-    final AlertDialog alert = AlertDialog(
-      backgroundColor: Theme.of(context).backgroundColor,
-      title: Text(
-        "Deleting Announcement!!!",
-        textScaleFactor: 1.1,
-        style: TextStyle(color: Theme.of(context).accentColor),
-      ),
-      content: const Text(
-        "Are you sure you want to delete the announcement?",
-        textScaleFactor: 1.1,
-      ),
-      actions: [
-        cancelButton,
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   const AnnouncementScreen({Key key, @required this.announcement})
       : super(key: key);
@@ -159,7 +112,15 @@ class AnnouncementScreen extends StatelessWidget {
                           FontAwesomeIcons.trash,
                           color: Theme.of(context).accentColor,
                         ),
-                        onPressed: () => showAlertDialog(context),
+                        onPressed: () => customAlertDialog(
+                            context: context,
+                            title: 'Announcement',
+                            onOK: () async {
+                              await DatabaseService.deleteAnnouncement(
+                                  id: announcement.id);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }),
                       )
                     ],
                   ),

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../models/event.dart';
 import '../models/student_data.dart';
 import '../services/database.dart';
+import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
 
 class EventDetails extends StatefulWidget {
@@ -174,7 +175,15 @@ class _EventDetailsState extends State<EventDetails> {
                                   FontAwesomeIcons.trash,
                                   color: Theme.of(context).accentColor,
                                 ),
-                                onPressed: () {},
+                                onPressed: () => customAlertDialog(
+                                  context: context,
+                                  title: 'Event',
+                                  onOK: () {
+                                    DatabaseService.deleteEvent(id: event.id);
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  },
+                                ),
                               )
                             ],
                           ),
