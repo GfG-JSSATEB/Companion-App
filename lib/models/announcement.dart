@@ -18,18 +18,22 @@ class Announcement {
     @required this.date,
   });
 
-  factory Announcement.fromDocumentSnapshot(DocumentSnapshot snapshot) {
-    final Map<String, dynamic> data = snapshot.data();
+  static List<Announcement> announcemntListFromSnapshot(
+    QuerySnapshot snapshot,
+  ) {
     final DateFormat dateFormat = DateFormat('EE, d MMM');
 
-    final DateTime date = DateTime.parse(data['timestamp'].toDate().toString());
+    return snapshot.docs.map((doc) {
+      final DateTime date =
+          DateTime.parse(doc['timestamp'].toDate().toString());
 
-    return Announcement(
-      id: snapshot.id,
-      title: data['title'] as String,
-      description: data['description'] as String,
-      date: dateFormat.format(date),
-      relativeTime: timeago.format(date),
-    );
+      return Announcement(
+        id: doc.id,
+        title: doc['title'] as String,
+        description: doc['description'] as String,
+        date: dateFormat.format(date),
+        relativeTime: timeago.format(date),
+      );
+    }).toList();
   }
 }

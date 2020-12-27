@@ -9,25 +9,13 @@ import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static const routeName = '/home';
 
   @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  Future<List<Announcement>> announcements;
-
-  @override
-  void initState() {
-    Provider.of<StudentData>(context, listen: false);
-    announcements = DatabaseService.getAnnouncements();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Provider.of<StudentData>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: const PreferredSize(
@@ -38,8 +26,8 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: CustomDrawer(),
       body: SafeArea(
-        child: FutureBuilder(
-          future: announcements,
+        child: StreamBuilder(
+          stream: DatabaseService.announcements,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
               return Center(
