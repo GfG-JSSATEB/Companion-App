@@ -112,7 +112,6 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                     validity: validTitle,
                     errorMessage: titleErrorMessage,
                     obscureText: false,
-                    iconData: FontAwesomeIcons.solidUser,
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -131,7 +130,6 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                     maxLines: null,
                     errorMessage: descriptionErrorMessage,
                     obscureText: false,
-                    iconData: FontAwesomeIcons.solidUser,
                   ),
                   const SizedBox(height: 20),
                   MaterialButton(
