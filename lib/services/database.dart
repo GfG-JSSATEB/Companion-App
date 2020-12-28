@@ -12,8 +12,10 @@ import 'storage.dart';
 
 class DatabaseService {
   DatabaseService._();
+//   Initialize uuid
   static final Uuid _uuid = Uuid(options: {'grng': UuidUtil.cryptoRNG});
 
+// Cloud firestore collection path
   static final CollectionReference _eventRef =
       FirebaseFirestore.instance.collection('events');
 
@@ -23,6 +25,7 @@ class DatabaseService {
   static final CollectionReference _announcementRef =
       FirebaseFirestore.instance.collection('announcements');
 
+// Student related function
   static Future<void> addStudent({
     @required String email,
     @required String name,
@@ -46,25 +49,33 @@ class DatabaseService {
     });
   }
 
-  static Future<Student> getStudent(String id) async {
-    final DocumentSnapshot snapshot = await _studentRef.doc(id).get();
+  static Future<Student> getStudentById({@required String uid}) async {
+    final DocumentSnapshot snapshot = await _studentRef.doc(uid).get();
     return Student.fromDocumentSnapshot(snapshot);
   }
 
-  static Future<void> updateStudentField(
-      {@required String id,
-      @required String value,
-      @required String key}) async {
+  static Future<void> updateStudentField({
+    @required String id,
+    @required String value,
+    @required String key,
+  }) async {
     await _studentRef.doc(id).update({
       key: value,
     });
   }
 
+  static Future<Student> getStudentByEmail({@required String email}) async {
+    final QuerySnapshot snapshot =
+        await _studentRef.where('email', isEqualTo: email).get();
+    return Student.fromDocumentSnapshot(snapshot.docs.first);
+  }
+
+// Announcement related function
   static Stream<List<Announcement>> get announcements {
     return _announcementRef
         .orderBy('timestamp', descending: true)
         .snapshots()
-        .map(Announcement.announcemntListFromSnapshot);
+        .map(Announcement.fromQuerySnapshot);
   }
 
   static Future<void> addAnnouncement(
@@ -93,6 +104,7 @@ class DatabaseService {
     await _announcementRef.doc(id).delete();
   }
 
+// Event related function
   static Stream<List<Event>> getAllEvents({@required bool isFinished}) {
     return _eventRef
         .where('isFinished', isEqualTo: isFinished)

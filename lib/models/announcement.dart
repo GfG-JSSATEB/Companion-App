@@ -18,7 +18,7 @@ class Announcement {
     @required this.date,
   });
 
-  static List<Announcement> announcemntListFromSnapshot(
+  static List<Announcement> fromQuerySnapshot(
     QuerySnapshot snapshot,
   ) {
     final DateFormat dateFormat = DateFormat('EE, d MMM');

@@ -12,8 +12,9 @@ class StudentData extends ChangeNotifier {
   }
 
   Future<void> _loadStudent() async {
-    _student =
-        await DatabaseService.getStudent(FirebaseAuth.instance.currentUser.uid);
+    _student = await DatabaseService.getStudentById(
+      uid: FirebaseAuth.instance.currentUser.uid,
+    );
     notifyListeners();
   }
 
