@@ -125,4 +125,25 @@ class DatabaseService {
       'participated': FieldValue.arrayUnion([eventId])
     });
   }
+
+  static Future<void> addEvent({
+    @required String title,
+    @required String description,
+    @required String url,
+    @required DateTime date,
+    @required DateTime register,
+  }) async {
+    final String id = _uuid.v4();
+    await _eventRef.doc(id).set({
+      'id': id,
+      'title': title,
+      'description': description,
+      'url': url,
+      'date': Timestamp.fromDate(date),
+      'register': Timestamp.fromDate(register),
+      'participants': <String>[],
+      'participantsEmail': <String>[],
+      'isFinished': false,
+    });
+  }
 }
