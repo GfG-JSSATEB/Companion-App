@@ -55,6 +55,9 @@ class _AddEventState extends State<AddEvent> {
     if (isUpdate) {
       titleController.text = widget.event.title;
       desctiptionController.text = widget.event.description;
+      eventPickedDate = widget.event.date;
+      registerPickedDate = widget.event.register;
+      eventTime = TimeOfDay.fromDateTime(eventPickedDate);
     }
     super.initState();
   }
@@ -202,12 +205,15 @@ class _AddEventState extends State<AddEvent> {
                     trailing: const Icon(FontAwesomeIcons.chevronDown),
                     onTap: () => _pickDate('register'),
                   ),
-                  const InputText(title: 'Poster'),
-                  ListTile(
-                    title: Text(poster != null ? 'Uploaded' : 'Choose a file'),
-                    trailing: const Icon(FontAwesomeIcons.chevronDown),
-                    onTap: () => _pickImage(),
-                  ),
+                  if (!isUpdate) ...[
+                    const InputText(title: 'Poster'),
+                    ListTile(
+                      title:
+                          Text(poster != null ? 'Uploaded' : 'Choose a file'),
+                      trailing: const Icon(FontAwesomeIcons.chevronDown),
+                      onTap: () => _pickImage(),
+                    ),
+                  ],
                   const SizedBox(height: 20),
                   submitButton(context),
                 ],
@@ -230,13 +236,25 @@ class _AddEventState extends State<AddEvent> {
           validTitle = isValidTitle();
         });
 
-        if (validDescription && validTitle && poster != null) {
+        if (validDescription && validTitle && (isUpdate || poster != null)) {
           setState(() {
             _isLoading = true;
           });
           try {
             isUpdate
-                ? null
+                ? await DatabaseService.updateEvent(
+                    id: widget.event.id,
+                    title: titleController.text.trim(),
+                    description: desctiptionController.text.trim(),
+                    date: DateTime(
+                      eventPickedDate.year,
+                      eventPickedDate.month,
+                      eventPickedDate.day,
+                      eventTime.hour,
+                      eventTime.minute,
+                    ),
+                    register: registerPickedDate,
+                  )
                 : await DatabaseService.addEvent(
                     title: titleController.text.trim(),
                     description: desctiptionController.text.trim(),

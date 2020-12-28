@@ -11,6 +11,7 @@ import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
+import 'admin/add_events.dart';
 
 class EventDetails extends StatefulWidget {
   final String id;
@@ -168,7 +169,14 @@ class _EventDetailsState extends State<EventDetails> {
                                   FontAwesomeIcons.pen,
                                   color: Theme.of(context).accentColor,
                                 ),
-                                onPressed: () {},
+                                onPressed: () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddEvent(
+                                      event: event,
+                                    ),
+                                  ),
+                                ),
                               ),
                               IconButton(
                                 icon: Icon(

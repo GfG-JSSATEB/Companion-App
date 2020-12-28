@@ -153,4 +153,19 @@ class DatabaseService {
       'isFinished': false,
     });
   }
+
+  static Future<void> updateEvent({
+    @required String id,
+    @required String title,
+    @required String description,
+    @required DateTime date,
+    @required DateTime register,
+  }) async {
+    await _eventRef.doc(id).update({
+      'title': title,
+      'description': description,
+      'date': Timestamp.fromDate(date),
+      'register': Timestamp.fromDate(register),
+    });
+  }
 }

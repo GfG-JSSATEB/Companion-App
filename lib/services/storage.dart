@@ -10,7 +10,7 @@ class StorageService {
   Future<String> uploadPoster({
     @required File file,
   }) async {
-    return await upload(
+    return upload(
       file: file,
       path: 'event/$id.png',
       contentType: 'image/png',
