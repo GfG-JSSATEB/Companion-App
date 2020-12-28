@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
@@ -6,6 +8,7 @@ import 'package:uuid/uuid_util.dart';
 import '../models/announcement.dart';
 import '../models/event.dart';
 import '../models/student.dart';
+import 'storage.dart';
 
 class DatabaseService {
   DatabaseService._();
@@ -129,11 +132,15 @@ class DatabaseService {
   static Future<void> addEvent({
     @required String title,
     @required String description,
-    @required String url,
+    @required File poster,
     @required DateTime date,
     @required DateTime register,
   }) async {
     final String id = _uuid.v4();
+
+    final String url =
+        await StorageService(id: title).uploadPoster(file: poster);
+
     await _eventRef.doc(id).set({
       'id': id,
       'title': title,
