@@ -8,6 +8,7 @@ import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
+import 'admin/add_events.dart';
 
 class PastEventDetails extends StatelessWidget {
   final DateFormat dateFormat = DateFormat('hh:mm a, d MMM yyyy');
@@ -88,7 +89,14 @@ class PastEventDetails extends StatelessWidget {
                           FontAwesomeIcons.pen,
                           color: Theme.of(context).accentColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddEvent(
+                              event: event,
+                            ),
+                          ),
+                        ),
                       ),
                       IconButton(
                         icon: Icon(
