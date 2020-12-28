@@ -114,13 +114,19 @@ class _AddEventState extends State<AddEvent> {
     setState(() {
       _isLoading = true;
     });
-    final imagePicker = Provider.of<ImagePickerService>(context, listen: false);
-    poster = await imagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
-    setState(() {
-      _isLoading = false;
-    });
+    try {
+      final imagePicker =
+          Provider.of<ImagePickerService>(context, listen: false);
+      poster = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
