@@ -7,6 +7,7 @@ import 'models/student_data.dart';
 import 'screens/home.dart';
 import 'screens/sign_in.dart';
 import 'services/auth.dart';
+import 'services/image_picker.dart';
 import 'settings/dark_notifier.dart';
 import 'settings/routes.dart';
 import 'settings/theme_data.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<StudentData>(
           create: (_) => StudentData(),
+        ),
+        Provider<ImagePickerService>(
+          create: (_) => ImagePickerService(),
         ),
       ],
       child: MaterialApp(
