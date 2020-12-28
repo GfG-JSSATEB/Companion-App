@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gfg_jssateb/services/image_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -10,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/event.dart';
 import '../../services/database.dart';
+import '../../services/image_picker.dart';
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_textfield.dart';
 
@@ -164,47 +164,9 @@ class _AddEventState extends State<AddEvent> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const InputText(title: 'Title'),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: titleController,
-                    title: 'Title',
-                    validity: validTitle,
-                    errorMessage: titleErrorMessage,
-                    obscureText: false,
-                  ),
+                  textInfo(),
                   const SizedBox(height: 20),
-                  const InputText(title: 'Description'),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: desctiptionController,
-                    title: 'Description',
-                    validity: validDescription,
-                    textInputType: TextInputType.multiline,
-                    maxLines: null,
-                    errorMessage: descriptionErrorMessage,
-                    obscureText: false,
-                  ),
-                  const SizedBox(height: 20),
-                  const InputText(title: 'Event Date'),
-                  ListTile(
-                    title: Text("Date: ${dateFormat.format(eventPickedDate)}"),
-                    trailing: const Icon(FontAwesomeIcons.chevronDown),
-                    onTap: () => _pickDate('event'),
-                  ),
-                  const InputText(title: 'Event Time'),
-                  ListTile(
-                    title: Text("Time: ${eventTime.hour}:${eventTime.minute}"),
-                    trailing: const Icon(FontAwesomeIcons.chevronDown),
-                    onTap: _pickTime,
-                  ),
-                  const InputText(title: 'Last Date to register'),
-                  ListTile(
-                    title:
-                        Text("Date: ${dateFormat.format(registerPickedDate)}"),
-                    trailing: const Icon(FontAwesomeIcons.chevronDown),
-                    onTap: () => _pickDate('register'),
-                  ),
+                  dateInfo(),
                   if (!isUpdate) ...[
                     const InputText(title: 'Poster'),
                     ListTile(
@@ -222,6 +184,59 @@ class _AddEventState extends State<AddEvent> {
           ),
         ),
       ),
+    );
+  }
+
+  Column textInfo() {
+    return Column(
+      children: [
+        const InputText(title: 'Title'),
+        const SizedBox(height: 10),
+        CustomTextField(
+          controller: titleController,
+          title: 'Title',
+          validity: validTitle,
+          errorMessage: titleErrorMessage,
+          obscureText: false,
+        ),
+        const SizedBox(height: 20),
+        const InputText(title: 'Description'),
+        const SizedBox(height: 10),
+        CustomTextField(
+          controller: desctiptionController,
+          title: 'Description',
+          validity: validDescription,
+          textInputType: TextInputType.multiline,
+          maxLines: null,
+          errorMessage: descriptionErrorMessage,
+          obscureText: false,
+        ),
+      ],
+    );
+  }
+
+  Column dateInfo() {
+    return Column(
+      children: [
+        const InputText(title: 'Event Date'),
+        ListTile(
+          title: Text("Date: ${dateFormat.format(eventPickedDate)}"),
+          trailing: const Icon(FontAwesomeIcons.chevronDown),
+          onTap: () => _pickDate('event'),
+        ),
+        const InputText(title: 'Event Time'),
+        ListTile(
+          title: Text("Time: ${eventTime.hour}:${eventTime.minute}"),
+          trailing: const Icon(FontAwesomeIcons.chevronDown),
+          onTap: _pickTime,
+        ),
+        const InputText(title: 'Last Date to register'),
+        ListTile(
+          title: Text("Date: ${dateFormat.format(registerPickedDate)}"),
+          trailing: const Icon(FontAwesomeIcons.chevronDown),
+          onTap: () => _pickDate('register'),
+        ),
+      ],
     );
   }
 

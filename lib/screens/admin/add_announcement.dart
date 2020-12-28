@@ -101,99 +101,108 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text(
-                    'Title:',
-                    textScaleFactor: 2,
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: titleController,
-                    title: 'Title',
-                    validity: validTitle,
-                    errorMessage: titleErrorMessage,
-                    obscureText: false,
-                  ),
+                  inputForm(context),
                   const SizedBox(height: 20),
-                  Text(
-                    'Description:',
-                    textScaleFactor: 2,
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextField(
-                    controller: desctiptionController,
-                    title: 'Description',
-                    validity: validDescription,
-                    textInputType: TextInputType.multiline,
-                    maxLines: null,
-                    errorMessage: descriptionErrorMessage,
-                    obscureText: false,
-                  ),
-                  const SizedBox(height: 20),
-                  MaterialButton(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    minWidth: MediaQuery.of(context).size.width * 0.6,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () async {
-                      setState(() {
-                        validDescription = isValidDescription();
-                        validTitle = isValidTitle();
-                      });
-
-                      if (validDescription && validTitle) {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        try {
-                          isUpdate
-                              ? await DatabaseService.updateAnnouncement(
-                                  title: titleController.text.trim(),
-                                  description:
-                                      desctiptionController.text.trim(),
-                                  id: widget.announcement.id,
-                                )
-                              : await DatabaseService.addAnnouncement(
-                                  title: titleController.text.trim(),
-                                  description:
-                                      desctiptionController.text.trim(),
-                                );
-
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text(
-                                'Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
-                          ));
-
-                          Future.delayed(const Duration(seconds: 2), () {
-                            Navigator.pop(context);
-                          });
-                        } catch (e) {
-                          _scaffoldKey.currentState
-                              .showSnackBar(SnackBar(content: Text('$e')));
-                        } finally {
-                          setState(() {
-                            _isLoading = false;
-                          });
-                        }
-                      }
-                    },
-                    color: Theme.of(context).accentColor,
-                    child: Text(
-                      isUpdate ? 'Update' : "Add",
-                      textScaleFactor: 1.4,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  submitButton(context),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Column inputForm(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Title:',
+          textScaleFactor: 2,
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+          ),
+        ),
+        const SizedBox(height: 10),
+        CustomTextField(
+          controller: titleController,
+          title: 'Title',
+          validity: validTitle,
+          errorMessage: titleErrorMessage,
+          obscureText: false,
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'Description:',
+          textScaleFactor: 2,
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+          ),
+        ),
+        const SizedBox(height: 10),
+        CustomTextField(
+          controller: desctiptionController,
+          title: 'Description',
+          validity: validDescription,
+          textInputType: TextInputType.multiline,
+          maxLines: null,
+          errorMessage: descriptionErrorMessage,
+          obscureText: false,
+        ),
+      ],
+    );
+  }
+
+  MaterialButton submitButton(BuildContext context) {
+    return MaterialButton(
+      height: MediaQuery.of(context).size.height * 0.06,
+      minWidth: MediaQuery.of(context).size.width * 0.6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      onPressed: () async {
+        setState(() {
+          validDescription = isValidDescription();
+          validTitle = isValidTitle();
+        });
+
+        if (validDescription && validTitle) {
+          setState(() {
+            _isLoading = true;
+          });
+          try {
+            isUpdate
+                ? await DatabaseService.updateAnnouncement(
+                    title: titleController.text.trim(),
+                    description: desctiptionController.text.trim(),
+                    id: widget.announcement.id,
+                  )
+                : await DatabaseService.addAnnouncement(
+                    title: titleController.text.trim(),
+                    description: desctiptionController.text.trim(),
+                  );
+
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
+              content: Text(
+                  'Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
+            ));
+
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.pop(context);
+            });
+          } catch (e) {
+            _scaffoldKey.currentState
+                .showSnackBar(SnackBar(content: Text('$e')));
+          } finally {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+        }
+      },
+      color: Theme.of(context).accentColor,
+      child: Text(
+        isUpdate ? 'Update' : "Add",
+        textScaleFactor: 1.4,
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
