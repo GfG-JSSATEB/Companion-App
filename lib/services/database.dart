@@ -168,4 +168,11 @@ class DatabaseService {
       'register': Timestamp.fromDate(register),
     });
   }
+
+  static Future<void> toggleEvent(
+      {@required String id, @required bool isFinished}) async {
+    await _eventRef.doc(id).update({
+      'isFinished': isFinished,
+    });
+  }
 }

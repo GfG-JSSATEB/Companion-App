@@ -46,6 +46,27 @@ class _EventDetailsState extends State<EventDetails> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: CustomAppBar(
+            actions: isAdmin
+                ? [
+                    IconButton(
+                      icon: const Icon(FontAwesomeIcons.check),
+                      onPressed: () => customAlertDialog(
+                          context: context,
+                          title: 'Toggle Event!',
+                          description:
+                              'Are you sure you want to mark event finshed?',
+                          onOK: () async {
+                            DatabaseService.toggleEvent(
+                              id: widget.id,
+                              isFinished: true,
+                            );
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }),
+                    ),
+                    const SizedBox(width: 5),
+                  ]
+                : null,
             leading: IconButton(
               icon: const Icon(
                 FontAwesomeIcons.chevronLeft,
@@ -72,7 +93,7 @@ class _EventDetailsState extends State<EventDetails> {
                   stream: DatabaseService.getEvent(id: widget.id),
                   builder: (context, snapshot) {
                     final Event event =
-                        Event.fromDocumentSnapshot(snapshot.data);
+                        Event.fromDocumentSnapshot(snapshot?.data);
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -185,7 +206,9 @@ class _EventDetailsState extends State<EventDetails> {
                                 ),
                                 onPressed: () => customAlertDialog(
                                   context: context,
-                                  title: 'Event',
+                                  title: 'Deleting Event!!!',
+                                  description:
+                                      'Are you sure you want to delete this event!?',
                                   onOK: () {
                                     DatabaseService.deleteEvent(id: event.id);
                                     Navigator.pop(context);

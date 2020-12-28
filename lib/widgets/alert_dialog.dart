@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void customAlertDialog({
   @required BuildContext context,
   @required String title,
+  @required String description,
   @required Function onOK,
 }) {
   final Widget cancelButton = FlatButton(
@@ -25,12 +26,12 @@ void customAlertDialog({
   final AlertDialog alert = AlertDialog(
     backgroundColor: Theme.of(context).backgroundColor,
     title: Text(
-      "Deleting $title!!!",
+      title,
       textScaleFactor: 1.1,
       style: TextStyle(color: Theme.of(context).accentColor),
     ),
     content: Text(
-      "Are you sure you want to delete the $title?",
+      description,
       textScaleFactor: 1.1,
     ),
     actions: [

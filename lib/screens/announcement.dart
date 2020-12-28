@@ -114,7 +114,9 @@ class AnnouncementScreen extends StatelessWidget {
                         ),
                         onPressed: () => customAlertDialog(
                             context: context,
-                            title: 'Announcement',
+                            title: 'Deleting Announcement!!!',
+                            description:
+                                'Are you sure you want to delete this announcement!?',
                             onOK: () async {
                               await DatabaseService.deleteAnnouncement(
                                   id: announcement.id);
