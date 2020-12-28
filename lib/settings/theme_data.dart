@@ -12,6 +12,9 @@ class Styles {
           isDark ? const Color(0xFF010409) : const Color(0xFFEEEEEE),
       brightness: isDark ? Brightness.dark : Brightness.light,
       fontFamily: "Mont-med",
+      colorScheme: isDark
+          ? const ColorScheme.dark(primary: Color(0xFF2F8D46))
+          : const ColorScheme.light(primary: Color(0xFF2F8D46)),
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
