@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +6,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
 import '../models/event.dart';
+import '../models/student.dart';
 import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
@@ -28,15 +28,15 @@ class _EventDetailsState extends State<EventDetails> {
   final DateFormat dateFormat = DateFormat('hh:mm a, d MMM yyyy');
   final DateFormat registerFormat = DateFormat('d MMM yyyy');
 
-  final String uid = FirebaseAuth.instance.currentUser.uid;
-  final String email = FirebaseAuth.instance.currentUser.email;
-
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin =
-        Provider.of<StudentData>(context, listen: false).isAdmin;
+    final Student student =
+        Provider.of<StudentData>(context, listen: false).student;
+    final bool isAdmin = student.isAdmin;
+    final String uid = student.id;
+    final String email = student.email;
 
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
