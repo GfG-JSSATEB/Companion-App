@@ -60,6 +60,10 @@ class _SignUpState extends State<SignUp> {
 
   Future<void> signUp(BuildContext context) async {
     try {
+      setState(() {
+        _isLoading = true;
+      });
+
       if (college == CollegeDetails.otherCollege) {
         college = otherCollegeController.text.trim();
       }
@@ -93,6 +97,10 @@ class _SignUpState extends State<SignUp> {
             emailIdErrorMessage = e.message;
           });
       }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -300,7 +308,6 @@ class _SignUpState extends State<SignUp> {
               validityOtherCollege =
                   isValidOtherCollege(otherCollegeController.text.trim());
             }
-            _isLoading = true;
           });
           if (validityEmail &&
               validityPassword &&
@@ -316,9 +323,6 @@ class _SignUpState extends State<SignUp> {
               await signUp(context);
             }
           }
-          setState(() {
-            _isLoading = false;
-          });
         },
         color: Theme.of(context).accentColor,
         child: const Text(

@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                   ? [
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.plus),
-                        onPressed: () => Navigator.pushReplacement(
+                        onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const AddAnnouncement(),

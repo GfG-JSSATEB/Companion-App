@@ -28,6 +28,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   Future<void> resetPassword(BuildContext context) async {
     try {
+      setState(() {
+        _isLoading = true;
+      });
       await context
           .read<AuthService>()
           .resetPassword(email: emailController.text.trim());
@@ -42,6 +45,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       setState(() {
         validityEmail = false;
         emailIdErrorMessage = e.message;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
       });
     }
   }
@@ -114,14 +121,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         onPressed: () async {
           setState(() {
             validityEmail = isValidEmail(emailController.text.trim());
-            _isLoading = true;
           });
           if (validityEmail) {
             await resetPassword(context);
           }
-          setState(() {
-            _isLoading = false;
-          });
         },
         color: Theme.of(context).accentColor,
         child: const Text(

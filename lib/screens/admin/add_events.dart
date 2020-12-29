@@ -129,6 +129,57 @@ class _AddEventState extends State<AddEvent> {
     }
   }
 
+  Future<void> onSubmit() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      isUpdate
+          ? await DatabaseService.updateEvent(
+              id: widget.event.id,
+              title: titleController.text.trim(),
+              description: desctiptionController.text.trim(),
+              date: DateTime(
+                eventPickedDate.year,
+                eventPickedDate.month,
+                eventPickedDate.day,
+                eventTime.hour,
+                eventTime.minute,
+              ),
+              register: registerPickedDate,
+            )
+          : await DatabaseService.addEvent(
+              title: titleController.text.trim(),
+              description: desctiptionController.text.trim(),
+              poster: poster,
+              date: DateTime(
+                eventPickedDate.year,
+                eventPickedDate.month,
+                eventPickedDate.day,
+                eventTime.hour,
+                eventTime.minute,
+              ),
+              register: registerPickedDate,
+            );
+
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text('Even ${isUpdate ? 'updated' : 'added'} Successfully'),
+        ),
+      );
+
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pop(context);
+      });
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -258,56 +309,7 @@ class _AddEventState extends State<AddEvent> {
         });
 
         if (validDescription && validTitle && (isUpdate || poster != null)) {
-          setState(() {
-            _isLoading = true;
-          });
-          try {
-            isUpdate
-                ? await DatabaseService.updateEvent(
-                    id: widget.event.id,
-                    title: titleController.text.trim(),
-                    description: desctiptionController.text.trim(),
-                    date: DateTime(
-                      eventPickedDate.year,
-                      eventPickedDate.month,
-                      eventPickedDate.day,
-                      eventTime.hour,
-                      eventTime.minute,
-                    ),
-                    register: registerPickedDate,
-                  )
-                : await DatabaseService.addEvent(
-                    title: titleController.text.trim(),
-                    description: desctiptionController.text.trim(),
-                    poster: poster,
-                    date: DateTime(
-                      eventPickedDate.year,
-                      eventPickedDate.month,
-                      eventPickedDate.day,
-                      eventTime.hour,
-                      eventTime.minute,
-                    ),
-                    register: registerPickedDate,
-                  );
-
-            _scaffoldKey.currentState.showSnackBar(
-              SnackBar(
-                content:
-                    Text('Even ${isUpdate ? 'updated' : 'added'} Successfully'),
-              ),
-            );
-
-            Future.delayed(const Duration(seconds: 2), () {
-              Navigator.pop(context);
-            });
-          } catch (e) {
-            _scaffoldKey.currentState
-                .showSnackBar(SnackBar(content: Text('$e')));
-          } finally {
-            setState(() {
-              _isLoading = false;
-            });
-          }
+          await onSubmit();
         }
       },
       color: Theme.of(context).accentColor,

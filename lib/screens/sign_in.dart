@@ -35,6 +35,10 @@ class _SignInState extends State<SignIn> {
 
   Future<void> signIn(BuildContext context) async {
     try {
+      setState(() {
+        _isLoading = true;
+      });
+
       final User user = await context.read<AuthService>().signInWithEmail(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
@@ -70,6 +74,10 @@ class _SignInState extends State<SignIn> {
             emailIdErrorMessage = e.message;
           });
       }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -202,14 +210,10 @@ class _SignInState extends State<SignIn> {
           setState(() {
             validityEmail = isValidEmail(emailController.text.trim());
             validityPassword = isValidPassword(passwordController.text);
-            _isLoading = true;
           });
           if (validityEmail && validityPassword) {
             await signIn(context);
           }
-          setState(() {
-            _isLoading = false;
-          });
         },
         color: Theme.of(context).accentColor,
         child: const Text(

@@ -60,6 +60,39 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
     }
   }
 
+  Future<void> onSubmit() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      isUpdate
+          ? await DatabaseService.updateAnnouncement(
+              title: titleController.text.trim(),
+              description: desctiptionController.text.trim(),
+              id: widget.announcement.id,
+            )
+          : await DatabaseService.addAnnouncement(
+              title: titleController.text.trim(),
+              description: desctiptionController.text.trim(),
+            );
+
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content:
+            Text('Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
+      ));
+
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pop(context);
+      });
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -165,37 +198,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
         });
 
         if (validDescription && validTitle) {
-          setState(() {
-            _isLoading = true;
-          });
-          try {
-            isUpdate
-                ? await DatabaseService.updateAnnouncement(
-                    title: titleController.text.trim(),
-                    description: desctiptionController.text.trim(),
-                    id: widget.announcement.id,
-                  )
-                : await DatabaseService.addAnnouncement(
-                    title: titleController.text.trim(),
-                    description: desctiptionController.text.trim(),
-                  );
-
-            _scaffoldKey.currentState.showSnackBar(SnackBar(
-              content: Text(
-                  'Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
-            ));
-
-            Future.delayed(const Duration(seconds: 2), () {
-              Navigator.pop(context);
-            });
-          } catch (e) {
-            _scaffoldKey.currentState
-                .showSnackBar(SnackBar(content: Text('$e')));
-          } finally {
-            setState(() {
-              _isLoading = false;
-            });
-          }
+          await onSubmit();
         }
       },
       color: Theme.of(context).accentColor,
