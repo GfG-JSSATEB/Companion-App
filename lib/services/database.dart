@@ -163,6 +163,7 @@ class DatabaseService {
       'participants': <String>[],
       'participantsEmail': <String>[],
       'isFinished': false,
+      'registrationEnded': false,
     });
   }
 
