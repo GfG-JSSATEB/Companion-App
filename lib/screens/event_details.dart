@@ -173,7 +173,7 @@ class _EventDetailsState extends State<EventDetails> {
           textScaleFactor: 1.2,
         ),
         const SizedBox(height: 20),
-        if (!event.participants.contains(uid))
+        if (!event.participants.contains(uid) && !event.registrationEnded)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -252,25 +252,54 @@ class _EventDetailsState extends State<EventDetails> {
             ],
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              FlatButton(
-                color: Theme.of(context).accentColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                onPressed: () {
-                  Clipboard.setData(
-                      ClipboardData(text: event.participantsEmail.join(',')));
+          Center(
+            child: Column(
+              children: [
+                FlatButton(
+                  color: Theme.of(context).accentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () {
+                    Clipboard.setData(
+                        ClipboardData(text: event.participantsEmail.join(',')));
 
-                  _scaffoldKey.currentState.showSnackBar(const SnackBar(
-                      content: Text(
-                          'Participants email have been copied to clipboard')));
-                },
-                child: const Text('Get Partivipants Email'),
-              )
-            ],
+                    _scaffoldKey.currentState.showSnackBar(const SnackBar(
+                        content: Text(
+                            'Participants email have been copied to clipboard')));
+                  },
+                  child: const Text('Get Partivipants Email'),
+                ),
+                FlatButton(
+                  color: Theme.of(context).accentColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    try {
+                      await DatabaseService.toggleEventRegistration(
+                          id: event.id,
+                          registrationEnded: !event.registrationEnded);
+                      _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          content: Text(
+                              'Registration for this event is ${event.registrationEnded ? 'resumed' : 'stopped'}')));
+                    } catch (e) {
+                      _scaffoldKey.currentState
+                          .showSnackBar(SnackBar(content: Text('$e')));
+                    } finally {
+                      setState(() {
+                        _isLoading = false;
+                      });
+                    }
+                  },
+                  child: Text(
+                      '${event.registrationEnded ? 'Resume' : 'Stop'} Registration'),
+                ),
+              ],
+            ),
           )
         ],
       ],

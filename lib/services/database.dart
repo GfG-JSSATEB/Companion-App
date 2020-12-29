@@ -187,4 +187,11 @@ class DatabaseService {
       'isFinished': isFinished,
     });
   }
+
+  static Future<void> toggleEventRegistration(
+      {@required String id, @required bool registrationEnded}) async {
+    await _eventRef.doc(id).update({
+      'registrationEnded': registrationEnded,
+    });
+  }
 }

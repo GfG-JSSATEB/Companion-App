@@ -11,6 +11,7 @@ class Event {
   final List participants;
   final List participantsEmail;
   final bool isFinished;
+  final bool registrationEnded;
 
   Event({
     @required this.id,
@@ -22,6 +23,7 @@ class Event {
     @required this.participants,
     @required this.participantsEmail,
     @required this.isFinished,
+    @required this.registrationEnded,
   });
 
   factory Event.fromDocumentSnapshot(DocumentSnapshot snapshot) {
@@ -37,6 +39,7 @@ class Event {
       participants: data['participants'] as List,
       participantsEmail: data['participantsEmail'] as List,
       isFinished: data['isFinished'] as bool,
+      registrationEnded: data['registrationEnded'] as bool,
     );
   }
 
@@ -52,6 +55,7 @@ class Event {
         participants: doc['participants'] as List,
         participantsEmail: doc['participantsEmail'] as List,
         isFinished: doc['isFinished'] as bool,
+        registrationEnded: doc['registrationEnded'] as bool,
       );
     }).toList();
 
