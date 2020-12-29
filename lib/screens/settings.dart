@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/sign_in.dart';
+import '../services/auth.dart';
 import '../settings/dark_notifier.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
@@ -41,19 +43,19 @@ class Settings extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SettingsTile(
+                    _SettingsTile(
                       icon: FontAwesomeIcons.solidUser,
                       title: 'Profile',
                       onTap: () =>
                           Navigator.pushNamed(context, ProfilePage.routeName),
                     ),
-                    SettingsTile(
+                    _SettingsTile(
                       icon: FontAwesomeIcons.infoCircle,
                       title: 'About App',
                       onTap: () =>
                           Navigator.pushNamed(context, AboutApp.routeName),
                     ),
-                    SettingsTile(
+                    _SettingsTile(
                       icon: FontAwesomeIcons.fill,
                       title: 'Dark Theme',
                       trailing: Switch(
@@ -66,6 +68,15 @@ class Settings extends StatelessWidget {
                       ),
                       onTap: () {},
                     ),
+                    _SettingsTile(
+                      title: 'Sign Out',
+                      icon: FontAwesomeIcons.signOutAlt,
+                      onTap: () async {
+                        await context.read<AuthService>().signOut();
+                        Navigator.pushReplacementNamed(
+                            context, SignIn.routeName);
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -77,13 +88,13 @@ class Settings extends StatelessWidget {
   }
 }
 
-class SettingsTile extends StatelessWidget {
+class _SettingsTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function onTap;
   final Widget trailing;
 
-  const SettingsTile({
+  const _SettingsTile({
     Key key,
     @required this.title,
     @required this.icon,

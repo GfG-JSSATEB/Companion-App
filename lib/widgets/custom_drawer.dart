@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '../screens/about_us.dart';
 import '../screens/events.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
-import '../screens/sign_in.dart';
-import '../services/auth.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
@@ -23,13 +20,13 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             header(context),
             const SizedBox(height: 30),
-            DrawerTile(
+            _DrawerTile(
               title: 'Home',
               iconData: FontAwesomeIcons.home,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, HomePage.routeName),
             ),
-            DrawerTile(
+            _DrawerTile(
               title: 'Events',
               iconData: FontAwesomeIcons.calendarAlt,
               onTap: () => Navigator.pushReplacement(
@@ -42,7 +39,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            DrawerTile(
+            _DrawerTile(
               title: 'Past Events',
               iconData: FontAwesomeIcons.calendarCheck,
               onTap: () => Navigator.pushReplacement(
@@ -55,25 +52,17 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            DrawerTile(
+            _DrawerTile(
               title: 'About Us',
               iconData: FontAwesomeIcons.info,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, AboutUs.routeName),
             ),
-            DrawerTile(
+            _DrawerTile(
               title: 'Settings',
               iconData: FontAwesomeIcons.cog,
               onTap: () =>
                   Navigator.pushReplacementNamed(context, Settings.routeName),
-            ),
-            DrawerTile(
-              title: 'Sign Out',
-              iconData: FontAwesomeIcons.signOutAlt,
-              onTap: () async {
-                await context.read<AuthService>().signOut();
-                Navigator.pushReplacementNamed(context, SignIn.routeName);
-              },
             ),
           ],
         ),
@@ -104,12 +93,12 @@ class CustomDrawer extends StatelessWidget {
   }
 }
 
-class DrawerTile extends StatelessWidget {
+class _DrawerTile extends StatelessWidget {
   final String title;
   final IconData iconData;
   final Function onTap;
 
-  const DrawerTile({
+  const _DrawerTile({
     Key key,
     @required this.title,
     @required this.iconData,
