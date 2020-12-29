@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -250,7 +251,27 @@ class _EventDetailsState extends State<EventDetails> {
               )
             ],
           ),
-          const SizedBox(height: 10)
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FlatButton(
+                color: Theme.of(context).accentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                onPressed: () {
+                  Clipboard.setData(
+                      ClipboardData(text: event.participantsEmail.join(',')));
+
+                  _scaffoldKey.currentState.showSnackBar(const SnackBar(
+                      content: Text(
+                          'Participants email have been copied to clipboard')));
+                },
+                child: const Text('Get Partivipants Email'),
+              )
+            ],
+          )
         ],
       ],
     );
