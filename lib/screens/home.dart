@@ -16,28 +16,30 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
-        child: CustomAppBar(
-          actions: isAdmin
-              ? [
-                  IconButton(
-                    icon: const Icon(FontAwesomeIcons.plus),
-                    onPressed: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddAnnouncement(),
+        child: Consumer<StudentData>(
+          builder: (_, student, __) {
+            return CustomAppBar(
+              actions: student.isAdmin
+                  ? [
+                      IconButton(
+                        icon: const Icon(FontAwesomeIcons.plus),
+                        onPressed: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddAnnouncement(),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                ]
-              : null,
-          title: 'Home',
+                      const SizedBox(width: 5),
+                    ]
+                  : null,
+              title: 'Home',
+            );
+          },
         ),
       ),
       drawer: CustomDrawer(),
