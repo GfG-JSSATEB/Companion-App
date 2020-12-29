@@ -24,20 +24,6 @@ class AnnouncementScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
-          actions: isAdmin
-              ? [
-                  IconButton(
-                    icon: const Icon(FontAwesomeIcons.plus),
-                    onPressed: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddAnnouncement(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                ]
-              : null,
           leading: IconButton(
             icon: const Icon(
               FontAwesomeIcons.chevronLeft,

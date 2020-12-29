@@ -31,7 +31,7 @@ class StudentData extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isAdmin => _student.isAdmin;
+  bool get isAdmin => _student?.isAdmin ?? false;
 
   Student get student => _student;
 }

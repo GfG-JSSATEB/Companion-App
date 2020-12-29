@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../components/announcement_card.dart';
@@ -8,19 +9,34 @@ import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
+import 'admin/add_announcement.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<StudentData>(context, listen: false);
+    final bool isAdmin = Provider.of<StudentData>(context).isAdmin;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(60),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
+          actions: isAdmin
+              ? [
+                  IconButton(
+                    icon: const Icon(FontAwesomeIcons.plus),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddAnnouncement(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                ]
+              : null,
           title: 'Home',
         ),
       ),
