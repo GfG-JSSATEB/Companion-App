@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/about_app.dart';
 import '../screens/about_us.dart';
+import '../screens/admin/get_student.dart';
 import '../screens/forgot_password.dart';
 import '../screens/home.dart';
 import '../screens/profile.dart';
@@ -20,4 +21,5 @@ Map<String, WidgetBuilder> routes = {
   AboutApp.routeName: (context) => AboutApp(),
   Settings.routeName: (context) => Settings(),
   ProfilePage.routeName: (context) => ProfilePage(),
+  GetStudent.routeName: (context) => GetStudent(),
 };

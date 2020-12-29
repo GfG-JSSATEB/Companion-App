@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../models/student_data.dart';
 import '../screens/about_us.dart';
+import '../screens/admin/get_student.dart';
 import '../screens/events.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
@@ -64,6 +67,18 @@ class CustomDrawer extends StatelessWidget {
               onTap: () =>
                   Navigator.pushReplacementNamed(context, Settings.routeName),
             ),
+            Consumer<StudentData>(
+              builder: (_, student, __) {
+                return student.isAdmin
+                    ? _DrawerTile(
+                        title: 'Get Student',
+                        iconData: FontAwesomeIcons.solidUser,
+                        onTap: () => Navigator.pushReplacementNamed(
+                            context, GetStudent.routeName),
+                      )
+                    : const Text('');
+              },
+            )
           ],
         ),
       ),
