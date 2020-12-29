@@ -8,6 +8,7 @@ import 'screens/home.dart';
 import 'screens/sign_in.dart';
 import 'services/auth.dart';
 import 'services/image_picker.dart';
+import 'services/push_notification.dart';
 import 'settings/dark_notifier.dart';
 import 'settings/routes.dart';
 import 'settings/theme_data.dart';
@@ -60,6 +61,9 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //   Initialize fcm
+    PushNotificationService.initialize();
+
     final _user = context.watch<User>();
     if (_user != null) {
       return HomePage();
