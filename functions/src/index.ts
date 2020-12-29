@@ -9,7 +9,7 @@ export const sendNotification = functions.firestore
     .document('announcements/{announcementID}')
     .onCreate(async (snapshot) => {
         const announcement = snapshot.data();
-        const condition = "!('industry-tech' in topics)";
+        const topic = 'notification';
         const payload: admin.messaging.MessagingPayload = {
             notification: {
                 title: 'New Announcement!',
@@ -20,5 +20,5 @@ export const sendNotification = functions.firestore
             },
         };
 
-        return fcm.sendToCondition(condition, payload);
+        return fcm.sendToTopic(topic, payload);
     });
