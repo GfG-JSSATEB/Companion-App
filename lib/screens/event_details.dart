@@ -268,7 +268,10 @@ class _EventDetailsState extends State<EventDetails> {
                         content: Text(
                             'Participants email have been copied to clipboard')));
                   },
-                  child: const Text('Get Partivipants Email'),
+                  child: const Text(
+                    'Get Partivipants Email',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 FlatButton(
                   color: Theme.of(context).accentColor,
@@ -296,7 +299,9 @@ class _EventDetailsState extends State<EventDetails> {
                     }
                   },
                   child: Text(
-                      '${event.registrationEnded ? 'Resume' : 'Stop'} Registration'),
+                    '${event.registrationEnded ? 'Resume' : 'Stop'} Registration',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
