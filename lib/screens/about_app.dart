@@ -7,8 +7,8 @@ import '../widgets/custom_drawer.dart';
 
 class AboutApp extends StatelessWidget {
   static const String routeName = '/aboutApp';
-  final String _playstoreUrl = '';
-  final String _githubeUrl = '';
+  final String _playstoreUrl = 'https://play.google.com/store';
+  final String _githubeUrl = 'https://github.com/GfG-JSSATEB';
 
   Future<void> _launchSocial(String url) async {
     try {
@@ -85,12 +85,12 @@ class AboutApp extends StatelessWidget {
                 _AboutTile(
                   icon: FontAwesomeIcons.googlePlay,
                   title: 'Rate Us',
-                  onTap: () {},
+                  onTap: () => _launchSocial(_playstoreUrl),
                 ),
                 _AboutTile(
                   icon: FontAwesomeIcons.github,
                   title: 'Contribute',
-                  onTap: () {},
+                  onTap: () => _launchSocial(_githubeUrl),
                 ),
               ],
             ),
