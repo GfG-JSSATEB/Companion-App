@@ -78,6 +78,16 @@ class AboutApp extends StatelessWidget {
                   textScaleFactor: 1.3,
                 ),
                 const SizedBox(height: 15),
+                const ListTile(
+                  trailing: Text(
+                    '1.0.0',
+                    textScaleFactor: 1.5,
+                  ),
+                  title: Text(
+                    'Version',
+                    textScaleFactor: 1.5,
+                  ),
+                ),
                 _AboutTile(
                   icon: FontAwesomeIcons.shareAlt,
                   title: 'Share',
@@ -94,6 +104,11 @@ class AboutApp extends StatelessWidget {
                   icon: FontAwesomeIcons.github,
                   title: 'Contribute',
                   onTap: () => _launchSocial(_githubeUrl),
+                ),
+                _AboutTile(
+                  title: 'Contact Developer',
+                  icon: FontAwesomeIcons.solidEnvelope,
+                  onTap: () => _launchSocial('mailto:varun.sathreya@gmail.com'),
                 ),
               ],
             ),
