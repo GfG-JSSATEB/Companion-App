@@ -65,23 +65,32 @@ class _GetStudentState extends State<GetStudent> {
           ),
         ),
         drawer: CustomDrawer(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 20.0),
-                inputForm(),
-                const SizedBox(height: 5.0),
-                signInButton(context),
-                if (student != null) ...[
-                  buildDetails(key: 'Name', value: student.name),
-                  buildDetails(key: 'College', value: student.college),
-                  buildDetails(key: 'USN', value: student.usn),
-                  buildDetails(key: 'Branch', value: student.branch),
-                  buildDetails(key: 'id', value: student.id),
-                ]
-              ],
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20.0),
+                  inputForm(),
+                  const SizedBox(height: 5.0),
+                  signInButton(context),
+                  if (student != null) ...[
+                    buildDetails(key: 'Name', value: student.name),
+                    buildDetails(key: 'College', value: student.college),
+                    buildDetails(key: 'USN', value: student.usn),
+                    buildDetails(key: 'Branch', value: student.branch),
+                    buildDetails(key: 'id', value: student.id),
+                  ]
+                ],
+              ),
             ),
           ),
         ),
