@@ -19,9 +19,9 @@ class CustomDrawer extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           children: [
             const SizedBox(height: 30),
-            logo(context),
+            _logo(context),
             const SizedBox(height: 30),
-            header(context),
+            _header(context),
             const SizedBox(height: 30),
             _DrawerTile(
               title: 'Home',
@@ -85,7 +85,7 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  CircleAvatar logo(BuildContext context) {
+  CircleAvatar _logo(BuildContext context) {
     return CircleAvatar(
       backgroundColor: Theme.of(context).accentColor,
       radius: 65,
@@ -93,7 +93,7 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  Center header(BuildContext context) {
+  Center _header(BuildContext context) {
     return Center(
       child: Text(
         'GfG JSSATEB',

@@ -6,9 +6,9 @@ import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 
 class AboutApp extends StatelessWidget {
-  static const routeName = '/aboutApp';
-  final String playstoreUrl = '';
-  final String githubeUrl = '';
+  static const String routeName = '/aboutApp';
+  final String _playstoreUrl = '';
+  final String _githubeUrl = '';
 
   Future<void> _launchSocial(String url) async {
     try {
@@ -77,17 +77,17 @@ class AboutApp extends StatelessWidget {
                   textScaleFactor: 1.3,
                 ),
                 const SizedBox(height: 15),
-                AboutTile(
+                _AboutTile(
                   icon: FontAwesomeIcons.shareAlt,
                   title: 'Share',
                   onTap: () {},
                 ),
-                AboutTile(
+                _AboutTile(
                   icon: FontAwesomeIcons.googlePlay,
                   title: 'Rate Us',
                   onTap: () {},
                 ),
-                AboutTile(
+                _AboutTile(
                   icon: FontAwesomeIcons.github,
                   title: 'Contribute',
                   onTap: () {},
@@ -101,11 +101,11 @@ class AboutApp extends StatelessWidget {
   }
 }
 
-class AboutTile extends StatelessWidget {
+class _AboutTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function onTap;
-  const AboutTile({
+  const _AboutTile({
     Key key,
     @required this.title,
     @required this.icon,

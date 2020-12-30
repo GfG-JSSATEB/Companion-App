@@ -6,7 +6,7 @@ import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 
 class AboutUs extends StatelessWidget {
-  static const routeName = '/aboutUs';
+  static const String routeName = '/aboutUs';
 
   final String fburl =
       "https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal";
@@ -80,15 +80,15 @@ class AboutUs extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    buildIconButton(
+                    _buildIconButton(
                         icon: FontAwesomeIcons.facebook, url: fburl),
-                    buildIconButton(
+                    _buildIconButton(
                         icon: FontAwesomeIcons.instagram, url: instagramUrl),
-                    buildIconButton(
+                    _buildIconButton(
                         icon: FontAwesomeIcons.linkedinIn, url: linkedinUrl),
-                    buildIconButton(
+                    _buildIconButton(
                         icon: FontAwesomeIcons.whatsapp, url: whatsappUrl),
-                    buildIconButton(
+                    _buildIconButton(
                         icon: FontAwesomeIcons.globe, url: websiteurl),
                   ],
                 )
@@ -100,7 +100,7 @@ class AboutUs extends StatelessWidget {
     );
   }
 
-  IconButton buildIconButton({@required IconData icon, @required String url}) {
+  IconButton _buildIconButton({@required IconData icon, @required String url}) {
     return IconButton(
       icon: Icon(
         icon,

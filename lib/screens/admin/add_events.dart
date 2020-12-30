@@ -25,55 +25,55 @@ class AddEvent extends StatefulWidget {
 class _AddEventState extends State<AddEvent> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController desctiptionController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _desctiptionController = TextEditingController();
 
-  final DateFormat dateFormat = DateFormat('d MMM yyyy');
+  final DateFormat _dateFormat = DateFormat('d MMM yyyy');
 
-  String titleErrorMessage = '';
-  bool validTitle = true;
+  String _titleErrorMessage = '';
+  bool _validTitle = true;
 
-  String descriptionErrorMessage = '';
-  bool validDescription = true;
+  String _descriptionErrorMessage = '';
+  bool _validDescription = true;
 
-  bool isUpdate;
+  bool _isUpdate;
 
-  DateTime eventPickedDate;
-  TimeOfDay eventTime;
-  DateTime registerPickedDate;
+  DateTime _eventPickedDate;
+  TimeOfDay _eventTime;
+  DateTime _registerPickedDate;
 
-  File poster;
+  File _poster;
 
   bool _isLoading = false;
 
   @override
   void initState() {
-    eventPickedDate = DateTime.now();
-    eventTime = TimeOfDay.now();
-    registerPickedDate = DateTime.now();
-    isUpdate = widget.event != null;
-    if (isUpdate) {
-      titleController.text = widget.event.title;
-      desctiptionController.text = widget.event.description;
-      eventPickedDate = widget.event.date;
-      registerPickedDate = widget.event.register;
-      eventTime = TimeOfDay.fromDateTime(eventPickedDate);
+    _eventPickedDate = DateTime.now();
+    _eventTime = TimeOfDay.now();
+    _registerPickedDate = DateTime.now();
+    _isUpdate = widget.event != null;
+    if (_isUpdate) {
+      _titleController.text = widget.event.title;
+      _desctiptionController.text = widget.event.description;
+      _eventPickedDate = widget.event.date;
+      _registerPickedDate = widget.event.register;
+      _eventTime = TimeOfDay.fromDateTime(_eventPickedDate);
     }
     super.initState();
   }
 
-  bool isValidDescription() {
-    if (desctiptionController.text.trim().length < 3) {
-      descriptionErrorMessage = 'Description too short';
+  bool _isValidDescription() {
+    if (_desctiptionController.text.trim().length < 3) {
+      _descriptionErrorMessage = 'Description too short';
       return false;
     } else {
       return true;
     }
   }
 
-  bool isValidTitle() {
-    if (titleController.text.trim().length < 3) {
-      titleErrorMessage = 'Title too short';
+  bool _isValidTitle() {
+    if (_titleController.text.trim().length < 3) {
+      _titleErrorMessage = 'Title too short';
       return false;
     } else {
       return true;
@@ -85,16 +85,16 @@ class _AddEventState extends State<AddEvent> {
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 5),
-      initialDate: type == 'event' ? eventPickedDate : registerPickedDate,
+      initialDate: type == 'event' ? _eventPickedDate : _registerPickedDate,
     );
     if (date != null) {
       if (type == 'event') {
         setState(() {
-          eventPickedDate = date;
+          _eventPickedDate = date;
         });
       } else {
         setState(() {
-          registerPickedDate = date;
+          _registerPickedDate = date;
         });
       }
     }
@@ -102,10 +102,10 @@ class _AddEventState extends State<AddEvent> {
 
   Future<void> _pickTime() async {
     final TimeOfDay t =
-        await showTimePicker(context: context, initialTime: eventTime);
+        await showTimePicker(context: context, initialTime: _eventTime);
     if (t != null) {
       setState(() {
-        eventTime = t;
+        _eventTime = t;
       });
     }
   }
@@ -117,7 +117,7 @@ class _AddEventState extends State<AddEvent> {
     try {
       final imagePicker =
           Provider.of<ImagePickerService>(context, listen: false);
-      poster = await imagePicker.pickImage(
+      _poster = await imagePicker.pickImage(
         source: ImageSource.gallery,
       );
     } catch (e) {
@@ -129,42 +129,42 @@ class _AddEventState extends State<AddEvent> {
     }
   }
 
-  Future<void> onSubmit() async {
+  Future<void> _onSubmit() async {
     try {
       setState(() {
         _isLoading = true;
       });
-      isUpdate
+      _isUpdate
           ? await DatabaseService.updateEvent(
               id: widget.event.id,
-              title: titleController.text.trim(),
-              description: desctiptionController.text.trim(),
+              title: _titleController.text.trim(),
+              description: _desctiptionController.text.trim(),
               date: DateTime(
-                eventPickedDate.year,
-                eventPickedDate.month,
-                eventPickedDate.day,
-                eventTime.hour,
-                eventTime.minute,
+                _eventPickedDate.year,
+                _eventPickedDate.month,
+                _eventPickedDate.day,
+                _eventTime.hour,
+                _eventTime.minute,
               ),
-              register: registerPickedDate,
+              register: _registerPickedDate,
             )
           : await DatabaseService.addEvent(
-              title: titleController.text.trim(),
-              description: desctiptionController.text.trim(),
-              poster: poster,
+              title: _titleController.text.trim(),
+              description: _desctiptionController.text.trim(),
+              poster: _poster,
               date: DateTime(
-                eventPickedDate.year,
-                eventPickedDate.month,
-                eventPickedDate.day,
-                eventTime.hour,
-                eventTime.minute,
+                _eventPickedDate.year,
+                _eventPickedDate.month,
+                _eventPickedDate.day,
+                _eventTime.hour,
+                _eventTime.minute,
               ),
-              register: registerPickedDate,
+              register: _registerPickedDate,
             );
 
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(
-          content: Text('Even ${isUpdate ? 'updated' : 'added'} Successfully'),
+          content: Text('Even ${_isUpdate ? 'updated' : 'added'} Successfully'),
         ),
       );
 
@@ -182,8 +182,8 @@ class _AddEventState extends State<AddEvent> {
 
   @override
   void dispose() {
-    titleController.dispose();
-    desctiptionController.dispose();
+    _titleController.dispose();
+    _desctiptionController.dispose();
     super.dispose();
   }
 
@@ -221,20 +221,20 @@ class _AddEventState extends State<AddEvent> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  textInfo(),
+                  _textInfo(),
                   const SizedBox(height: 20),
-                  dateInfo(),
-                  if (!isUpdate) ...[
+                  _dateInfo(),
+                  if (!_isUpdate) ...[
                     const InputText(title: 'Poster'),
                     ListTile(
                       title:
-                          Text(poster != null ? 'Uploaded' : 'Choose a file'),
+                          Text(_poster != null ? 'Uploaded' : 'Choose a file'),
                       trailing: const Icon(FontAwesomeIcons.chevronDown),
                       onTap: () => _pickImage(),
                     ),
                   ],
                   const SizedBox(height: 20),
-                  submitButton(context),
+                  _submitButton(context),
                 ],
               ),
             ),
@@ -244,52 +244,52 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  Column textInfo() {
+  Column _textInfo() {
     return Column(
       children: [
         const InputText(title: 'Title'),
         const SizedBox(height: 10),
         CustomTextField(
-          controller: titleController,
+          controller: _titleController,
           title: 'Title',
-          validity: validTitle,
-          errorMessage: titleErrorMessage,
+          validity: _validTitle,
+          errorMessage: _titleErrorMessage,
           obscureText: false,
         ),
         const SizedBox(height: 20),
         const InputText(title: 'Description'),
         const SizedBox(height: 10),
         CustomTextField(
-          controller: desctiptionController,
+          controller: _desctiptionController,
           title: 'Description',
-          validity: validDescription,
+          validity: _validDescription,
           textInputType: TextInputType.multiline,
           maxLines: null,
-          errorMessage: descriptionErrorMessage,
+          errorMessage: _descriptionErrorMessage,
           obscureText: false,
         ),
       ],
     );
   }
 
-  Column dateInfo() {
+  Column _dateInfo() {
     return Column(
       children: [
         const InputText(title: 'Event Date'),
         ListTile(
-          title: Text("Date: ${dateFormat.format(eventPickedDate)}"),
+          title: Text("Date: ${_dateFormat.format(_eventPickedDate)}"),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: () => _pickDate('event'),
         ),
         const InputText(title: 'Event Time'),
         ListTile(
-          title: Text("Time: ${eventTime.hour}:${eventTime.minute}"),
+          title: Text("Time: ${_eventTime.hour}:${_eventTime.minute}"),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: _pickTime,
         ),
         const InputText(title: 'Last Date to register'),
         ListTile(
-          title: Text("Date: ${dateFormat.format(registerPickedDate)}"),
+          title: Text("Date: ${_dateFormat.format(_registerPickedDate)}"),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: () => _pickDate('register'),
         ),
@@ -297,24 +297,26 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  MaterialButton submitButton(BuildContext context) {
+  MaterialButton _submitButton(BuildContext context) {
     return MaterialButton(
       height: MediaQuery.of(context).size.height * 0.06,
       minWidth: MediaQuery.of(context).size.width * 0.6,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       onPressed: () async {
         setState(() {
-          validDescription = isValidDescription();
-          validTitle = isValidTitle();
+          _validDescription = _isValidDescription();
+          _validTitle = _isValidTitle();
         });
 
-        if (validDescription && validTitle && (isUpdate || poster != null)) {
-          await onSubmit();
+        if (_validDescription &&
+            _validTitle &&
+            (_isUpdate || _poster != null)) {
+          await _onSubmit();
         }
       },
       color: Theme.of(context).accentColor,
       child: Text(
-        isUpdate ? 'Update' : "Add",
+        _isUpdate ? 'Update' : "Add",
         textScaleFactor: 1.4,
         style: const TextStyle(color: Colors.white),
       ),

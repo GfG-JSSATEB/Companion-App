@@ -19,66 +19,66 @@ class AddAnnouncement extends StatefulWidget {
 class _AddAnnouncementState extends State<AddAnnouncement> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController desctiptionController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _desctiptionController = TextEditingController();
 
-  String titleErrorMessage = '';
-  bool validTitle = true;
+  String _titleErrorMessage = '';
+  bool _validTitle = true;
 
-  String descriptionErrorMessage = '';
-  bool validDescription = true;
+  String _descriptionErrorMessage = '';
+  bool _validDescription = true;
 
-  bool isUpdate;
+  bool _isUpdate;
 
   bool _isLoading = false;
 
   @override
   void initState() {
-    isUpdate = widget.announcement != null;
-    if (isUpdate) {
-      titleController.text = widget.announcement.title;
-      desctiptionController.text = widget.announcement.description;
+    _isUpdate = widget.announcement != null;
+    if (_isUpdate) {
+      _titleController.text = widget.announcement.title;
+      _desctiptionController.text = widget.announcement.description;
     }
     super.initState();
   }
 
-  bool isValidDescription() {
-    if (desctiptionController.text.trim().length < 3) {
-      descriptionErrorMessage = 'Description too short';
+  bool _isValidDescription() {
+    if (_desctiptionController.text.trim().length < 3) {
+      _descriptionErrorMessage = 'Description too short';
       return false;
     } else {
       return true;
     }
   }
 
-  bool isValidTitle() {
-    if (titleController.text.trim().length < 3) {
-      titleErrorMessage = 'Title too short';
+  bool _isValidTitle() {
+    if (_titleController.text.trim().length < 3) {
+      _titleErrorMessage = 'Title too short';
       return false;
     } else {
       return true;
     }
   }
 
-  Future<void> onSubmit() async {
+  Future<void> _onSubmit() async {
     try {
       setState(() {
         _isLoading = true;
       });
-      isUpdate
+      _isUpdate
           ? await DatabaseService.updateAnnouncement(
-              title: titleController.text.trim(),
-              description: desctiptionController.text.trim(),
+              title: _titleController.text.trim(),
+              description: _desctiptionController.text.trim(),
               id: widget.announcement.id,
             )
           : await DatabaseService.addAnnouncement(
-              title: titleController.text.trim(),
-              description: desctiptionController.text.trim(),
+              title: _titleController.text.trim(),
+              description: _desctiptionController.text.trim(),
             );
 
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content:
-            Text('Announcemnt ${isUpdate ? 'updated' : 'added'} Successfully'),
+            Text('Announcemnt ${_isUpdate ? 'updated' : 'added'} Successfully'),
       ));
 
       Future.delayed(const Duration(seconds: 2), () {
@@ -95,8 +95,8 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
 
   @override
   void dispose() {
-    titleController.dispose();
-    desctiptionController.dispose();
+    _titleController.dispose();
+    _desctiptionController.dispose();
     super.dispose();
   }
 
@@ -134,9 +134,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  inputForm(context),
+                  _inputForm(context),
                   const SizedBox(height: 20),
-                  submitButton(context),
+                  _submitButton(context),
                 ],
               ),
             ),
@@ -146,7 +146,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
     );
   }
 
-  Column inputForm(BuildContext context) {
+  Column _inputForm(BuildContext context) {
     return Column(
       children: [
         Text(
@@ -158,10 +158,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
         ),
         const SizedBox(height: 10),
         CustomTextField(
-          controller: titleController,
+          controller: _titleController,
           title: 'Title',
-          validity: validTitle,
-          errorMessage: titleErrorMessage,
+          validity: _validTitle,
+          errorMessage: _titleErrorMessage,
           obscureText: false,
         ),
         const SizedBox(height: 20),
@@ -174,36 +174,36 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
         ),
         const SizedBox(height: 10),
         CustomTextField(
-          controller: desctiptionController,
+          controller: _desctiptionController,
           title: 'Description',
-          validity: validDescription,
+          validity: _validDescription,
           textInputType: TextInputType.multiline,
           maxLines: null,
-          errorMessage: descriptionErrorMessage,
+          errorMessage: _descriptionErrorMessage,
           obscureText: false,
         ),
       ],
     );
   }
 
-  MaterialButton submitButton(BuildContext context) {
+  MaterialButton _submitButton(BuildContext context) {
     return MaterialButton(
       height: MediaQuery.of(context).size.height * 0.06,
       minWidth: MediaQuery.of(context).size.width * 0.6,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       onPressed: () async {
         setState(() {
-          validDescription = isValidDescription();
-          validTitle = isValidTitle();
+          _validDescription = _isValidDescription();
+          _validTitle = _isValidTitle();
         });
 
-        if (validDescription && validTitle) {
-          await onSubmit();
+        if (_validDescription && _validTitle) {
+          await _onSubmit();
         }
       },
       color: Theme.of(context).accentColor,
       child: Text(
-        isUpdate ? 'Update' : "Add",
+        _isUpdate ? 'Update' : "Add",
         textScaleFactor: 1.4,
         style: const TextStyle(color: Colors.white),
       ),

@@ -21,23 +21,23 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Student student;
+  Student _student;
 
   bool _isLoading = false;
 
-  TextEditingController textController = TextEditingController();
-  String errorMessage = "";
-  bool validityName = true;
+  final TextEditingController _textController = TextEditingController();
+  String _errorMessage = "";
+  bool _validityName = true;
 
   @override
   void dispose() {
-    textController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    student = Provider.of<StudentData>(context).student;
+    _student = Provider.of<StudentData>(context).student;
 
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
@@ -72,15 +72,15 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ProfileTile(
-                    title: student.name,
+                  _ProfileTile(
+                    title: _student.name,
                     icon: FontAwesomeIcons.solidUser,
                     trailing: FontAwesomeIcons.pen,
                     trailingOnTap: () async {
-                      await buildShowDialog(
+                      await _buildShowDialog(
                         context: context,
                         key: 'name',
-                        value: student.name,
+                        value: _student.name,
                       );
                     },
                   ),
@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Theme.of(context).accentColor,
                     ),
                     title: Text(
-                      student.email,
+                      _student.email,
                       style: const TextStyle(
                         letterSpacing: 1.3,
                       ),
@@ -102,45 +102,45 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Theme.of(context).accentColor,
                     ),
                     title: Text(
-                      student.college,
+                      _student.college,
                       style: const TextStyle(
                         letterSpacing: 1.3,
                       ),
                     ),
                   ),
-                  ProfileTile(
-                    title: student.usn,
+                  _ProfileTile(
+                    title: _student.usn,
                     icon: FontAwesomeIcons.solidIdBadge,
                     trailing: FontAwesomeIcons.pen,
                     trailingOnTap: () async {
-                      await buildShowDialog(
+                      await _buildShowDialog(
                         context: context,
                         key: 'usn',
-                        value: student.usn,
+                        value: _student.usn,
                       );
                     },
                   ),
-                  ProfileTile(
-                    title: student.branch,
+                  _ProfileTile(
+                    title: _student.branch,
                     icon: FontAwesomeIcons.bookReader,
                     trailing: FontAwesomeIcons.pen,
                     trailingOnTap: () async {
-                      await buildShowDialog(
+                      await _buildShowDialog(
                         context: context,
                         key: 'branch',
-                        value: student.branch,
+                        value: _student.branch,
                       );
                     },
                   ),
-                  ProfileTile(
-                    title: student.year,
+                  _ProfileTile(
+                    title: _student.year,
                     icon: FontAwesomeIcons.graduationCap,
                     trailing: FontAwesomeIcons.pen,
                     trailingOnTap: () async {
-                      await buildShowDialog(
+                      await _buildShowDialog(
                         context: context,
                         key: 'year',
-                        value: student.year,
+                        value: _student.year,
                       );
                     },
                   ),
@@ -153,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
-                    child: const ProfileTile(
+                    child: const _ProfileTile(
                       title: 'Participated Events',
                       icon: FontAwesomeIcons.certificate,
                       trailing: FontAwesomeIcons.chevronRight,
@@ -168,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () async {
                       await context
                           .read<AuthService>()
-                          .resetPassword(email: student.email);
+                          .resetPassword(email: _student.email);
                       await context.read<AuthService>().signOut();
                       Navigator.pushReplacementNamed(context, SignIn.routeName);
                     },
@@ -188,12 +188,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Future<void> buildShowDialog({
+  Future<void> _buildShowDialog({
     @required BuildContext context,
     @required String key,
     @required String value,
   }) async {
-    textController.text = value;
+    _textController.text = value;
 
     showDialog(
       context: context,
@@ -206,10 +206,10 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextField(
-                  controller: textController,
+                  controller: _textController,
                   title: key,
-                  validity: validityName,
-                  errorMessage: errorMessage,
+                  validity: _validityName,
+                  errorMessage: _errorMessage,
                   obscureText: false,
                   iconData: FontAwesomeIcons.solidEdit,
                 ),
@@ -222,9 +222,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   onPressed: () async {
                     try {
                       setState(() {
-                        validityName = isValidName(textController.text.trim());
+                        _validityName =
+                            _isValidName(_textController.text.trim());
                       });
-                      if (validityName) {
+                      if (_validityName) {
                         Navigator.pop(context);
 
                         _isLoading = true;
@@ -232,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         await Provider.of<StudentData>(context, listen: false)
                             .updateStudent(
                           key: key,
-                          value: textController.text.trim(),
+                          value: _textController.text.trim(),
                         );
 
                         _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -260,9 +261,9 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  bool isValidName(String name) {
+  bool _isValidName(String name) {
     if (name.length < 3) {
-      errorMessage = 'Name too short';
+      _errorMessage = 'Name too short';
       return false;
     } else {
       return true;
@@ -270,8 +271,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-class ProfileTile extends StatelessWidget {
-  const ProfileTile(
+class _ProfileTile extends StatelessWidget {
+  const _ProfileTile(
       {Key key,
       @required this.title,
       @required this.icon,

@@ -14,14 +14,14 @@ import 'admin/add_events.dart';
 class PastEventDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final DateFormat dateFormat = DateFormat('hh:mm a, d MMM yyyy');
+  final DateFormat _dateFormat = DateFormat('hh:mm a, d MMM yyyy');
 
   final Event event;
 
   PastEventDetails({Key key, this.event}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin =
+    final bool _isAdmin =
         Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return Scaffold(
@@ -30,7 +30,7 @@ class PastEventDetails extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
-          actions: isAdmin
+          actions: _isAdmin
               ? [
                   IconButton(
                     icon: const Icon(FontAwesomeIcons.check),
@@ -89,7 +89,7 @@ class PastEventDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Event was On: ${dateFormat.format(event.date)}',
+                  'Event was On: ${_dateFormat.format(event.date)}',
                   textScaleFactor: 1.3,
                   maxLines: 2,
                   textAlign: TextAlign.center,
@@ -104,7 +104,7 @@ class PastEventDetails extends StatelessWidget {
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.2,
                 ),
-                if (isAdmin) ...[
+                if (_isAdmin) ...[
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

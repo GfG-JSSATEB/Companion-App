@@ -12,7 +12,7 @@ import '../widgets/error_message.dart';
 import 'admin/add_announcement.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = '/home';
+  static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {

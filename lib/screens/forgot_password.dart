@@ -18,22 +18,22 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  bool validityEmail = true;
+  bool _validityEmail = true;
 
-  String emailIdErrorMessage = "";
+  String _emailIdErrorMessage = "";
 
   bool _isLoading = false;
 
-  Future<void> resetPassword(BuildContext context) async {
+  Future<void> _resetPassword(BuildContext context) async {
     try {
       setState(() {
         _isLoading = true;
       });
       await context
           .read<AuthService>()
-          .resetPassword(email: emailController.text.trim());
+          .resetPassword(email: _emailController.text.trim());
 
       _scaffoldKey.currentState.showSnackBar(const SnackBar(
           content: Text('Password Reset Mail sent successfully')));
@@ -43,8 +43,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
     } on FirebaseAuthException catch (e) {
       setState(() {
-        validityEmail = false;
-        emailIdErrorMessage = e.message;
+        _validityEmail = false;
+        _emailIdErrorMessage = e.message;
       });
     } finally {
       setState(() {
@@ -55,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   void dispose() {
-    emailController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -70,12 +70,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                logo(context),
-                greetings(),
+                _logo(context),
+                _greetings(),
                 const SizedBox(height: 20.0),
-                inputForm(),
+                _inputForm(),
                 const SizedBox(height: 5.0),
-                signInButton(context),
+                _signInButton(context),
               ],
             ),
           ),
@@ -84,7 +84,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Text greetings() {
+  Text _greetings() {
     return const Text(
       'Forgot Password?',
       textScaleFactor: 2.3,
@@ -95,14 +95,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Column inputForm() {
+  Column _inputForm() {
     return Column(
       children: [
         CustomTextField(
-          controller: emailController,
+          controller: _emailController,
           title: 'Email',
-          validity: validityEmail,
-          errorMessage: emailIdErrorMessage,
+          validity: _validityEmail,
+          errorMessage: _emailIdErrorMessage,
           obscureText: false,
           iconData: FontAwesomeIcons.solidEnvelope,
         ),
@@ -111,7 +111,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Padding signInButton(BuildContext context) {
+  Padding _signInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: MaterialButton(
@@ -120,10 +120,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () async {
           setState(() {
-            validityEmail = isValidEmail(emailController.text.trim());
+            _validityEmail = _isValidEmail(_emailController.text.trim());
           });
-          if (validityEmail) {
-            await resetPassword(context);
+          if (_validityEmail) {
+            await _resetPassword(context);
           }
         },
         color: Theme.of(context).accentColor,
@@ -136,7 +136,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  Widget logo(BuildContext context) {
+  Widget _logo(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 50.0, bottom: 30.0),
       height: MediaQuery.of(context).size.height * 0.2,
@@ -150,17 +150,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  bool isValidEmail(String email) {
+  bool _isValidEmail(String email) {
     const String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     final RegExp regExp = RegExp(p);
     if (email.isEmpty) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a Email-id";
+      _emailIdErrorMessage = "Please enter a Email-id";
       return false;
     } else if (!regExp.hasMatch(email)) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a valid Email Address";
+      _emailIdErrorMessage = "Please enter a valid Email Address";
       return false;
     } else {
       return true;

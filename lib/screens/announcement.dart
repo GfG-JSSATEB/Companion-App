@@ -16,7 +16,7 @@ class AnnouncementScreen extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin =
+    final bool _isAdmin =
         Provider.of<StudentData>(context, listen: false).isAdmin;
 
     return Scaffold(
@@ -75,7 +75,7 @@ class AnnouncementScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.4,
                 ),
-                if (isAdmin) ...[
+                if (_isAdmin) ...[
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

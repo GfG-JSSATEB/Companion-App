@@ -18,23 +18,23 @@ class GetStudent extends StatefulWidget {
 class _GetStudentState extends State<GetStudent> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  bool validityEmail = true;
+  bool _validityEmail = true;
 
-  String emailIdErrorMessage = "";
+  String _emailIdErrorMessage = "";
 
   bool _isLoading = false;
 
-  Student student;
+  Student _student;
 
-  Future<void> getUser(BuildContext context) async {
+  Future<void> _getUser(BuildContext context) async {
     try {
       setState(() {
         _isLoading = true;
       });
-      student = await DatabaseService.getStudentByEmail(
-        email: emailController.text.trim(),
+      _student = await DatabaseService.getStudentByEmail(
+        email: _emailController.text.trim(),
       );
     } catch (e) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('$e')));
@@ -47,7 +47,7 @@ class _GetStudentState extends State<GetStudent> {
 
   @override
   void dispose() {
-    emailController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -79,15 +79,15 @@ class _GetStudentState extends State<GetStudent> {
               child: Column(
                 children: [
                   const SizedBox(height: 20.0),
-                  inputForm(),
+                  _inputForm(),
                   const SizedBox(height: 5.0),
-                  signInButton(context),
-                  if (student != null) ...[
-                    buildDetails(key: 'Name', value: student.name),
-                    buildDetails(key: 'College', value: student.college),
-                    buildDetails(key: 'USN', value: student.usn),
-                    buildDetails(key: 'Branch', value: student.branch),
-                    buildDetails(key: 'id', value: student.id),
+                  _signInButton(context),
+                  if (_student != null) ...[
+                    _buildDetails(key: 'Name', value: _student.name),
+                    _buildDetails(key: 'College', value: _student.college),
+                    _buildDetails(key: 'USN', value: _student.usn),
+                    _buildDetails(key: 'Branch', value: _student.branch),
+                    _buildDetails(key: 'id', value: _student.id),
                   ]
                 ],
               ),
@@ -98,17 +98,17 @@ class _GetStudentState extends State<GetStudent> {
     );
   }
 
-  ListTile buildDetails({@required String key, @required String value}) =>
+  ListTile _buildDetails({@required String key, @required String value}) =>
       ListTile(leading: Text(key), title: Text(value));
 
-  Column inputForm() {
+  Column _inputForm() {
     return Column(
       children: [
         CustomTextField(
-          controller: emailController,
+          controller: _emailController,
           title: 'Email',
-          validity: validityEmail,
-          errorMessage: emailIdErrorMessage,
+          validity: _validityEmail,
+          errorMessage: _emailIdErrorMessage,
           obscureText: false,
           iconData: FontAwesomeIcons.solidEnvelope,
         ),
@@ -117,7 +117,7 @@ class _GetStudentState extends State<GetStudent> {
     );
   }
 
-  Padding signInButton(BuildContext context) {
+  Padding _signInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: MaterialButton(
@@ -126,10 +126,10 @@ class _GetStudentState extends State<GetStudent> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () async {
           setState(() {
-            validityEmail = isValidEmail(emailController.text.trim());
+            _validityEmail = isValidEmail(_emailController.text.trim());
           });
-          if (validityEmail) {
-            await getUser(context);
+          if (_validityEmail) {
+            await _getUser(context);
           }
         },
         color: Theme.of(context).accentColor,
@@ -148,11 +148,11 @@ class _GetStudentState extends State<GetStudent> {
     final RegExp regExp = RegExp(p);
     if (email.isEmpty) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a Email-id";
+      _emailIdErrorMessage = "Please enter a Email-id";
       return false;
     } else if (!regExp.hasMatch(email)) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a valid Email Address";
+      _emailIdErrorMessage = "Please enter a valid Email Address";
       return false;
     } else {
       return true;

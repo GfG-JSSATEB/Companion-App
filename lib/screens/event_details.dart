@@ -27,13 +27,15 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final DateFormat dateFormat = DateFormat('hh:mm a, d MMM yyyy');
-  final DateFormat registerFormat = DateFormat('d MMM yyyy');
+  final DateFormat _dateFormat = DateFormat('hh:mm a, d MMM yyyy');
+  final DateFormat _registerFormat = DateFormat('d MMM yyyy');
 
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    final String _id = widget.id;
+
     final Student student =
         Provider.of<StudentData>(context, listen: false).student;
     final bool isAdmin = student.isAdmin;
@@ -59,7 +61,7 @@ class _EventDetailsState extends State<EventDetails> {
                               'Are you sure you want to mark event finshed?',
                           onOK: () async {
                             DatabaseService.toggleEvent(
-                              id: widget.id,
+                              id: _id,
                               isFinished: true,
                             );
                             Navigator.pop(context);
@@ -92,7 +94,7 @@ class _EventDetailsState extends State<EventDetails> {
             ),
             child: SingleChildScrollView(
               child: StreamBuilder<DocumentSnapshot>(
-                stream: DatabaseService.getEvent(id: widget.id),
+                stream: DatabaseService.getEvent(id: _id),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return Center(
@@ -103,7 +105,7 @@ class _EventDetailsState extends State<EventDetails> {
                   } else if (snapshot.hasData) {
                     final Event event =
                         Event.fromDocumentSnapshot(snapshot.data);
-                    return buildEventDetail(
+                    return _buildEventDetail(
                       event: event,
                       context: context,
                       uid: uid,
@@ -124,7 +126,7 @@ class _EventDetailsState extends State<EventDetails> {
     );
   }
 
-  Column buildEventDetail({
+  Column _buildEventDetail({
     @required Event event,
     @required BuildContext context,
     @required String uid,
@@ -147,7 +149,7 @@ class _EventDetailsState extends State<EventDetails> {
         ),
         const SizedBox(height: 20),
         Text(
-          'Event On: ${dateFormat.format(event.date)}',
+          'Event On: ${_dateFormat.format(event.date)}',
           textScaleFactor: 1.3,
           maxLines: 2,
           textAlign: TextAlign.justify,
@@ -157,7 +159,7 @@ class _EventDetailsState extends State<EventDetails> {
         ),
         const SizedBox(height: 10),
         Text(
-          'Register By: ${registerFormat.format(event.register)}',
+          'Register By: ${_registerFormat.format(event.register)}',
           textScaleFactor: 1.3,
           maxLines: 2,
           textAlign: TextAlign.center,
@@ -300,7 +302,7 @@ class _EventDetailsState extends State<EventDetails> {
                   },
                   child: Text(
                     '${event.registrationEnded ? 'Resume' : 'Stop'} Registration',
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],

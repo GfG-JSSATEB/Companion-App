@@ -18,24 +18,24 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  User user;
-  Timer timer;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User _user;
+  Timer _timer;
 
   @override
   void initState() {
-    user = auth.currentUser;
-    user.sendEmailVerification();
+    _user = _auth.currentUser;
+    _user.sendEmailVerification();
 
-    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      checkEmailVerified();
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      _checkEmailVerified();
     });
     super.initState();
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -54,7 +54,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
             ),
             const SizedBox(height: 30),
             Text(
-              "A email have been send to ${user.email} please verify",
+              "A email have been send to ${_user.email} please verify",
               textScaleFactor: 1.3,
               textAlign: TextAlign.center,
             ),
@@ -81,11 +81,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
     );
   }
 
-  Future<void> checkEmailVerified() async {
-    user = auth.currentUser;
-    await user.reload();
-    if (user.emailVerified) {
-      timer.cancel();
+  Future<void> _checkEmailVerified() async {
+    _user = _auth.currentUser;
+    await _user.reload();
+    if (_user.emailVerified) {
+      _timer.cancel();
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     }
   }

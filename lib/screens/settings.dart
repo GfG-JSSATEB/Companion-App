@@ -15,7 +15,7 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<DarkNotifier>(context, listen: false).isDark;
+    bool _isDark = Provider.of<DarkNotifier>(context, listen: false).isDark;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -59,11 +59,11 @@ class Settings extends StatelessWidget {
                       icon: FontAwesomeIcons.fill,
                       title: 'Dark Theme',
                       trailing: Switch(
-                        value: isDark,
+                        value: _isDark,
                         onChanged: (value) {
-                          isDark = value;
+                          _isDark = value;
                           Provider.of<DarkNotifier>(context, listen: false)
-                              .darkMode = isDark;
+                              .darkMode = _isDark;
                         },
                       ),
                       onTap: () {},

@@ -70,13 +70,13 @@ class EventCard extends StatelessWidget {
                 textScaleFactor: 1.2,
               ),
               const SizedBox(height: 15),
-              buildRichText(
+              _buildRichText(
                 context: context,
                 title: 'Event Date',
                 value: dateFormat.format(event.date),
               ),
               const SizedBox(height: 5),
-              buildRichText(
+              _buildRichText(
                 context: context,
                 title: 'Register By',
                 value: dateFormat.format(event.register),
@@ -88,7 +88,7 @@ class EventCard extends StatelessWidget {
     );
   }
 
-  RichText buildRichText({
+  RichText _buildRichText({
     @required BuildContext context,
     @required String title,
     @required String value,
@@ -107,10 +107,11 @@ class EventCard extends StatelessWidget {
             ),
           ),
           TextSpan(
-              text: value,
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-              )),
+            text: value,
+            style: TextStyle(
+              color: Theme.of(context).accentColor,
+            ),
+          ),
         ],
       ),
     );

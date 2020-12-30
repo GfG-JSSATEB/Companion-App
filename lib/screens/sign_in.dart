@@ -22,26 +22,26 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  bool validityEmail = true;
-  bool validityPassword = true;
+  bool _validityEmail = true;
+  bool _validityPassword = true;
 
-  String emailIdErrorMessage = "";
-  String passwordErrorMessage = "";
+  String _emailIdErrorMessage = "";
+  String _passwordErrorMessage = "";
 
   bool _isLoading = false;
 
-  Future<void> signIn(BuildContext context) async {
+  Future<void> _signIn(BuildContext context) async {
     try {
       setState(() {
         _isLoading = true;
       });
 
       final User user = await context.read<AuthService>().signInWithEmail(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim(),
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
           );
       if (user.emailVerified) {
         Navigator.pushReplacementNamed(context, HomePage.routeName);
@@ -52,26 +52,26 @@ class _SignInState extends State<SignIn> {
       switch (e.code) {
         case 'user-not-found':
           setState(() {
-            validityEmail = false;
-            emailIdErrorMessage = e.message;
+            _validityEmail = false;
+            _emailIdErrorMessage = e.message;
           });
           break;
         case 'wrong-password':
           setState(() {
-            validityPassword = false;
-            passwordErrorMessage = e.message;
+            _validityPassword = false;
+            _passwordErrorMessage = e.message;
           });
           break;
         case 'user-disabled':
           setState(() {
-            validityEmail = false;
-            emailIdErrorMessage = e.message;
+            _validityEmail = false;
+            _emailIdErrorMessage = e.message;
           });
           break;
         default:
           setState(() {
-            validityEmail = false;
-            emailIdErrorMessage = e.message;
+            _validityEmail = false;
+            _emailIdErrorMessage = e.message;
           });
       }
     } finally {
@@ -83,8 +83,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -99,16 +99,16 @@ class _SignInState extends State<SignIn> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                logo(context),
-                greetings(),
+                _logo(context),
+                _greetings(),
                 const SizedBox(height: 20.0),
-                inputForm(),
+                _inputForm(),
                 const SizedBox(height: 5.0),
-                buildForgotPassword(),
+                _buildForgotPassword(),
                 const SizedBox(height: 12.0),
-                signInButton(context),
+                _signInButton(context),
                 const SizedBox(height: 10.0),
-                signUpRoute(context),
+                _signUpRoute(context),
               ],
             ),
           ),
@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Row buildForgotPassword() {
+  Row _buildForgotPassword() {
     return Row(
       children: [
         GestureDetector(
@@ -137,7 +137,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Text greetings() {
+  Text _greetings() {
     return const Text(
       'GfG JSSATEB',
       textScaleFactor: 2.5,
@@ -148,7 +148,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Column signUpRoute(BuildContext context) {
+  Column _signUpRoute(BuildContext context) {
     return Column(
       children: [
         const Text(
@@ -174,23 +174,23 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Column inputForm() {
+  Column _inputForm() {
     return Column(
       children: [
         CustomTextField(
-          controller: emailController,
+          controller: _emailController,
           title: 'Email',
-          validity: validityEmail,
-          errorMessage: emailIdErrorMessage,
+          validity: _validityEmail,
+          errorMessage: _emailIdErrorMessage,
           obscureText: false,
           iconData: FontAwesomeIcons.solidEnvelope,
         ),
         const SizedBox(height: 20),
         CustomTextField(
-          controller: passwordController,
+          controller: _passwordController,
           title: 'Password',
-          validity: validityPassword,
-          errorMessage: passwordErrorMessage,
+          validity: _validityPassword,
+          errorMessage: _passwordErrorMessage,
           obscureText: true,
           iconData: FontAwesomeIcons.lock,
         ),
@@ -199,7 +199,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Padding signInButton(BuildContext context) {
+  Padding _signInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: MaterialButton(
@@ -208,11 +208,11 @@ class _SignInState extends State<SignIn> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () async {
           setState(() {
-            validityEmail = isValidEmail(emailController.text.trim());
-            validityPassword = isValidPassword(passwordController.text);
+            _validityEmail = _isValidEmail(_emailController.text.trim());
+            _validityPassword = _isValidPassword(_passwordController.text);
           });
-          if (validityEmail && validityPassword) {
-            await signIn(context);
+          if (_validityEmail && _validityPassword) {
+            await _signIn(context);
           }
         },
         color: Theme.of(context).accentColor,
@@ -225,7 +225,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Widget logo(BuildContext context) {
+  Widget _logo(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 50.0, bottom: 30.0),
       height: MediaQuery.of(context).size.height * 0.2,
@@ -239,39 +239,39 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  bool isValidEmail(String email) {
+  bool _isValidEmail(String email) {
     const String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     final RegExp regExp = RegExp(p);
     if (email.isEmpty) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a Email-id";
+      _emailIdErrorMessage = "Please enter a Email-id";
       return false;
     } else if (!regExp.hasMatch(email)) {
       //assigning error message to String variable emailIdErrorMessage
-      emailIdErrorMessage = "Please enter a valid Email Address";
+      _emailIdErrorMessage = "Please enter a valid Email Address";
       return false;
     } else {
       return true;
     }
   }
 
-  bool isValidPassword(String password) {
+  bool _isValidPassword(String password) {
     //Function that VALIDATES ENTERED PASSWORD
     const String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     final RegExp regExp = RegExp(pattern);
     if (password.isEmpty) {
       //assigning error message to String variable passwordErrorMessage
-      passwordErrorMessage = "Please enter Password";
+      _passwordErrorMessage = "Please enter Password";
       return false;
     } else if (password.length < 8) {
       //assigning error message to String variable passwordErrorMessage
-      passwordErrorMessage = "Password must contain at least 8 characters";
+      _passwordErrorMessage = "Password must contain at least 8 characters";
       return false;
     } else if (!regExp.hasMatch(password)) {
       //assigning error message to String variable passwordErrorMessage
-      passwordErrorMessage =
+      _passwordErrorMessage =
           "Password must contain \n at least 1 upper case alphabet,\nat least one number \nand at least one special character \nalong with lowercase alphabets";
       return false;
     } else {

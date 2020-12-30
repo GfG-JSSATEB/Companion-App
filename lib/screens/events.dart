@@ -12,7 +12,7 @@ import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
 
 class EventsPage extends StatelessWidget {
-  static const routeName = '/events';
+  static const String routeName = '/events';
   final bool isFinished;
   final bool isParticipated;
 
@@ -24,9 +24,9 @@ class EventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAdmin =
+    final bool _isAdmin =
         Provider.of<StudentData>(context, listen: false).isAdmin;
-    final String uid =
+    final String _uid =
         Provider.of<StudentData>(context, listen: false).student.id;
 
     return Scaffold(
@@ -34,7 +34,7 @@ class EventsPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
-          actions: isAdmin
+          actions: _isAdmin
               ? [
                   IconButton(
                     icon: const Icon(FontAwesomeIcons.plus),
@@ -55,7 +55,7 @@ class EventsPage extends StatelessWidget {
       body: SafeArea(
         child: StreamBuilder(
           stream: isParticipated
-              ? DatabaseService.getParticipatedEvents(uid: uid)
+              ? DatabaseService.getParticipatedEvents(uid: _uid)
               : DatabaseService.getAllEvents(isFinished: isFinished),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
