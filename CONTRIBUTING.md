@@ -82,7 +82,7 @@ $ git push origin
 
 ### You're Ready to Go
 
-Once you have completed these steps, you are ready to start contributing by checking our Issues and creating [pull requests](https://github.com/GfG-JSSATEB/Companion-App/pulls).
+Once you have completed these steps, you are ready to start contributing or raise [Issues](https://github.com/GfG-JSSATEB/Companion-App/issues) and creating [pull requests](https://github.com/GfG-JSSATEB/Companion-App/pulls).
 
 </details>
 
