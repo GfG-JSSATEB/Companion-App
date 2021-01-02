@@ -71,7 +71,7 @@ class AboutApp extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 const Text(
-                  'description descriptiondescriptiondescription escriptio nescription escriptionescription escriptionescription nescription escriptionescription nescription escriptionescription ription ',
+                  'GfG JSSATEB app is created to provide seamless experience for students to register and participate in events and get latest announcements directly in their finger tips.',
                   softWrap: true,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.visible,
