@@ -159,7 +159,7 @@ class PastEventDetails extends StatelessWidget {
                                   'Participants email have been copied to clipboard')));
                         },
                         child: const Text(
-                          'Get Partivipants Email',
+                          'Get Participants Email',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
