@@ -73,127 +73,136 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _ProfileTile(
-                    title: _student.name,
-                    icon: FontAwesomeIcons.solidUser,
-                    trailing: FontAwesomeIcons.pen,
-                    trailingOnTap: () async {
-                      await _buildShowDialog(
-                        context: context,
-                        key: 'name',
-                        value: _student.name,
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      FontAwesomeIcons.solidEnvelope,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    title: Text(
-                      _student.email,
-                      style: const TextStyle(
-                        letterSpacing: 1.3,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      FontAwesomeIcons.school,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    title: Text(
-                      _student.college,
-                      style: const TextStyle(
-                        letterSpacing: 1.3,
-                      ),
-                    ),
-                  ),
-                  _ProfileTile(
-                    title: _student.usn,
-                    icon: FontAwesomeIcons.solidIdBadge,
-                    trailing: FontAwesomeIcons.pen,
-                    trailingOnTap: () async {
-                      await _buildShowDialog(
-                        context: context,
-                        key: 'usn',
-                        value: _student.usn,
-                      );
-                    },
-                  ),
-                  _ProfileTile(
-                    title: _student.branch,
-                    icon: FontAwesomeIcons.bookReader,
-                    trailing: FontAwesomeIcons.pen,
-                    trailingOnTap: () async {
-                      await _buildShowDialog(
-                        context: context,
-                        key: 'branch',
-                        value: _student.branch,
-                      );
-                    },
-                  ),
-                  _ProfileTile(
-                    title: _student.year,
-                    icon: FontAwesomeIcons.graduationCap,
-                    trailing: FontAwesomeIcons.pen,
-                    trailingOnTap: () async {
-                      await _buildShowDialog(
-                        context: context,
-                        key: 'year',
-                        value: _student.year,
-                      );
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const EventsPage(
-                          isParticipated: true,
-                        ),
-                      ),
-                    ),
-                    child: const _ProfileTile(
-                      title: 'Participated Events',
-                      icon: FontAwesomeIcons.certificate,
-                      trailing: FontAwesomeIcons.chevronRight,
-                    ),
-                  ),
+                  _pageTiles(context),
                   const SizedBox(height: 20),
-                  MaterialButton(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    minWidth: MediaQuery.of(context).size.width * 0.6,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () => customAlertDialog(
-                      context: context,
-                      title: 'Resetting Pasword!',
-                      description:
-                          'Are you sure you want to reset user password!?',
-                      onOK: () async {
-                        await context
-                            .read<AuthService>()
-                            .resetPassword(email: _student.email);
-
-                        await context.read<AuthService>().signOut();
-
-                        Navigator.pushReplacementNamed(
-                            context, SignIn.routeName);
-                      },
-                    ),
-                    color: Theme.of(context).accentColor,
-                    child: const Text(
-                      "Reset Password?",
-                      textScaleFactor: 1.4,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  _resetPassword(context),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Column _pageTiles(BuildContext context) {
+    return Column(
+      children: [
+        _ProfileTile(
+          title: _student.name,
+          icon: FontAwesomeIcons.solidUser,
+          trailing: FontAwesomeIcons.pen,
+          trailingOnTap: () async {
+            await _buildShowDialog(
+              context: context,
+              key: 'name',
+              value: _student.name,
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.solidEnvelope,
+            color: Theme.of(context).accentColor,
+          ),
+          title: Text(
+            _student.email,
+            style: const TextStyle(
+              letterSpacing: 1.3,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            FontAwesomeIcons.school,
+            color: Theme.of(context).accentColor,
+          ),
+          title: Text(
+            _student.college,
+            style: const TextStyle(
+              letterSpacing: 1.3,
+            ),
+          ),
+        ),
+        _ProfileTile(
+          title: _student.usn,
+          icon: FontAwesomeIcons.solidIdBadge,
+          trailing: FontAwesomeIcons.pen,
+          trailingOnTap: () async {
+            await _buildShowDialog(
+              context: context,
+              key: 'usn',
+              value: _student.usn,
+            );
+          },
+        ),
+        _ProfileTile(
+          title: _student.branch,
+          icon: FontAwesomeIcons.bookReader,
+          trailing: FontAwesomeIcons.pen,
+          trailingOnTap: () async {
+            await _buildShowDialog(
+              context: context,
+              key: 'branch',
+              value: _student.branch,
+            );
+          },
+        ),
+        _ProfileTile(
+          title: _student.year,
+          icon: FontAwesomeIcons.graduationCap,
+          trailing: FontAwesomeIcons.pen,
+          trailingOnTap: () async {
+            await _buildShowDialog(
+              context: context,
+              key: 'year',
+              value: _student.year,
+            );
+          },
+        ),
+        GestureDetector(
+          onTap: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EventsPage(
+                isParticipated: true,
+              ),
+            ),
+          ),
+          child: const _ProfileTile(
+            title: 'Participated Events',
+            icon: FontAwesomeIcons.certificate,
+            trailing: FontAwesomeIcons.chevronRight,
+          ),
+        ),
+      ],
+    );
+  }
+
+  MaterialButton _resetPassword(BuildContext context) {
+    return MaterialButton(
+      height: MediaQuery.of(context).size.height * 0.06,
+      minWidth: MediaQuery.of(context).size.width * 0.6,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      onPressed: () => customAlertDialog(
+        context: context,
+        title: 'Resetting Pasword!',
+        description: 'Are you sure you want to reset user password!?',
+        onOK: () async {
+          await context
+              .read<AuthService>()
+              .resetPassword(email: _student.email);
+
+          await context.read<AuthService>().signOut();
+
+          Navigator.pushReplacementNamed(context, SignIn.routeName);
+        },
+      ),
+      color: Theme.of(context).accentColor,
+      child: const Text(
+        "Reset Password?",
+        textScaleFactor: 1.4,
+        style: TextStyle(color: Colors.white),
       ),
     );
   }
