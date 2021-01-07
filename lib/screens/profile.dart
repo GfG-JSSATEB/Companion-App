@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/student.dart';
 import '../models/student_data.dart';
 import '../services/auth.dart';
+import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_textfield.dart';
 import 'events.dart';
@@ -165,13 +166,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     minWidth: MediaQuery.of(context).size.width * 0.6,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () async {
-                      await context
-                          .read<AuthService>()
-                          .resetPassword(email: _student.email);
-                      await context.read<AuthService>().signOut();
-                      Navigator.pushReplacementNamed(context, SignIn.routeName);
-                    },
+                    onPressed: () => customAlertDialog(
+                      context: context,
+                      title: 'Resetting Pasword!',
+                      description:
+                          'Are you sure you want to reset user password!?',
+                      onOK: () async {
+                        await context
+                            .read<AuthService>()
+                            .resetPassword(email: _student.email);
+
+                        await context.read<AuthService>().signOut();
+
+                        Navigator.pushReplacementNamed(
+                            context, SignIn.routeName);
+                      },
+                    ),
                     color: Theme.of(context).accentColor,
                     child: const Text(
                       "Reset Password?",
