@@ -99,16 +99,17 @@ class AnnouncementScreen extends StatelessWidget {
                           color: Theme.of(context).accentColor,
                         ),
                         onPressed: () => customAlertDialog(
-                            context: context,
-                            title: 'Deleting Announcement!!!',
-                            description:
-                                'Are you sure you want to delete this announcement!?',
-                            onOK: () async {
-                              await DatabaseService.deleteAnnouncement(
-                                  id: announcement.id);
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }),
+                          context: context,
+                          title: 'Deleting Announcement!!!',
+                          description:
+                              'Are you sure you want to delete this announcement!?',
+                          onOK: () async {
+                            await DatabaseService.deleteAnnouncement(
+                                id: announcement.id);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        ),
                       )
                     ],
                   ),
