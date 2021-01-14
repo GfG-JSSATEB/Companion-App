@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:share/share.dart';
+// import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/custom_appbar.dart';
@@ -88,13 +88,13 @@ class AboutApp extends StatelessWidget {
                     textScaleFactor: 1.5,
                   ),
                 ),
-                _AboutTile(
-                  icon: FontAwesomeIcons.shareAlt,
-                  title: 'Share',
-                  onTap: () => Share.share(
-                      'Check out the app at https://example.com',
-                      subject: 'GfG JSSATEB has a app now!!'),
-                ),
+                // _AboutTile(
+                //   icon: FontAwesomeIcons.shareAlt,
+                //   title: 'Share',
+                //   onTap: () => Share.share(
+                //       'Check out the app at https://example.com',
+                //       subject: 'GfG JSSATEB has a app now!!'),
+                // ),
                 _AboutTile(
                   icon: FontAwesomeIcons.googlePlay,
                   title: 'Rate Us',
