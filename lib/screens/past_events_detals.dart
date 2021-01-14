@@ -9,7 +9,7 @@ import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
-import 'admin/add_events.dart';
+import 'add_events.dart';
 
 class PastEventDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();

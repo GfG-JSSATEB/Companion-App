@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import '../components/event_card.dart';
 import '../models/event.dart';
 import '../models/student_data.dart';
-import '../screens/admin/add_events.dart';
 import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
+import 'add_events.dart';
 
 class EventsPage extends StatelessWidget {
   static const String routeName = '/events';

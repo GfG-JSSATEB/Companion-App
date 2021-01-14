@@ -13,7 +13,7 @@ import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/error_message.dart';
-import 'admin/add_events.dart';
+import 'add_events.dart';
 
 class EventDetails extends StatefulWidget {
   final String id;

@@ -7,7 +7,7 @@ import '../models/student_data.dart';
 import '../services/database.dart';
 import '../widgets/alert_dialog.dart';
 import '../widgets/custom_appbar.dart';
-import 'admin/add_announcement.dart';
+import 'add_announcement.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   final Announcement announcement;

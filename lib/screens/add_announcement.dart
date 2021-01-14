@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-import '../../models/announcement.dart';
-import '../../services/database.dart';
-import '../../widgets/custom_appbar.dart';
-import '../../widgets/custom_textfield.dart';
+import '../models/announcement.dart';
+import '../services/database.dart';
+import '../widgets/custom_appbar.dart';
+import '../widgets/custom_textfield.dart';
 
 class AddAnnouncement extends StatefulWidget {
   final Announcement announcement;
