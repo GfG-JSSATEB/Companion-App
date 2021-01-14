@@ -10,7 +10,7 @@ class AboutUs extends StatelessWidget {
 
   final String fburl =
       "https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal";
-  final String websiteurl = "mailto:gfg.jssateb@gmail.com";
+  final String gmailurl = "gfgscjssateb@gmail.com";
   final String linkedinUrl =
       "https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/";
   final String whatsappUrl = "https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr";
@@ -89,7 +89,7 @@ class AboutUs extends StatelessWidget {
                     _buildIconButton(
                         icon: FontAwesomeIcons.whatsapp, url: whatsappUrl),
                     _buildIconButton(
-                        icon: FontAwesomeIcons.globe, url: websiteurl),
+                        icon: FontAwesomeIcons.solidEnvelope, url: gmailurl),
                   ],
                 )
               ],
