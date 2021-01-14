@@ -69,7 +69,7 @@ class AboutUs extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 const Text(
-                  'description descriptiondescriptiondescription escriptio nescription escriptionescription escriptionescription ',
+                  'The GeeksforGeeks Student Chapter of Jss Academy of Technical Education Bengaluru is an organization aimed at providing awareness about programming concepts,algorithms and interview questions. We aim to indulge our college students in competitive level programming and technical learning experience.',
                   softWrap: true,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
