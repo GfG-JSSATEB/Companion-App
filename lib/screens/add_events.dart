@@ -7,11 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/event.dart';
-import '../../services/database.dart';
-import '../../services/image_picker.dart';
-import '../../widgets/custom_appbar.dart';
-import '../../widgets/custom_textfield.dart';
+import '../models/event.dart';
+import '../services/database.dart';
+import '../services/image_picker.dart';
+import '../widgets/custom_appbar.dart';
+import '../widgets/custom_textfield.dart';
 
 class AddEvent extends StatefulWidget {
   final Event event;

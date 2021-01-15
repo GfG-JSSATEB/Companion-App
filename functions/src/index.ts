@@ -17,6 +17,8 @@ export const sendNotification = functions.firestore
                 clickAction: 'FLUTTER_NOTIFICATION_CLICK',
                 icon:
                     'https://drive.google.com/uc?export=view&id=1uJN7SufcHG4eHscBSbfdowyVlychy407',
+                badge:
+                    'https://drive.google.com/uc?export=view&id=1uJN7SufcHG4eHscBSbfdowyVlychy407',
             },
         };
 

@@ -9,7 +9,7 @@ import '../services/database.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/error_message.dart';
-import 'admin/add_announcement.dart';
+import 'add_announcement.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = '/home';

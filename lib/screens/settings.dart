@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../screens/sign_in.dart';
 import '../services/auth.dart';
-import '../settings/dark_notifier.dart';
+import '../util/dark_notifier.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/custom_drawer.dart';
 import 'about_app.dart';

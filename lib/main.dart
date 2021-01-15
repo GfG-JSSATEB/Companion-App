@@ -9,9 +9,9 @@ import 'screens/sign_in.dart';
 import 'services/auth.dart';
 import 'services/image_picker.dart';
 import 'services/push_notification.dart';
-import 'settings/dark_notifier.dart';
-import 'settings/routes.dart';
-import 'settings/theme_data.dart';
+import 'util/dark_notifier.dart';
+import 'util/routes.dart';
+import 'util/theme_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

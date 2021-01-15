@@ -10,7 +10,7 @@ class AboutUs extends StatelessWidget {
 
   final String fburl =
       "https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal";
-  final String websiteurl = "mailto:gfg.jssateb@gmail.com";
+  final String gmailurl = "gfgscjssateb@gmail.com";
   final String linkedinUrl =
       "https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/";
   final String whatsappUrl = "https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr";
@@ -69,7 +69,7 @@ class AboutUs extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 const Text(
-                  'description descriptiondescriptiondescription escriptio nescription escriptionescription escriptionescription ',
+                  'The GeeksforGeeks Student Chapter of Jss Academy of Technical Education Bengaluru is an organization aimed at providing awareness about programming concepts,algorithms and interview questions. We aim to indulge our college students in competitive level programming and technical learning experience.',
                   softWrap: true,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -89,7 +89,7 @@ class AboutUs extends StatelessWidget {
                     _buildIconButton(
                         icon: FontAwesomeIcons.whatsapp, url: whatsappUrl),
                     _buildIconButton(
-                        icon: FontAwesomeIcons.globe, url: websiteurl),
+                        icon: FontAwesomeIcons.solidEnvelope, url: gmailurl),
                   ],
                 )
               ],

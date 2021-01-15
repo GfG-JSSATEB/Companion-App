@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../models/student_data.dart';
 import '../screens/about_us.dart';
-import '../screens/admin/get_student.dart';
 import '../screens/events.dart';
+import '../screens/get_student.dart';
 import '../screens/home.dart';
 import '../screens/settings.dart';
 
