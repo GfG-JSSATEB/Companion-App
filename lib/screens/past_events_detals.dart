@@ -116,7 +116,7 @@ class PastEventDetails extends StatelessWidget {
                         ),
                         onPressed: () => Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
+                          MaterialPageRoute<AddEvent>(
                             builder: (context) => AddEvent(
                               event: event,
                             ),

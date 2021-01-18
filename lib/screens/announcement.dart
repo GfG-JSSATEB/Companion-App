@@ -87,7 +87,7 @@ class AnnouncementScreen extends StatelessWidget {
                         ),
                         onPressed: () => Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
+                          MaterialPageRoute<AddAnnouncement>(
                             builder: (context) =>
                                 AddAnnouncement(announcement: announcement),
                           ),

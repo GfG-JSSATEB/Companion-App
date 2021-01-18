@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: () => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute<EventsPage>(
               builder: (context) => const EventsPage(
                 isParticipated: true,
               ),
@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }) async {
     _textController.text = value;
 
-    showDialog(
+    showDialog<Dialog>(
       context: context,
       builder: (context) {
         return Dialog(

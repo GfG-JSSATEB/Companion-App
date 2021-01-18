@@ -38,7 +38,7 @@ class EventsPage extends StatelessWidget {
               ? [
                   IconButton(
                     icon: const Icon(FontAwesomeIcons.plus),
-                    onPressed: () => Navigator.push(
+                    onPressed: () => Navigator.push<AddEvent>(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const AddEvent(),

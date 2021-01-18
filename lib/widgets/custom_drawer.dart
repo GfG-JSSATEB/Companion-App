@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
               iconData: FontAwesomeIcons.calendarAlt,
               onTap: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
+                MaterialPageRoute<EventsPage>(
                   builder: (context) => const EventsPage(
                     isFinished: false,
                     isParticipated: false,
@@ -47,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
               iconData: FontAwesomeIcons.calendarCheck,
               onTap: () => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
+                MaterialPageRoute<EventsPage>(
                   builder: (context) => const EventsPage(
                     isFinished: true,
                     isParticipated: false,

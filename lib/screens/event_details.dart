@@ -228,7 +228,7 @@ class _EventDetailsState extends State<EventDetails> {
                 ),
                 onPressed: () => Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<AddEvent>(
                     builder: (context) => AddEvent(
                       event: event,
                     ),

@@ -12,7 +12,7 @@ class AnnouncementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
+      onTap: () => Navigator.push<AnnouncementScreen>(
         context,
         MaterialPageRoute(
           builder: (context) => AnnouncementScreen(announcement: announcement),

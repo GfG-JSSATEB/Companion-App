@@ -24,7 +24,7 @@ class CustomCachedImage extends StatelessWidget {
           highlightColor: Theme.of(context).accentColor,
           child: Container(color: Colors.white, height: 250),
         ),
-        errorWidget: (context, _, e) => ErrorMessage(message: e),
+        errorWidget: (context, _, dynamic e) => ErrorMessage(message: e),
       ),
     );
   }

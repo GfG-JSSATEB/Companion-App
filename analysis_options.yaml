@@ -1,5 +1,3 @@
-
-# Enable all rules by default
 include: all_lint_rules.yaml
 analyzer:
   strong-mode:

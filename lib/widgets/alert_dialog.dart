@@ -41,7 +41,7 @@ void customAlertDialog({
   );
 
   // show the dialog
-  showDialog(
+  showDialog<AlertDialog>(
     context: context,
     builder: (BuildContext context) {
       return alert;
