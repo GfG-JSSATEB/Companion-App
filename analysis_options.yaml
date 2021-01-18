@@ -1,8 +1,16 @@
-include: package:lint/analysis_options.yaml
 
+# Enable all rules by default
+include: all_lint_rules.yaml
 analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
   errors:
-    missing_return: error
-    missing_required_param: error
-    must_be_immutable: error
-    sort_unnamed_constructors_first: ignore
+    # Otherwise cause the import of all_lint_rules to warn because of some rules conflicts.
+    # The conflicts are fixed in this file instead, so we can safely ignore the warning.
+    included_file_warning: ignore
+# Explicitly disable only the rules we do not want.
+linter:
+  rules:
+    # Some explanation why we don't want this lint
+    always_put_required_named_parameters_first: false
