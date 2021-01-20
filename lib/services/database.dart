@@ -35,7 +35,7 @@ class DatabaseService {
     @required String year,
     @required String id,
   }) async {
-    _studentRef.doc(id).set({
+    await _studentRef.doc(id).set({
       'id': id,
       'name': name,
       'email': email,

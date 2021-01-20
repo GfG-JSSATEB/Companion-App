@@ -9,10 +9,10 @@ class AboutUs extends StatelessWidget {
   static const String routeName = '/aboutUs';
 
   final String fburl =
-      "https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal";
-  final String gmailurl = "gfgscjssateb@gmail.com";
+      'https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal';
+  final String gmailurl = 'gfgscjssateb@gmail.com';
   final String linkedinUrl =
-      "https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/";
+      'https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/';
   final String whatsappUrl = "https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr";
   final String instagramUrl = "https://www.instagram.com/gfg_jssateb/";
 

@@ -58,7 +58,7 @@ class AnnouncementCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  " ${announcement.relativeTime}",
+                  ' ${announcement.relativeTime}',
                   textScaleFactor: 1.2,
                 )
               ],

@@ -100,7 +100,7 @@ class EventCard extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: "$title: ",
+            text: '$title: ',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).accentColor,

@@ -60,7 +60,7 @@ class _EventDetailsState extends State<EventDetails> {
                           description:
                               'Are you sure you want to mark event finshed?',
                           onOK: () async {
-                            DatabaseService.toggleEvent(
+                            await DatabaseService.toggleEvent(
                               id: _id,
                               isFinished: true,
                             );

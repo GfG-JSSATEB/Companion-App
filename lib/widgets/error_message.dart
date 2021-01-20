@@ -22,7 +22,7 @@ class ErrorMessage extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Text(
-            "$message",
+            '$message',
             textScaleFactor: 1.2,
             textAlign: TextAlign.center,
           ),
