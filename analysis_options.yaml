@@ -26,3 +26,7 @@ linter:
 
 # doc comments
     - slash_for_doc_comments
+
+analyzer:
+  errors:
+    omit_local_variable_types: ignore
