@@ -8,7 +8,7 @@ class PushNotificationService {
   static Future<void> initialize() async {
     _fcm.requestNotificationPermissions();
 
-    _fcm.subscribeToTopic('notification');
+    await _fcm.subscribeToTopic('notification');
 
     _fcm.configure(
       // When using the app

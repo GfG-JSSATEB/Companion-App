@@ -12,7 +12,7 @@ class AnnouncementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
+      onTap: () => Navigator.push<AnnouncementScreen>(
         context,
         MaterialPageRoute(
           builder: (context) => AnnouncementScreen(announcement: announcement),
@@ -58,7 +58,7 @@ class AnnouncementCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  " ${announcement.relativeTime}",
+                  ' ${announcement.relativeTime}',
                   textScaleFactor: 1.2,
                 )
               ],

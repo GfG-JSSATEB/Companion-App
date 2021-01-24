@@ -60,7 +60,7 @@ class _EventDetailsState extends State<EventDetails> {
                           description:
                               'Are you sure you want to mark event finshed?',
                           onOK: () async {
-                            DatabaseService.toggleEvent(
+                            await DatabaseService.toggleEvent(
                               id: _id,
                               isFinished: true,
                             );
@@ -209,7 +209,7 @@ class _EventDetailsState extends State<EventDetails> {
                 },
                 color: Theme.of(context).accentColor,
                 child: const Text(
-                  "Register",
+                  'Register',
                   textScaleFactor: 1.4,
                   style: TextStyle(color: Colors.white),
                 ),
@@ -228,7 +228,7 @@ class _EventDetailsState extends State<EventDetails> {
                 ),
                 onPressed: () => Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute<AddEvent>(
                     builder: (context) => AddEvent(
                       event: event,
                     ),

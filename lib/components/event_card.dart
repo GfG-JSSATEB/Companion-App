@@ -16,7 +16,7 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => event.isFinished
-          ? Navigator.push(
+          ? Navigator.push<PastEventDetails>(
               context,
               MaterialPageRoute(
                 builder: (context) => PastEventDetails(
@@ -24,7 +24,7 @@ class EventCard extends StatelessWidget {
                 ),
               ),
             )
-          : Navigator.push(
+          : Navigator.push<EventDetails>(
               context,
               MaterialPageRoute(
                 builder: (context) => EventDetails(
@@ -100,7 +100,7 @@ class EventCard extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: "$title: ",
+            text: '$title: ',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).accentColor,

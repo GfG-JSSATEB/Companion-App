@@ -9,23 +9,23 @@ class AboutUs extends StatelessWidget {
   static const String routeName = '/aboutUs';
 
   final String fburl =
-      "https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal";
-  final String gmailurl = "gfgscjssateb@gmail.com";
+      'https://www.facebook.com/Gfg_jssateb-100108775197286/?ref=page_internal';
+  final String gmailurl = 'gfgscjssateb@gmail.com';
   final String linkedinUrl =
-      "https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/";
-  final String whatsappUrl = "https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr";
-  final String instagramUrl = "https://www.instagram.com/gfg_jssateb/";
+      'https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/';
+  final String whatsappUrl = 'https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr';
+  final String instagramUrl = 'https://www.instagram.com/gfg_jssateb/';
 
   Future<void> _launchSocial(String url) async {
     try {
       final bool launched =
           await launch(url, forceSafariVC: false, forceWebView: false);
       if (!launched) {
-        await launch("https://www.geeksforgeeks.org/",
+        await launch('https://www.geeksforgeeks.org/',
             forceSafariVC: false, forceWebView: false);
       }
     } catch (e) {
-      await launch("https://www.geeksforgeeks.org/",
+      await launch('https://www.geeksforgeeks.org/',
           forceSafariVC: false, forceWebView: false);
     }
   }

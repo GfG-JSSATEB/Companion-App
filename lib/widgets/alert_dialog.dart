@@ -9,7 +9,7 @@ void customAlertDialog({
   final Widget cancelButton = FlatButton(
     onPressed: () => Navigator.pop(context),
     child: Text(
-      "Cancel",
+      'Cancel',
       textScaleFactor: 1.2,
       style: TextStyle(color: Theme.of(context).accentColor),
     ),
@@ -17,7 +17,7 @@ void customAlertDialog({
   final Widget okButton = FlatButton(
     onPressed: () => onOK(),
     child: Text(
-      "OK",
+      'OK',
       textScaleFactor: 1.2,
       style: TextStyle(color: Theme.of(context).accentColor),
     ),
@@ -41,7 +41,7 @@ void customAlertDialog({
   );
 
   // show the dialog
-  showDialog(
+  showDialog<AlertDialog>(
     context: context,
     builder: (BuildContext context) {
       return alert;

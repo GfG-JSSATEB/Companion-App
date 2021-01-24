@@ -42,11 +42,11 @@ class _SignUpState extends State<SignUp> {
 
   String _college = CollegeDetails.noDetail;
 
-  String _emailIdErrorMessage = "";
-  String _passwordErrorMessage = "";
-  String _nameErrorMessage = "";
-  String _usnErrorMessage = "";
-  String _otherCollegeErorMessage = "";
+  String _emailIdErrorMessage = '';
+  String _passwordErrorMessage = '';
+  String _nameErrorMessage = '';
+  String _usnErrorMessage = '';
+  String _otherCollegeErorMessage = '';
 
   bool _validityName = true;
   bool _validityEmail = true;
@@ -163,7 +163,7 @@ class _SignUpState extends State<SignUp> {
     return Column(
       children: [
         const Text(
-          "Already have an account?",
+          'Already have an account?',
           textScaleFactor: 1.3,
         ),
         const SizedBox(height: 5.0),
@@ -324,7 +324,7 @@ class _SignUpState extends State<SignUp> {
         },
         color: Theme.of(context).accentColor,
         child: const Text(
-          "SIGN UP",
+          'SIGN UP',
           textScaleFactor: 1.4,
           style: TextStyle(color: Colors.white),
         ),
@@ -365,11 +365,11 @@ class _SignUpState extends State<SignUp> {
     final RegExp regExp = RegExp(p);
     if (email.isEmpty) {
       //assigning error message to String variable emailIdErrorMessage
-      _emailIdErrorMessage = "Please enter a Email-id";
+      _emailIdErrorMessage = 'Please enter a Email-id';
       return false;
     } else if (!regExp.hasMatch(email)) {
       //assigning error message to String variable emailIdErrorMessage
-      _emailIdErrorMessage = "Please enter a valid Email Address";
+      _emailIdErrorMessage = 'Please enter a valid Email Address';
       return false;
     } else {
       return true;
@@ -383,16 +383,16 @@ class _SignUpState extends State<SignUp> {
     final RegExp regExp = RegExp(pattern);
     if (password.isEmpty) {
       //assigning error message to String variable passwordErrorMessage
-      _passwordErrorMessage = "Please enter Password";
+      _passwordErrorMessage = 'Please enter Password';
       return false;
     } else if (password.length < 8) {
       //assigning error message to String variable passwordErrorMessage
-      _passwordErrorMessage = "Password must contain at least 8 characters";
+      _passwordErrorMessage = 'Password must contain at least 8 characters';
       return false;
     } else if (!regExp.hasMatch(password)) {
       //assigning error message to String variable passwordErrorMessage
       _passwordErrorMessage =
-          "Password must contain \n at least 1 upper case alphabet,\nat least one number \nand at least one special character \nalong with lowercase alphabets";
+          'Password must contain \n at least 1 upper case alphabet,\nat least one number \nand at least one special character \nalong with lowercase alphabets';
       return false;
     } else {
       return true;

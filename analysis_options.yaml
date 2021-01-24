@@ -1,8 +1,29 @@
-include: package:lint/analysis_options.yaml
+include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+
+# Style rules
+
+    - camel_case_types
+    - library_names
+    - avoid_catches_without_on_clauses
+    - avoid_catching_errors
+    - avoid_empty_else
+    - empty_statements
+    - unnecessary_parenthesis
+    - unnecessary_this
+    - unnecessary_const
+    - unnecessary_overrides
+    - unnecessary_lambdas
+    - unnecessary_brace_in_string_interps
+# formatting
+    - lines_longer_than_80_chars
+    - curly_braces_in_flow_control_structures
+
+# doc comments
+    - slash_for_doc_comments
 
 analyzer:
   errors:
-    missing_return: error
-    missing_required_param: error
-    must_be_immutable: error
-    sort_unnamed_constructors_first: ignore
+    omit_local_variable_types: ignore

@@ -35,7 +35,7 @@ class AuthService {
     );
 
     if (userCredential.user != null) {
-      DatabaseService.addStudent(
+      await DatabaseService.addStudent(
         email: email,
         name: name,
         usn: usn,

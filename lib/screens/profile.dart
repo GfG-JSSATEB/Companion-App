@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool _isLoading = false;
 
   final TextEditingController _textController = TextEditingController();
-  String _errorMessage = "";
+  String _errorMessage = '';
   bool _validityName = true;
 
   @override
@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
         GestureDetector(
           onTap: () => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute<EventsPage>(
               builder: (context) => const EventsPage(
                 isParticipated: true,
               ),
@@ -200,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       color: Theme.of(context).accentColor,
       child: const Text(
-        "Reset Password?",
+        'Reset Password?',
         textScaleFactor: 1.4,
         style: TextStyle(color: Colors.white),
       ),
@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }) async {
     _textController.text = value;
 
-    showDialog(
+    showDialog<Dialog>(
       context: context,
       builder: (context) {
         return Dialog(
@@ -267,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                   color: Theme.of(context).accentColor,
                   child: const Text(
-                    "Update",
+                    'Update',
                     textScaleFactor: 1.4,
                     style: TextStyle(color: Colors.white),
                   ),

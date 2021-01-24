@@ -277,19 +277,19 @@ class _AddEventState extends State<AddEvent> {
       children: [
         const InputText(title: 'Event Date'),
         ListTile(
-          title: Text("Date: ${_dateFormat.format(_eventPickedDate)}"),
+          title: Text('Date: ${_dateFormat.format(_eventPickedDate)}'),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: () => _pickDate('event'),
         ),
         const InputText(title: 'Event Time'),
         ListTile(
-          title: Text("Time: ${_eventTime.hour}:${_eventTime.minute}"),
+          title: Text('Time: ${_eventTime.hour}:${_eventTime.minute}'),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: _pickTime,
         ),
         const InputText(title: 'Last Date to register'),
         ListTile(
-          title: Text("Date: ${_dateFormat.format(_registerPickedDate)}"),
+          title: Text('Date: ${_dateFormat.format(_registerPickedDate)}'),
           trailing: const Icon(FontAwesomeIcons.chevronDown),
           onTap: () => _pickDate('register'),
         ),
@@ -316,7 +316,7 @@ class _AddEventState extends State<AddEvent> {
       },
       color: Theme.of(context).accentColor,
       child: Text(
-        _isUpdate ? 'Update' : "Add",
+        _isUpdate ? 'Update' : 'Add',
         textScaleFactor: 1.4,
         style: const TextStyle(color: Colors.white),
       ),
