@@ -16,11 +16,11 @@ class AboutApp extends StatelessWidget {
       final bool launched =
           await launch(url, forceSafariVC: false, forceWebView: false);
       if (!launched) {
-        await launch("https://www.geeksforgeeks.org/",
+        await launch('https://www.geeksforgeeks.org/',
             forceSafariVC: false, forceWebView: false);
       }
     } catch (e) {
-      await launch("https://www.geeksforgeeks.org/",
+      await launch('https://www.geeksforgeeks.org/',
           forceSafariVC: false, forceWebView: false);
     }
   }

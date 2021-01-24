@@ -203,7 +203,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
       },
       color: Theme.of(context).accentColor,
       child: Text(
-        _isUpdate ? 'Update' : "Add",
+        _isUpdate ? 'Update' : 'Add',
         textScaleFactor: 1.4,
         style: const TextStyle(color: Colors.white),
       ),

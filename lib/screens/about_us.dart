@@ -13,19 +13,19 @@ class AboutUs extends StatelessWidget {
   final String gmailurl = 'gfgscjssateb@gmail.com';
   final String linkedinUrl =
       'https://www.linkedin.com/company/geeksforgeeks-student-chapter-jssateb/';
-  final String whatsappUrl = "https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr";
-  final String instagramUrl = "https://www.instagram.com/gfg_jssateb/";
+  final String whatsappUrl = 'https://chat.whatsapp.com/GKTxGaduQl6649CvzvrbYr';
+  final String instagramUrl = 'https://www.instagram.com/gfg_jssateb/';
 
   Future<void> _launchSocial(String url) async {
     try {
       final bool launched =
           await launch(url, forceSafariVC: false, forceWebView: false);
       if (!launched) {
-        await launch("https://www.geeksforgeeks.org/",
+        await launch('https://www.geeksforgeeks.org/',
             forceSafariVC: false, forceWebView: false);
       }
     } catch (e) {
-      await launch("https://www.geeksforgeeks.org/",
+      await launch('https://www.geeksforgeeks.org/',
           forceSafariVC: false, forceWebView: false);
     }
   }

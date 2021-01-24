@@ -22,7 +22,7 @@ class _GetStudentState extends State<GetStudent> {
 
   bool _validityEmail = true;
 
-  String _emailIdErrorMessage = "";
+  String _emailIdErrorMessage = '';
 
   bool _isLoading = false;
 
@@ -134,7 +134,7 @@ class _GetStudentState extends State<GetStudent> {
         },
         color: Theme.of(context).accentColor,
         child: const Text(
-          "Get User",
+          'Get User',
           textScaleFactor: 1.4,
           style: TextStyle(color: Colors.white),
         ),
@@ -148,11 +148,11 @@ class _GetStudentState extends State<GetStudent> {
     final RegExp regExp = RegExp(p);
     if (email.isEmpty) {
       //assigning error message to String variable emailIdErrorMessage
-      _emailIdErrorMessage = "Please enter a Email-id";
+      _emailIdErrorMessage = 'Please enter a Email-id';
       return false;
     } else if (!regExp.hasMatch(email)) {
       //assigning error message to String variable emailIdErrorMessage
-      _emailIdErrorMessage = "Please enter a valid Email Address";
+      _emailIdErrorMessage = 'Please enter a valid Email Address';
       return false;
     } else {
       return true;

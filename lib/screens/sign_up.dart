@@ -324,7 +324,7 @@ class _SignUpState extends State<SignUp> {
         },
         color: Theme.of(context).accentColor,
         child: const Text(
-          "SIGN UP",
+          'SIGN UP',
           textScaleFactor: 1.4,
           style: TextStyle(color: Colors.white),
         ),
@@ -392,7 +392,7 @@ class _SignUpState extends State<SignUp> {
     } else if (!regExp.hasMatch(password)) {
       //assigning error message to String variable passwordErrorMessage
       _passwordErrorMessage =
-          "Password must contain \n at least 1 upper case alphabet,\nat least one number \nand at least one special character \nalong with lowercase alphabets";
+          'Password must contain \n at least 1 upper case alphabet,\nat least one number \nand at least one special character \nalong with lowercase alphabets';
       return false;
     } else {
       return true;

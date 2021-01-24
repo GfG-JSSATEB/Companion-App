@@ -209,7 +209,7 @@ class _EventDetailsState extends State<EventDetails> {
                 },
                 color: Theme.of(context).accentColor,
                 child: const Text(
-                  "Register",
+                  'Register',
                   textScaleFactor: 1.4,
                   style: TextStyle(color: Colors.white),
                 ),

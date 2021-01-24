@@ -54,7 +54,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
             ),
             const SizedBox(height: 30),
             Text(
-              "A email have been send to ${_user.email} please verify",
+              'A email have been send to ${_user.email} please verify',
               textScaleFactor: 1.3,
               textAlign: TextAlign.center,
             ),
@@ -70,7 +70,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
               },
               color: Theme.of(context).accentColor,
               child: const Text(
-                "SIGN OUT",
+                'SIGN OUT',
                 textScaleFactor: 1.4,
                 style: TextStyle(color: Colors.white),
               ),
