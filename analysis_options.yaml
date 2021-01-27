@@ -29,3 +29,4 @@ linter:
 analyzer:
   errors:
     omit_local_variable_types: ignore
+    lines_longer_than_80_chars: ignore
