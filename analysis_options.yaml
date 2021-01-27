@@ -17,12 +17,14 @@ linter:
     - unnecessary_overrides
     - unnecessary_lambdas
     - unnecessary_brace_in_string_interps
+    - prefer_const_literals_to_create_immutables
 # formatting
     - lines_longer_than_80_chars
     - curly_braces_in_flow_control_structures
 
 # doc comments
     - slash_for_doc_comments
+    - avoid_print
 
 analyzer:
   errors:
