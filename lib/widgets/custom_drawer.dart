@@ -133,7 +133,7 @@ class _DrawerTile extends StatelessWidget {
             title,
             textScaleFactor: 1.3,
           ),
-          onTap: () => onTap(),
+          onTap: onTap,
         ),
         const Divider(
           thickness: 2,

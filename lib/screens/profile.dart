@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 import '../models/student.dart';
@@ -195,7 +196,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
           await context.read<AuthService>().signOut();
 
-          Navigator.pushReplacementNamed(context, SignIn.routeName);
+          unawaited(
+            Navigator.pushReplacementNamed(context, SignIn.routeName),
+          );
         },
       ),
       color: Theme.of(context).accentColor,
@@ -214,7 +217,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }) async {
     _textController.text = value;
 
-    showDialog<Dialog>(
+    await showDialog<Dialog>(
       context: context,
       builder: (context) {
         return Dialog(
@@ -318,7 +321,7 @@ class _ProfileTile extends StatelessWidget {
         ),
       ),
       trailing: IconButton(
-        onPressed: () => trailingOnTap(),
+        onPressed: trailingOnTap,
         icon: Icon(
           trailing,
           color: Theme.of(context).accentColor,

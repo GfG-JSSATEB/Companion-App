@@ -230,7 +230,7 @@ class _AddEventState extends State<AddEvent> {
                       title:
                           Text(_poster != null ? 'Uploaded' : 'Choose a file'),
                       trailing: const Icon(FontAwesomeIcons.chevronDown),
-                      onTap: () => _pickImage(),
+                      onTap: _pickImage,
                     ),
                   ],
                   const SizedBox(height: 20),
