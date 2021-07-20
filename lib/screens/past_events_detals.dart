@@ -40,7 +40,7 @@ class PastEventDetails extends StatelessWidget {
                         description:
                             'Are you sure you want to mark event unfinished?',
                         onOK: () async {
-                          DatabaseService.toggleEvent(
+                          await DatabaseService.toggleEvent(
                             id: event.id,
                             isFinished: !event.isFinished,
                           );

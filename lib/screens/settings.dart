@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/sign_in.dart';
@@ -73,8 +74,12 @@ class Settings extends StatelessWidget {
                       icon: FontAwesomeIcons.signOutAlt,
                       onTap: () async {
                         await context.read<AuthService>().signOut();
-                        Navigator.pushReplacementNamed(
-                            context, SignIn.routeName);
+                        unawaited(
+                          Navigator.pushReplacementNamed(
+                            context,
+                            SignIn.routeName,
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -105,7 +110,7 @@ class _SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => onTap(),
+      onTap: onTap,
       leading: Icon(
         icon,
         color: Theme.of(context).accentColor,

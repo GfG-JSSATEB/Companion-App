@@ -143,7 +143,7 @@ class _AboutTile extends StatelessWidget {
           size: 30,
           color: Theme.of(context).accentColor,
         ),
-        onPressed: () => onTap(),
+        onPressed: onTap,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 import '../components/body_container.dart';
@@ -66,7 +67,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () async {
                 await context.read<AuthService>().signOut();
-                Navigator.pushReplacementNamed(context, SignIn.routeName);
+                unawaited(
+                  Navigator.pushReplacementNamed(context, SignIn.routeName),
+                );
               },
               color: Theme.of(context).accentColor,
               child: const Text(
@@ -86,7 +89,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     await _user.reload();
     if (_user.emailVerified) {
       _timer.cancel();
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
+      await Navigator.pushReplacementNamed(context, HomePage.routeName);
     }
   }
 }

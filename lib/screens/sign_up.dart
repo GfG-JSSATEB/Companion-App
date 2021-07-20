@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
             branch: _branch,
             year: _year,
           );
-      Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
+      await Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':

@@ -44,9 +44,9 @@ class _SignInState extends State<SignIn> {
             password: _passwordController.text.trim(),
           );
       if (user.emailVerified) {
-        Navigator.pushReplacementNamed(context, HomePage.routeName);
+        await Navigator.pushReplacementNamed(context, HomePage.routeName);
       } else {
-        Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
+        await Navigator.pushReplacementNamed(context, VerifyScreen.routeName);
       }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
