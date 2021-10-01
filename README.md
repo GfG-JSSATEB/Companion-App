@@ -9,4 +9,4 @@ GfG JSSATEB companion app is created to provide seamless experience for students
 ## Getting Started:
 
 We invite you to join our team! Everyone is welcome to contribute code via [pull requests](https://github.com/GfG-JSSATEB/Companion-App/pulls), to file [issues](https://github.com/GfG-JSSATEB/Companion-App/issues) on GitHub.
-For more information check [CONTRIBUTING.md](https://github.com/GfG-JSSATEB/Companion-App/blob/main/CONTRIBUTING.md)
+For more information on contribution check [CONTRIBUTING.md](./CONTRIBUTING.md)
